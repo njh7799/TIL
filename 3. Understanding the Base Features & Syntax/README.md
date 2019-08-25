@@ -15,8 +15,6 @@
   - 페이지 전체가 React의 영향권에 있지는 않다.
   - 각각의 위젯들은 서로의 존재에 대해 알지 못한다.
 
----
-
 <h2>JSX Restrictions</h2>
 JSX 는 HTML과 매우 비슷하지만, 그 본질은 javascript이다. 따라서 사용에 있어서 주의해야할 부분이 몇가지 존재한다.
 
@@ -47,15 +45,7 @@ return (
 
 ```
 
-3. Properties
-
-onClick
-
-```
-<button onClick={this.switchNameHandler}>Switch Name</button>
-```
-
----
+````
 
 <h2>State & Props</h2>
 
@@ -77,7 +67,7 @@ const person = props => {
     </div>
   );
 };
-```
+````
 
 App.js
 
@@ -105,3 +95,60 @@ class App extends Component {
 
 - State의 특징
   1. state의 변경이 감지되면 DOM이 re-render되어 update 된다.
+
+<h2>Event</h2>
+
+- onClick
+
+  클릭했을 때
+
+  ```javascript
+  //Person.js
+  switchNameHandler = () => {
+    this.setState({
+      persons: [
+        { name: 'QWERTY', age: 1 },
+        { name: 'asdfg', age: 123 },
+        { name: 'TTffT', age: 112 }
+      ]
+    });
+  };
+
+  <button onClick={this.switchNameHandler}>Switch Name</button>;
+  ```
+
+- onChange
+
+  변화가 발생했을 때
+
+  ```javascript
+  //App.js
+  nameChangedHandler = event => {
+    this.setState({
+      persons: [
+        { name: 'KKK', age: 1 },
+        { name: event.target.value, age: 21 },
+        { name: 'TTT', age: 31 }
+      ]
+    });
+  };
+
+  <Person
+    name={this.state.persons[1].name}
+    age={this.state.persons[1].age}
+    changed={this.nameChangedHandler}
+  />;
+
+  //Person.js
+  const person = props => {
+    return (
+      <div className='Person'>
+        <p>
+          I'm a {props.name} I am {props.age}!
+        </p>
+        <p>{props.children}</p>
+        <input type='text' onChange={props.changed} value={props.name} />
+      </div>
+    );
+  };
+  ```

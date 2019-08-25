@@ -5,15 +5,19 @@ import Person from './Person/Person';
 
 class App extends Component {
   state = {
-    persons: [{ name: 'Max', age: 28 }, { name: 'Manu', age: 29 }]
+    persons: [
+      { name: 'Max', age: 28 },
+      { name: 'Manu', age: 29 },
+      { name: 'Jay', age: 23 }
+    ]
   };
 
   switchNameHandler = () => {
     this.setState({
       persons: [
         { name: 'QWERTY', age: 1 },
-        { name: 'asdfg', age: 1 },
-        { name: 'TTffT', age: 1 }
+        { name: 'asdfg', age: 123 },
+        { name: 'TTffT', age: 112 }
       ]
     });
   };
@@ -46,10 +50,18 @@ class App extends Component {
           name={this.state.persons[0].name}
           age={this.state.persons[0].age}
           changed={this.nameChangedHandler}
+        />
+        <Person
+          name={this.state.persons[1].name}
+          age={this.state.persons[1].age}
+          changed={this.nameChangedHandler}
         >
           MY hobby
         </Person>
-        <Person name={this.state.persons[1].name} />
+        <Person
+          name={this.state.persons[2].name}
+          age={this.state.persons[2].age}
+        />
         <h1>Hi</h1>
       </div>
     );
