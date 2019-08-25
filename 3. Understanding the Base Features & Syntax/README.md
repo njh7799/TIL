@@ -121,7 +121,7 @@ class App extends Component {
 
   변화가 발생했을 때
 
-  ```javascript
+  ```jsx
   //App.js
   nameChangedHandler = event => {
     this.setState({
@@ -132,7 +132,6 @@ class App extends Component {
       ]
     });
   };
-
   <Person
     name={this.state.persons[1].name}
     age={this.state.persons[1].age}
