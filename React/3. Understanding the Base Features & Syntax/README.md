@@ -43,12 +43,18 @@ return (
     <div></div>
 )
 
-```
 
-````
+3. 변수 사용 방법
+const context = (<div>Hello</div>)
+
+<div>
+{context}
+</div>
+```
 
 <h2>State & Props</h2>
 
+- state가 update 되면 자동으로 re-render 된다.
 - 예제
 
 Person.js
@@ -67,7 +73,7 @@ const person = props => {
     </div>
   );
 };
-````
+```
 
 App.js
 
@@ -132,6 +138,7 @@ class App extends Component {
       ]
     });
   };
+
   <Person
     name={this.state.persons[1].name}
     age={this.state.persons[1].age}
