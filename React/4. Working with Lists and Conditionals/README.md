@@ -59,10 +59,8 @@ persons = (
 <h2>클릭한 div 제거하기</h2>
 
 ```javascript
-
-
 deletePersonHandler = personIndex => {
-    const persons = this.state.persons;
+    const persons = this.state.persons;// 옳지 않은 방법
     persons.splice(personIndex, 1);
     this.setState({
       persons: persons
@@ -89,3 +87,25 @@ render(){
   )
 }
 ```
+
+<h2>배열의 복사</h2>
+
+`const persons = this.state.persons` 와 같은 방법으로 복사를 할 경우, originalArr의 pointer가 복사가 되기 때문에, arr를 변경하였을 때, original Arr까지 변경되는 문제가 발생할 수 있다.
+
+해결책)
+
+1. const persons = this.state.persons.slice()
+2. const persons = [...this.state.persons]
+
+<h2>Key 설정</h2>
+
+```javascript
+<Person
+  name={person.name}
+  age={person.age}
+  click={() => this.deletePersonHandler(index)}
+  ket={person.id}
+></Person>
+```
+
+Q. event handler에서의 `event` 변수
