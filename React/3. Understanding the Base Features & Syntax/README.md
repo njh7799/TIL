@@ -15,42 +15,50 @@
   - 페이지 전체가 React의 영향권에 있지는 않다.
   - 각각의 위젯들은 서로의 존재에 대해 알지 못한다.
 
-<h2>JSX Restrictions</h2>
+<h2>JSX</h2>
 JSX 는 HTML과 매우 비슷하지만, 그 본질은 javascript이다. 따라서 사용에 있어서 주의해야할 부분이 몇가지 존재한다.
 
 1. 'class' 를 쓰지 못한다
 
-```javascript
-//Wrong
-<div class = 'abc'>
+   ```javascript
+   //Wrong
+   <div class = 'abc'>
 
-//Correct
-<div className = 'abc'>
-```
+   //Correct
+   <div className = 'abc'>
+   ```
 
 2. root element는 하나만 존재해야 한다.
 
-```javascript
+   ```javascript
 
-//Wrong
-return (
-    <div></div>
-    <div></div>
-)
+   //Wrong
+   return (
+       <div></div>
+       <div></div>
+   )
 
-//Correct
-return (
-    <div></div>
-)
-
+   //Correct
+   return (
+       <div></div>
+   )
+   ```
 
 3. 변수 사용 방법
-const context = (<div>Hello</div>)
 
-<div>
-{context}
-</div>
-```
+   ```jsx
+   const context = (<div>Hello</div>)
+   <div> {context} </div>
+   ```
+
+4. 변수 이름 설정
+
+   첫 글짜를 대문자로 사용한다.
+
+   ```jsx
+   <Person/>
+   <Div/>
+   ```
 
 <h2>State & Props</h2>
 
