@@ -43,3 +43,49 @@ render(){
   )
 }
 ```
+
+<h2>map 메소드를 이용한 state elements 파싱</h2>
+
+```javascript
+persons = (
+  <div>
+    {this.state.persons.map(person => {
+      return <Person name={person.name} age={person.age}></Person>;
+    })}
+  </div>
+);
+```
+
+<h2>클릭한 div 제거하기</h2>
+
+```javascript
+
+
+deletePersonHandler = personIndex => {
+    const persons = this.state.persons;
+    persons.splice(personIndex, 1);
+    this.setState({
+      persons: persons
+    });
+  };
+
+render(){
+  persons = (
+    <div>
+      {this.state.persons.map((person, index) => {
+        return (
+          <Person
+            name={person.name}
+            age={person.age}
+            click={() => this.deletePersonHandler(index)}
+          ></Person>
+        );
+      })}
+    </div>
+  );
+
+  return (
+    {persons}
+  )
+}
+```
