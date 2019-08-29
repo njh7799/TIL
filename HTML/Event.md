@@ -1,6 +1,6 @@
 # Event
 
-## method
+## property
 
 사용 방법 예시
 
