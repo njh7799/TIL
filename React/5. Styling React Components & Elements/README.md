@@ -20,3 +20,19 @@ return (
     );
 ```
 
+## 클래스 다이나믹 방식으로 적용하기
+
+```javascript
+let classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red');
+    }
+    if (this.state.persons.length <= 1) {
+      classes.push('bold');
+    }
+    return (
+      <div className='App'>
+        <p className={classes.join(' ')}>FunFUnFun</p>
+      </div>
+```
+
