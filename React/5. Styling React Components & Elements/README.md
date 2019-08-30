@@ -131,4 +131,3 @@ const post = () => (
 ```
 
 [cssRef](https://github.com/css-modules/css-modules)
-
