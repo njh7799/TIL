@@ -1,6 +1,7 @@
 import React from 'react';
 import './Person.css';
 import Radium from 'radium';
+import ErrorBoundary from '../ErrorBoundary/ErrorBoundary';
 const person = props => {
   const style = {
     '@media (min-width:500px)': {
