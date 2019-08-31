@@ -13,8 +13,7 @@ class App extends Component {
       userInput: e.target.value
     });
   };
-  deleteLetterHandler = index => {
-    console.log(11);
+  deleteLetterHandler = event => {
     let str = this.state.userInput;
     str = str.slice(0, index) + str.slice(index + 1, str.length);
     this.setState({
@@ -27,7 +26,7 @@ class App extends Component {
       return (
         <Char
           letter={e}
-          click={() => this.deleteLetterHandler(index)}
+          click={() => his.deleteLetterHandler(index)}
           key={index}
         />
       );
