@@ -36,13 +36,14 @@ let classes = [];
       </div>
 ```
 
-## pseudo selector
+## pseudo classes
 
 ```javascript
-hover 같은거
+hover
+focus
 ```
 
-## raium package
+## radium package
 
 ```
 npm install --save radium
