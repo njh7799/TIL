@@ -2,7 +2,7 @@
 
 ```javascript
 setAttribute("name", "helloButton")
-getAttribute("name")
+getAttribute("name") // string type으로 반환되니 조심한다.
 hasAttribute("name")
 removeAttribute("name")
 ```
