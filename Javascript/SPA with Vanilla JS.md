@@ -87,3 +87,23 @@ window.addEventListener('hashchange', router);
 window.addEventListener('load', router);
 ```
 
+```javascript
+let About = {
+    //html 파일을 렌더링
+    render : async () => {
+        let view =  /*html*/`
+            <section class="section">
+                <h1> About </h1>
+            </section>
+        `
+        return view
+    },
+    
+    //html 렌더링 이후 js 동작들 실행
+    after_render: async () => {}
+        
+}
+
+export default About;
+```
+
