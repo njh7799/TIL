@@ -16,7 +16,10 @@ pip install Django
 django-admin startproject mysite
 ```
 디렉토리 내부에 mysite 폴더를 만들고 그 내부에 mysite 디렉토리를 또 만든다.
-![img](./img/startproject1.jpg)
+![startproject1](https://user-images.githubusercontent.com/40619551/64148618-b0cd4100-ce5e-11e9-8a5d-722ae1f8d0a6.JPG)
+
+
+
 
 
 2. 
@@ -26,5 +29,6 @@ django-admin startproject mysite .
 ```
 디렉토리에 바로 mysite 폴더를 만든다.
 본인은 이 방법을 선호한다.
-![img](./img/startproject2.jpg)
+![startproject2](https://user-images.githubusercontent.com/40619551/64148650-c2164d80-ce5e-11e9-9a3b-7cefc3ded708.JPG)
+
 
