@@ -1,2 +1,21 @@
 # Diving Deeper into Components & React Internals
 
+##  Splitting an App Into Components
+
+directories
+
+```shell
+src
+└ assets
+└ components
+	└ Cockpit
+		Cockpit.js
+		Cockpit.css
+	└ Persons
+		└Person
+			Person.js
+		Persons.js
+└ containers
+	App.js
+	App.css
+```
