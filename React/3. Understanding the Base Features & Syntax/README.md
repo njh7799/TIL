@@ -2,7 +2,6 @@
 & Syntax</h1>
 
 <h2>Two Kinds of Applications</h2>
-
 - Single Page Applications
 
   - 단일 페이지 내에서 js 와 React를 이용하여 구현
@@ -61,7 +60,6 @@ JSX 는 HTML과 매우 비슷하지만, 그 본질은 javascript이다. 따라�
    ```
 
 <h2>State & Props</h2>
-
 - state가 update 되면 자동으로 re-render 된다.
 - 예제
 
@@ -111,7 +109,6 @@ class App extends Component {
   1. state의 변경이 감지되면 DOM이 re-render되어 update 된다.
 
 <h2>Event</h2>
-
 - onClick
 
   클릭했을 때
@@ -166,3 +163,78 @@ class App extends Component {
     );
   };
   ```
+
+
+
+## Class-based vs Functional Components
+
+## Functional Components
+
+```javascript
+import Reacdt, {useState} from 'react';
+//useState를 이용하여 functional components에서 state에 접근할 수 있다.
+const app = props =>{
+    const [personState, setPersonsState] = uesState({
+        persons:[{
+            {name:'Max', age:28},
+            {name:'JAck', age:25}
+        }]
+        otherState: 'some other value'
+    })
+    
+    const switchNameHanlder = () => {
+        //merge 가 아니라 replace로 동작함. 따라서 otherState는 소멸
+        setPersonsState({
+            persons:[
+                {name:'May', age:23},
+                {name:'Jay', age:24}
+        	],
+            otherState: 'value'
+        })
+    }
+    return (
+        <Person
+        	name = {personsState.persons[0].name}
+        />
+    jsx
+    )
+}
+
+
+export default app
+```
+
+```javascript
+//use State를 여러번 사용함으로써 위의 문제를 해결할 수 있다.
+import Reacdt, {useState} from 'react';
+const app = props =>{
+    const [personState, setPersonsState] = uesState(
+        persons:[{
+            {name:'Max', age:28},
+            {name:'JAck', age:25}
+        }]
+    )
+    const [otherState, setOtherState] = uesState(
+        'value'
+    )
+    
+    const switchNameHanlder = () => {
+        setPersonsState(
+            persons:[
+                {name:'May', age:23},
+                {name:'Jay', age:24}
+        	]
+        )
+    }
+    return (
+        <Person
+        	name = {personsState.persons[0].name}
+        />
+    jsx
+    )
+}
+
+
+export default app
+```
+
