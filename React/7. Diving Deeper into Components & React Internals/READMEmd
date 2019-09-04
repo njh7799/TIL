@@ -7,7 +7,7 @@ directories
 ```shell
 src
 └ assets
-└ components
+└ components #stateless, dumb, presentational component 
 	└ Cockpit
 		Cockpit.js
 		Cockpit.css
@@ -15,7 +15,30 @@ src
 		└Person
 			Person.js
 		Persons.js
-└ containers
+└ containers #stateful, smart component
 	App.js
 	App.css
 ```
+
+
+
+## Class-based vs Functional Components
+
+|                         class-based                          |          functional          |
+| :----------------------------------------------------------: | :--------------------------: |
+|                  class XY extends Component                  |   const XY = props=>{....}   |
+| Access to State(<br />access: this.state<br />change: setState) | Access to State(useState() ) |
+|                      Lifecycle Hooks O                       |      Lifecycle Hooks X       |
+|              Access State and Props via 'this'               |   Access Props via 'props'   |
+| Use if you need to manage State or access to Lifecycle Hoks and you don't want to use React Hooks |    Use in all other Cases    |
+
+```javascript
+// index.js
+ReactDOM.render(<App title='Title'/>, document.getElementById('root'));
+```
+
+```javascript
+//App.js
+<Person title = this.props.title/>
+```
+
