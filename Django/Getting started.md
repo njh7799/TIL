@@ -32,3 +32,55 @@ django-admin startproject mysite .
 ![startproject2](https://user-images.githubusercontent.com/40619551/64148650-c2164d80-ce5e-11e9-9a3b-7cefc3ded708.JPG)
 
 
+
+##  로컬서버 동작
+
+```shell
+python manage.py runserver
+```
+
+
+
+## 앱 만들기
+
+```shell
+python manage.py startapp polls
+```
+
+
+
+## view 작성
+
+```python
+# polls/views.py
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("Hello, world. You're at the polls index.")
+```
+
+
+
+	## url 연결
+
+```python
+# mysite/urls.py
+from django.contrib import admin
+from django.urls import include, path
+
+urlpatterns = [
+    path('polls/', include('polls.urls')),
+    path('admin/', admin.site.urls),
+]
+```
+
+```python
+# polls/urls.py
+from django.urls import path
+from . import views
+
+urlpatterns = [
+    path('', views.index, name='index'),
+]
+```
+
