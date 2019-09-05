@@ -68,61 +68,93 @@ https://developer.okta.com/blog/2018/09/13/build-and-understand-express-middlewa
 
 ------
 
-### router와 라우팅
+### [미들웨어  사용](https://expressjs.com/en/starter/basic-routing.html)
 
-https://expressjs.com/en/starter/basic-routing.html
 
-```js
-app.METHOD(PATH, HANDLER)
-```
 
-- 'use'를 사용하면 모든 메소드에 대응
-- PATH를 사용하면 모든 URL에 대응
+- use 메소드와 METHOD 메소드
 
 ```js
-//app.js
-app.use(cookieparser())
-app.use('/users', userRouter)
-app.get('/test', (req, res, next)=>{
-    res.json({name:'jack', age:25})
-})
+app.use() //모든 메소드에 대하여 실행됨
+app.METHOD() //HTTP method에 대하여 실행 됨
+```
 
-app.get('/next', (req, res, next)=>{
-    next("error")
-    // next("error")를 만나면 즉시 에러 핸들러를 실행한다.
-    // 그냥 next()이면 다음 줄로 넘어간다.
-})
+- use 메소드
 
-app.get('/nonres', (req, res, next)=>{
-    console.log(req)
-    // 이런 경우에는 response가 없기 때문에 응답이 오지 않는다.
-})
+```js
+var app = express();
 
-app.use(function(req, res, next){
-    next(createError(404));
-})
+// 마운트 경로가 없는 경우엔 요청이 들어올 때 마다 미들웨어 함수가 실행된다.
+app.use(function (req, res, next) {
+  console.log('run every time');
+  next();
+});
 
+// 마운트 경로가 있는 경우엔, 마운트 경로로 들어오는 모든 요청에 대하여 미들웨어 함수가 실행된다.
+app.use('/route', function (req, res, next) {
+  console.log('run at route "/route"');
+  next();
+});
 
-app.use(function(err, req, res, next){
-    //매게변수가 4개이면 에러 핸들러이다.
-    
-})
-
+// 미들웨어 함수가 여러개 있는 경우엔 순차적으로 실행된다.
+app.use('/route', middlwareFunc1, middlewareFunc2);
 
 ```
-- 실행 되다가 reponse를 보내면(res.send 혹은 res.json을 만나면)끝난다. 따라서 먼저 실행되어야 하는 코드들은  `위에` 있어야 한다.
 
-- userRouter 같은 아이들을 미들웨어라고 한다.
-- app.use 는 모든 메소드를 의미하고 app.get은 get 메소드만 처리한다는 것을 의미한다.
+- next 를 만났을 때
+
+```js
+// next()를 만났을 때
+// 바로 다음 미들 웨어가 실행된다.
+app.use(function (req, res, next) {
+  next();
+});
+
+//next('error')를 만났을 때 
+// 즉시 에러 핸들러를 호출한다.
+app.use(function (req, res, next) {
+  next('error');
+});
+
+// next(createError(404));
+// 즉시 에러 핸들러를 호출하고 404 에러를 넘겨준다.
+app.use(function (req, res, next) {
+  next('createError(404)');
+});
+
+// next('route')
+// 라우터 미들웨어 스택의 나머지 미들웨어를 건너 뛰고 다음 라우터를 호출
+// app.METHOD 방식에서만 사용 가능
+app.get('/', (req, res, next)=>{
+    next('route')
+}, (req, res)=>{console.log('this code does not run')})
+```
+
+- response가 실행되었을 때
+
+```js
+// response를 보내고 즉시 종료된다. 따라서 이 구문 밑에 존재하는 구문들은 실행되지 못한다.
+app.use('/route', function (req, res, next) {
+  res.send('response');
+});
+```
+
+- 에러 처리
+
+```js
+// 매개변수가 4개일 경우 에러 처리 함수이다.
+app.use(function(err, req, res, next) {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+```
+
+	미들웨어에서 async - await와 함께 사용할 경우 에러 처리에 주의해야 한다.
 
 ------
 
-### 에러 처리
 
-- `next(error)`를 사용해서 에러를 처리한다.
-- 미들웨어에서 async - await와 함께 사용할 경우 에러 처리에 주의해야 한다.
 
-------
 
 ### template engine
 
