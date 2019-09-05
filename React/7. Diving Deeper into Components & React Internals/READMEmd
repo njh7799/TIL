@@ -25,7 +25,7 @@ src
 ## Class-based vs Functional Components
 
 |                         class-based                          |          functional          |
-| :----------------------------------------------------------: | :--------------------------: |
+| :-------------------------: | :--------------------------: |
 |                  class XY extends Component                  |   const XY = props=>{....}   |
 | Access to State(<br />access: this.state<br />change: setState) | Access to State(useState() ) |
 |                      Lifecycle Hooks O                       |      Lifecycle Hooks X       |
@@ -42,3 +42,150 @@ ReactDOM.render(<App title='Title'/>, document.getElementById('root'));
 <Person title = this.props.title/>
 ```
 
+
+
+## Component Lifecycle - Creation
+
+|                                       | Do                                | Don't                                  |
+| ------------------------------------- | --------------------------------- | -------------------------------------- |
+| constructor(props)                    | Set up State                      | Cause Side-Effects                     |
+| getDerivedStateFromPops(props, state) | Sync state                        | Cause Side-Effects                     |
+| render()                              | Prepare & Structure your JSX Code |                                        |
+| Render Child Components               |                                   |                                        |
+| componentDidMount()                   | Cause Side-Effects                | Update State(it'll triggers re-render) |
+
+```js
+//App.js
+class App extends Component{
+    constructor(props){
+        super(props);
+        console.log('[App.js] constructor')
+        this.state = {
+            
+        } // initialize state
+	}
+}
+
+static getDerivedStateFromPops(props,state){
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state
+}
+
+componentDidMount(){
+	console.log('[App.js] componentDidMount')
+}
+
+render(){
+	console.log('[App.js] render')
+    
+    persons = (
+    	<Persons/>
+    )
+}
+```
+
+```javascript
+// Persons.js
+const persons = props =>{
+	console.log('[Persons.js] rendering...')
+	return props.persons.map((person, index) => {
+		
+	})
+}
+	
+```
+
+```javascript
+// Person.js
+const person = props =>{
+	console.log('[Person.js] rendering...')
+	return 대충 jsx
+}
+	
+```
+
+```bash
+# 실행 결과
+[App.js] constructor
+[App.js] getDerivedStateFromProps
+[App.js] render
+[App.js] componentDidMount
+# Toggle Button 클릭
+[App.js] getDerivedStateFromProps
+[App.js] render
+[Persons.js] rendering...
+[Person.js] rendering...
+[Person.js] rendering...
+[Person.js] rendering...
+```
+
+
+
+## Component Lifecycle - Update
+
+|                                                              | Do                                | Don't                                       |
+| ------------------------------------------------------------ | --------------------------------- | ------------------------------------------- |
+| getDerivedStateFromPops(props, state)                        | Sync state to Props               | Cause Side-Effects(don't send http request) |
+| shouldComponentUpdate(nextProps, nextState); May cancel updating process | Decide whether to Continue or Not | Cause Side-Effects                          |
+| render()                                                     | Prepare & Structure your JSX Code |                                             |
+| Update Child Components Props                                |                                   |                                             |
+| getSnapshotBeforeUpdate(prevProps, prevState)                | Last-minute DOM ops               | Cause Side-Effects                          |
+| componentDidUpdate()                                         | Cause Side-Effects                | Update State(triggers re-render)            |
+
+```javascript
+// Persons.js
+// LifeCycle Hook을 확인하기 위해 Class-based로 수정
+
+class Persons extends Component {
+    static getDerivedStateFromPops(props, state){
+        console.log('[Persons.js] getDerivedStateFromPops');
+        return state;
+	}
+    
+    shouldComponentUpdate(nextProps, nextState){
+        console.log('[Persons.js] shouldComponentUpdate');
+        
+        // true일 경우 업데이트를 계속 진행
+        // false일 경우 업데이트를 멈춤
+        return true ;
+	}
+    
+    getSnapshotBeforeUpdate(prevProps, prevState){
+        console.log('[Persons.js] getSnapshotBeforeUpdate');
+        return { message:'Snapshot!'}; // Snapshot value or null
+        // snapshot은 data package
+        // update 직전의 state의 저장이 가능
+    }
+    
+    componentDidUpdate(prevProps, prevState, snapshot){
+        console.log('[Persons.js] componentDidUpdate');
+        console.log(snapshot); // 이게 가능해
+    }
+    render(){
+        console.log('[Persons.js] rendering...');
+	}
+}
+```
+
+```bash
+# 실행 결과
+[App.js] constructor
+[App.js] getDerivedStateFromProps
+[App.js] render
+[App.js] componentDidMount
+# input typing
+# text 창에 글자를 입력해야 person의 변화가 생기고 Lifecycle Hook 이 trigger 된다.
+[App.js] getDerivedStateFromProps
+[App.js] render
+[Persons.js] shouldComponentUpdate
+[Persons.js] rendering...
+[Person.js] rendering...
+[Person.js] rendering...
+[Person.js] rendering...
+[Persons.js] getSnapshotBeforeUpdate
+[Persons.js] componentDidUpdate
+```
+
+person 이 업데이트 될 때, App의 state도 변경이 되니까
+
+App도 업데이트 트리거 할 수 있는데 하고 싶으면 해 봐
