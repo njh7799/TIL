@@ -130,3 +130,29 @@ app.use(function(err, req, res, next){
 - 다양한 템플릿 엔진이 있음 (https://colorlib.com/wp/top-templating-engines-for-javascript/)
 - 대표적으로 EJS, Jade, pug 등을 사용 (https://expressjs.com/ko/guide/using-template-engines.html)
 - https://expressjs.com/ko/advanced/developing-template-engines.html
+
+### node express restart on change
+
+설치
+
+```shell
+npm install --save-dev nodemon
+```
+
+사용
+
+```json
+//package.json
+{
+    ...
+    {
+        ...
+        "scripts": {
+    		"start": "nodemon ./bin/www"
+  		},
+        ...
+    }
+    ...
+}
+```
+
