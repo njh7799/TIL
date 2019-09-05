@@ -70,8 +70,6 @@ https://developer.okta.com/blog/2018/09/13/build-and-understand-express-middlewa
 
 ### [미들웨어  사용](https://expressjs.com/en/starter/basic-routing.html)
 
-
-
 - use 메소드와 METHOD 메소드
 
 ```js
@@ -151,19 +149,18 @@ app.use(function(err, req, res, next) {
 
 	미들웨어에서 async - await와 함께 사용할 경우 에러 처리에 주의해야 한다.
 
-------
+---
 
-
-
-
-### template engine
+## template engine
 
 - 데이터를 이용, 템플릿을 렌더링해서 사용자에게 응답
 - 다양한 템플릿 엔진이 있음 (https://colorlib.com/wp/top-templating-engines-for-javascript/)
 - 대표적으로 EJS, Jade, pug 등을 사용 (https://expressjs.com/ko/guide/using-template-engines.html)
 - https://expressjs.com/ko/advanced/developing-template-engines.html
 
-### node express restart on change
+---
+
+## node express restart on change
 
 설치
 
