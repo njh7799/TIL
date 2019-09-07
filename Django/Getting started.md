@@ -47,6 +47,20 @@ python manage.py runserver
 python manage.py startapp polls
 ```
 
+```python
+# mysite/settings.py
+INSTALLED_APPS = [
+    'polls.apps.PollsConfig',
+    ...
+]
+
+# 혹은
+INSTALLED_APPS = [
+    'polls', # polls/apps.py 에 저장되어 있음
+    ...
+]
+```
+
 
 
 ## view 작성
@@ -83,4 +97,108 @@ urlpatterns = [
     path('', views.index, name='index'),
 ]
 ```
+
+
+
+## Time zone 설정 방법
+
+```python
+#mysite/settings.py
+TIME_ZONE = 'Asia/Seoul'
+```
+
+
+
+# 모델
+
+## 모델의 추가 및 변경 반영
+
+```python
+#polls/models.py
+from django.db import models
+
+
+class Question(models.Model):
+    question_text = models.CharField(max_length=200)
+    pub_date = models.DateTimeField('date published')
+
+
+class Choice(models.Model):
+    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    choice_text = models.CharField(max_length=200)
+    votes = models.IntegerField(default=0)
+```
+
+```bash
+#shell
+python manage.py makemigrations {app-name}
+python manage.py migrate
+```
+
+
+
+## (번외) 프로젝트 내에서 shell 사용하기
+
+```shell
+python manage.py shell
+```
+
+
+
+## 모델 객체에 이름 설정해주기
+
+```python
+from django.db import models
+
+class Question(models.Model):
+    # ...
+    def __str__(self):
+        return self.question_text
+
+class Choice(models.Model):
+    # ...
+    def __str__(self):
+        return self.choice_text
+```
+
+
+
+
+## 관리자 
+
+- 관리자 만들기
+
+```shell
+python manage.py createsuperuser
+```
+
+- 관리자 페이지 접근
+
+```shell
+#url
+localhost:8000/admin
+```
+
+
+
+## 관리자 페이지에서 모델 객체에 접근
+
+```python
+#polls/admin.py
+from django.contrib import admin
+
+from .models import Question
+
+admin.site.register(Question)
+```
+
+
+
+## (번외) runserver 쉽게 하기
+
+![캡처](https://user-images.githubusercontent.com/40619551/64477410-41e14680-d1d6-11e9-8a61-06ebbb10f621.JPG)
+
+
+
+# 뷰
 
