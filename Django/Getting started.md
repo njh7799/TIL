@@ -200,5 +200,130 @@ admin.site.register(Question)
 
 
 
-# 뷰
+## 뷰 추가하기
+
+```python
+#polls/view.py
+...
+def detail(request, question_id):
+    return HttpResponse("You're looking at question %s." % question_id)
+
+def results(request, question_id):
+    response = "You're looking at the results of question %s."
+    return HttpResponse(response % question_id)
+
+def vote(request, question_id):
+    return HttpResponse("You're voting on question %s." % question_id)
+```
+
+```python
+#polls/urls.py
+from django.urls import path
+
+from . import views
+
+urlpatterns = [
+    # ex: /polls/
+    path('', views.index, name='index'),
+    # ex: /polls/5/
+    path('<int:question_id>/', views.detail, name='detail'),
+    # ex: /polls/5/results/
+    path('<int:question_id>/results/', views.results, name='results'),
+    # ex: /polls/5/vote/
+    path('<int:question_id>/vote/', views.vote, name='vote'),
+]
+```
+
+
+
+## 템플릿 추가하기
+
+```python
+# polls/templates/polls/index.html
+{% if latest_question_list %}
+    <ul>
+    {% for question in latest_question_list %}
+        <li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No polls are available.</p>
+{% endif %}
+```
+
+```python
+# polls/views.py
+from django.http import HttpResponse
+from django.template import loader # loader를 import 한다.
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    
+    # 템플릿을 가져온다.
+    template = loader.get_template('polls/index.html') 
+    
+    # 템플릿에 넘겨줄 context를 json 형태로 저장
+    context = {
+        'latest_question_list': latest_question_list,
+    }
+    
+    # 가져온 템플릿을 이용하여 렌더링 한다.
+    return HttpResponse(template.render(context, request)) 
+```
+
+
+
+## 렌더링 간단하게 하기
+
+```python
+# polls/views.py
+from django.shortcuts import render
+
+from .models import Question
+
+
+def index(request):
+    latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    context = {'latest_question_list': latest_question_list}
+    return render(request, 'polls/index.html', context)
+```
+
+
+
+## 템플릿에서 url 소프트 코딩하기
+
+```html
+before
+<li><a href="/polls/{{ question.id }}/">{{ question.question_text }}</a></li>
+
+after
+<li><a href="{% url 'polls:detail' question.id %}">{{ question.question_text }}</a></li>
+
+...
+# the 'name' value as called by the {% url %} template tag
+path('<int:question_id>/', views.detail, name='detail'),
+...
+```
+
+```python
+# polls.urls.py
+polls/urls.py¶
+from django.urls import path
+
+from . import views
+
+# 앱 이름 설정!
+app_name = 'polls' 
+urlpatterns = [
+    
+    # url 이름 설정!
+    path('', views.index, name='index'),
+    path('<int:question_id>/', views.detail, name='detail'),
+    path('<int:question_id>/results/', views.results, name='results'),
+    path('<int:question_id>/vote/', views.vote, name='vote'),
+]
+```
 
