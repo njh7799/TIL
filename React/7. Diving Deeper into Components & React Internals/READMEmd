@@ -42,7 +42,7 @@ ReactDOM.render(<App title='Title'/>, document.getElementById('root'));
 <Person title = {this.props.title}/>
 ```
 
-
+# [Lifecycle](http://projects.wojtekmaj.pl/react-lifecycle-methods-diagram/)
 
 ## Component Lifecycle - Creation
 
