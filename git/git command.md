@@ -24,3 +24,10 @@ git push origin from:to
 git pull heroku from:to
 ```
 
+## git commit
+
+```bash
+git commit -m "title" # 제목만 입력
+git commit # vim이 실행 됨. 본문 또한 작성 가능
+```
+
