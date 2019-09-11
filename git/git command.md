@@ -51,6 +51,8 @@ git branch -d <branch_name>
 ```bash
 # Unstagee changes
 git reset HEAD
+
+# undo n commits from HEAD(including HEAD)
 git reset HEAD~n
 
 # discard all changes
@@ -58,5 +60,3 @@ git reset --hard
 
 # undo last commit
 ```
-
-ddd
