@@ -8,3 +8,5 @@
 - vanilla 의 경우: innerHTML을 이용하여 html을 렌더링 하고 js 파일을 addEventListener를 통해 묶어서 실행한다.
 - id 사용을 최소화 하고 페이지가 달라도 id가 겹치면 안된다.
 
+- 
+
