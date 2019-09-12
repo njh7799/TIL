@@ -70,10 +70,6 @@ git reset --hard
 git revert HEAD~n
 ```
 
-
-
-
-
 ## git log
 
 ```bash
@@ -104,25 +100,42 @@ git checkout {branch}
 
 ```bash
 # HEAD location : master
-git merge {branch} # 현재 브랜치에 {branch}를 합친다.
+git merge bugFix # 현재 브랜치에 {branch}를 합친다.
 # master branch에 {branch}의 내용이 합쳐져 commit 된다.
 # {branch}는 그대로 유지된다.
-
-git checkout {branch}
-git merge master
-# master branch로 {branch} 가 넘어온다.
 ```
+![머지1](https://user-images.githubusercontent.com/40619551/64791483-c1925b00-d5b2-11e9-872a-9ada98194ea4.gif)
+
+
+
+```bash
+git checkout bugFix; git merge master
+# master 로 bugFix 가 넘어온다.
+```
+![머지2](https://user-images.githubusercontent.com/40619551/64791636-f6061700-d5b2-11e9-91a9-38239766e7e8.gif)
+
 
 ## rebase - 두 브랜치를 한줄로
 
 ```bash
-# HEAD location : {branch}
+# HEAD location : bugFix
 git rebase master # 현재 브랜치를 master 밑으로 이동시킨다.
-# {branch} 가 master 밑으로 이동한다.
+# bugFix 가 master 밑으로 이동한다.
+```
+![리베이스1](https://user-images.githubusercontent.com/40619551/64791702-0fa75e80-d5b3-11e9-9baf-38d737c6ef83.gif)
 
-git checkout master
-git rebase {branch}
+```bash
+git checkout master; git rebase bugFix
+```
+![리베이스2](https://user-images.githubusercontent.com/40619551/64791726-17ff9980-d5b3-11e9-8f44-dbb065a0789b.gif)
+
+## cherry-pick 
+
+선택된 브랜치 밑에 원하는 커밋들을 붙인다.
+
+```bash
+git cherry-pick c2 c4
 ```
 
-
+![체리픽](https://user-images.githubusercontent.com/40619551/64791936-77f64000-d5b3-11e9-8f66-f5a17d160c9c.gif)
 
