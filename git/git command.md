@@ -63,12 +63,14 @@ git reset --hard
 
 ## revert 
 
-- 기본적으로 reset과 비슷함.
-- reset이 목표 커밋 까지 상태를 되돌린다면, revert 는 다음 커밋을 목표 커밋으로 만든다.
+- 선택된 커밋 하나가 삭제된 상태로 commit 된다.
 
 ```bash
 git revert HEAD~n
 ```
+위 코드를 실행할 시, HEAD~n 에서의 commit 만  삭제된 상태가 된다.
+
+
 
 ## git log
 
