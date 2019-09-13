@@ -61,6 +61,16 @@ INSTALLED_APPS = [
 ]
 ```
 
+### naming convention
+
+```bash
+1. my_django_app
+2. my-django-app Update: Not allowed syntactically
+3. mydjangoapp Recommended solution
+
+Modules should have short, all-lowercase names. Underscores can be used in the module name if it improves readability. Python packages should also have short, all-lowercase names, although the use of underscores is discouraged.
+```
+
 
 
 ## view 작성
