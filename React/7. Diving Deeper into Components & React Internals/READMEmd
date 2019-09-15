@@ -104,20 +104,9 @@ const person = props =>{
 	
 ```
 
-```bash
-# 실행 결과
-[App.js] constructor
-[App.js] getDerivedStateFromProps
-[App.js] render
-[App.js] componentDidMount
-# Toggle Button 클릭
-[App.js] getDerivedStateFromProps
-[App.js] render
-[Persons.js] rendering...
-[Person.js] rendering...
-[Person.js] rendering...
-[Person.js] rendering...
-```
+![create](https://user-images.githubusercontent.com/40619551/64921443-35747380-d7fe-11e9-8444-2f2d2c32fa6b.gif)
+
+
 
 
 
@@ -131,6 +120,9 @@ const person = props =>{
 | Update Child Components Props                                |                                   |                                             |
 | getSnapshotBeforeUpdate(prevProps, prevState)                | Last-minute DOM ops               | Cause Side-Effects                          |
 | componentDidUpdate()                                         | Cause Side-Effects                | Update State(triggers re-render)            |
+
+### props change
+
 
 ```javascript
 // Persons.js
@@ -172,28 +164,52 @@ class Persons extends Component {
 }
 ```
 
-```bash
-# 실행 결과
-[App.js] constructor
-[App.js] getDerivedStateFromProps
-[App.js] render
-[App.js] componentDidMount
-# input typing
-# text 창에 글자를 입력해야 person의 변화가 생기고 Lifecycle Hook 이 trigger 된다.
-[App.js] getDerivedStateFromProps
-[App.js] render
-[Persons.js] shouldComponentUpdate
-[Persons.js] rendering...
-[Person.js] rendering...
-[Person.js] rendering...
-[Person.js] rendering...
-[Persons.js] getSnapshotBeforeUpdate
-[Persons.js] componentDidUpdate
+![update props](https://user-images.githubusercontent.com/40619551/64921710-7c179d00-d801-11e9-8b8a-1353bd0ce4a8.gif)
+
+
+
+### state change
+
+```javascript
+//App.js
+class App extends Component{
+    constructor(props){
+        super(props);
+        console.log('[App.js] constructor')
+        this.state = {
+            
+        } // initialize state
+	}
+}
+
+static getDerivedStateFromProps(props,state){
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state
+}
+
+componentDidMount(){
+	console.log('[App.js] componentDidMount')
+}
+
+shouldComponentUpdate() {
+    console.log('[App.js] shouldComponentUpdate');
+    return true;
+}
+
+componentDidUpdate(){
+    console.log('[App.js] componentDidUpdate')
+}
+
+render(){
+	console.log('[App.js] render')
+    
+    persons = (
+    	<Persons/>
+    )
+}
 ```
 
-person 이 업데이트 될 때, App의 state도 변경이 되니까
-
-App도 업데이트 트리거 할 수 있는데 하고 싶으면 해 봐
+![update state](https://user-images.githubusercontent.com/40619551/64921823-c2b9c700-d802-11e9-9c35-c82f318e6098.gif)
 
 ## useEffect
 
@@ -271,3 +287,8 @@ useEffect(() => {
 ```
 
 clearTimeout을 설정하지 않은 상태에서 실행하면, 창을 로드하고 바로 `Remove Cockpit` 버튼을 누르더라도 1초 후 alert 창이 뜬다. 하지만 위 코드 처럼 설정을 하면 `Remove Cockpit` 버튼을 누를 때, unmount가 되어 return 함수가 실행되기 때문에, timer가 동작을 멈추게 되고 결과적으로 1초가 경과해도 경고창이 나오지 않는다.
+
+### shouldComponentUpdate 를 이용한 최적화
+
+문제 상황: state가 업데이트 될 때, person에 변화가 없어도 App이 re-rendering 되는 과정에서, Persons도 re-rendering 되는 낭비가 발생. 한 예로, `Remove Cockpit` 버튼을 누르면, person에는 변화가 없음에도, re-rendering이 일어남.
+
