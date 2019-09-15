@@ -161,6 +161,11 @@ class Persons extends Component {
         console.log('[Persons.js] componentDidUpdate');
         console.log(snapshot); // 이게 가능해
     }
+    
+    componentWillUnmount() {
+    	console.log('[Persons.js] componentWillUnmount');
+  	}
+    
     render(){
         console.log('[Persons.js] rendering...');
 	}
@@ -189,3 +194,80 @@ class Persons extends Component {
 person 이 업데이트 될 때, App의 state도 변경이 되니까
 
 App도 업데이트 트리거 할 수 있는데 하고 싶으면 해 봐
+
+## useEffect
+
+### basic settings
+
+- Component 이름은 대문자로 시작해야 한다. const cockpit => const Cockpit
+
+```javascript
+// Cockpit.js
+const Cockpit = props => {
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+  });
+   ...
+```
+
+- `state 변화 -> render 실행 -> 콕핏 실행`의 과정을 거치기 때문에, cockpit에 직접적인 변화가 없더라도 매번 실행 된다.
+- componentDidMount 와 compenentDidUpdate가 섞여있다고도 볼 수 있다.
+- 그렇다면 이를 어떻게 컨트롤 할 수 있을 것인가?
+
+```javascript
+// Cockpit.js
+const Cockpit = props => {
+  useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+  }, [props.persons]);
+   ...
+```
+
+- 위와 같이 useEffect의 두번째 인자로 배열을 주면, 배열 안에 있는 요소에 변경이 생길 때만 실행이 된다.
+- 만약 빈 배열을 넣을 경우, 맨 처음 한번만 실행되고 재실행이 되지 않는다.(componentDidMount 와 같은 동작)
+
+### cleanup
+
+```javascript
+useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+    return () => {
+        console.log('[Cockpit.js] cleanup work in useEffect');
+    };
+}, []);
+```
+
+- return 구문에 함수를 작성하면, unmount 될 때 함수가 실행된다.
+- 위와 같이 useEffect를 작성하면, 두번째 인자가 빈 배열이기 때문에, component가 mount되어 render 될 때 `console.log('[Cockpit.js] useEffect')`가 한 번 실행되고, unmount 될 때 `console.log('[Cockpit.js] cleanup work in useEffect')` 가 실행 된다.
+
+
+
+```javascript
+useEffect(() => {
+    console.log('[Cockpit.js] 2nd useEffect');
+    return () => {
+        console.log('[Cockpit.js] cleanup work in 2nd useEffect');
+    };
+});
+```
+
+- 두번 째 인자가 없을 때에는, re-rendering이 될 때 마다 실행 된다.
+- 어떠한 component가 re-render 되던 간에 re-render가 발생할 때마다 실행되게 해야할 경우 사용되는 방법 
+
+cleanup 예제)
+
+```javascript
+useEffect(() => {
+    console.log('[Cockpit.js] useEffect');
+
+    const timer = setTimeout(() => {
+      alert('Saved data to cloud!');
+    }, 1000);
+    return () => {
+      clearTimeout(timer);
+      console.log('[Cockpit.js] cleanup work in useEffect');
+    };
+  }, []);
+```
+
+clearTimeout을 설정하지 않은 상태에서 실행하면, 창을 로드하고 바로 `Remove Cockpit` 버튼을 누르더라도 1초 후 alert 창이 뜬다. 하지만 위 코드 처럼 설정을 하면 `Remove Cockpit` 버튼을 누를 때, unmount가 되어 return 함수가 실행되기 때문에, timer가 동작을 멈추게 되고 결과적으로 1초가 경과해도 경고창이 나오지 않는다.
