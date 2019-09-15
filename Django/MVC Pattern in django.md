@@ -4,10 +4,10 @@ MVC 패턴이 무엇인가에 대해서는 언급하지 않고 넘어간다.
 
 ```
 app
-├─ view.js
-├─ controller.js
-├─ model.js
-└─ url.js
+├─ view.py
+├─ controller.py
+├─ model.py
+└─ url.py
 ```
 
 위와 같이 디렉토리를 구성하는 것이 이상적이라 생각한다.
@@ -25,13 +25,12 @@ app
 
 - controller가 요청하는 데이터를 조회해준다.
 
+## 예시
 
-
-> 예시) 시간표 작성 어플에서 강의를 넣는 경우
+> **시간표 작성 어플에서 강의를 넣는 경우**
 >
 > view 가 http request를 받아서 넣으려는 강의에 대한 정보를 추출하여 controller에게 넘긴다.
 >
 > controller는  model에 접근하여 view로 부터 받은  강의의 시간표가 현재 만들어진 시간표와 겹치는 지 확인한다. 시간표가 겹치지 않을 경우, 강의를 추가하고(model을 업데이트 함) 강의가 정상적으로 추가되었음을 view에게 알린다.(대충 true를 return) 시간표가 겹칠 경우, 강의를 추가하지 않고 강의 시간이 겹침을 view에게 알린다.(대충 false를 return)
 >
 > model은 controller에게 조회 당하는 역할정도? model이 스스로 나서서 무언가를 하는 것은 아니다.
-
