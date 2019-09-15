@@ -22,6 +22,7 @@ git 설치할 때 global 변수에 내 아이디 정보가 들어가기 때문
 
 ```bash
 # master 브랜치를 HEAD~3의 위치로 강제로 옮김
+# HEAD를 뗀 상태에서만 변경이 가능
 git branch -f master HEAD~3
 ```
 
