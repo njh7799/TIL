@@ -1,6 +1,5 @@
-<h1>Array Method</h1>
-
-<h2>forEach</h2>
+# [Array Method](https://bblog.tistory.com/300)
+## forEach
 
 배열의 요소에 순차적으로 접근하여 콜백 함수를 실행
 
@@ -12,7 +11,6 @@ arr.forEach(e=>{if(e%2) console.log(e)});
 
 
 <h2>map</h2>
-
 배열의 각 요소들을 일괄적으로 변경 시킴
 
 새로운 배열을 생성하는 immutable 방식
@@ -25,7 +23,6 @@ arr.map(e=>e*4);//[4, 8, 12, 16, 20]
 
 
 <h2>filter</h2>
-
 배열의 각 요소를 콜백함수가 규정한 규칙에 따라 걸러 냄
 
 ```javascript
@@ -36,7 +33,6 @@ arr.filter(e=>e%2);//[1, 3, 5]
 
 
 <h2>find</h2>
-
 조건을 만족하는 가장 빠른 요소 값을 반환
 
 ```javascript
@@ -47,7 +43,6 @@ arr.find(e=>!(e%2)); // 4
 
 
 <h2>reduce</h2>
-
 reduce는 누산기의 개념이 적용된다.
 
 reduce의 패러미터는 callback 함수와 initial Value가 있다.
@@ -65,7 +60,6 @@ reduce의 패러미터는 callback 함수와 initial Value가 있다.
 
 
 <h2>slice</h2>
-
 immutable 방식
 
 ```javascript
@@ -82,7 +76,6 @@ const arr2 = arr.slice(1,4)
 
 
 <h2>splice</h2>
-
 mutable 방식
 
 ```javascript
@@ -100,7 +93,6 @@ const arr2 = arr.splice(1,2)
 
 
 <h2>etc</h2>
-
 - for(i in arr)
   - arr 의 인덱스에 순차적으로 접근
 - for(e of arr)
