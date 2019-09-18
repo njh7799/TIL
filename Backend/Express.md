@@ -176,3 +176,14 @@ npm install --save-dev nodemon
 }
 ```
 
+---
+
+## register to root directory
+
+```javascript
+app.use(express.static(path.join(__dirname, {target directory})));
+```
+
+__dirname은 현재의 루트 경로 {target directory} 는 등록할 디렉토리.
+
+위와 같이 설정을 해 놓으면, import할 때 수월하다.
