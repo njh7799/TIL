@@ -351,3 +351,179 @@ shouldComponentUpdate(nextProps, nextState) {
   ![tip](https://user-images.githubusercontent.com/40619551/64923161-4dee8900-d812-11e9-8ad4-860109bf7279.gif)
   - 화면상 변경을 보여줌
   - 이름에 타이핑을 해 보면, Cockpit이 계속 업데이트 되지만, 실제로 바뀌는 값이 없기 때문에 DOM이 갱신이 되지는 않지만, 이를 좀더 최적화 할 여지는 있음
+
+### Optimizing Functional Components with React.memo()
+
+component를 React.memo로 감싸면, 마운팅이 될 때의 값이 저장된다. 그리고 앱에 변화가 생겼을 때, 그 변화가 현재 component에 영향을 끼치지 않는다면, 저장된 값을 바로 불러오는 방식을 통해 최적화가 가능해진다.
+
+```javascript
+//Cockpit.js
+
+export default React.memo(Cockpit);
+```
+
+### shouldComponentUpdate 나 React.memo는 항상 하나요?
+
+이 두가지를 이용하여 성능을 향상 시킬 수는 있다. 하지만, 이렇게 체크를 하는 것 또한 비용이다. 만약 부모 component에 변화가 일어날 때, 자식 컴포넌트가 거의 확실하게 변화가 일어난다면, 굳이 확인 하는 코드를 넣을 필요가 없다.
+
+### 99. PureComponents instead of shouldComponentUpdate
+
+상황: Persons 컴포넌트에서, persons 뿐만 아니라, clicked 함수 혹은 changed 함수가 변경 되는 경우도 있을 수 있다.
+
+```javascript
+shouldComponentUpdate(nextProps, nextState) {
+    console.log('[Persons.js] shouldComponentUpdate');
+    if (nextProps.persons !== this.props.persons ||
+       	nextProps.changed !== this.props.changed ||
+       	nextProps.clicked !== this.props.clicked
+       ) return true;
+    else return false;
+  }
+```
+
+솔직히 이정도면 적어서 괜찮긴한데, 더 많아지면 감당 안 됨. 그래서 모든 props를 확인하는 친구가 나왔습니다.
+
+```javascript
+import React, {PureComponent} from 'react'
+
+class Persons extends PureComponent{
+    
+}
+```
+
+Component 대신 PureComponent를 상속하면, props에 변화가 하나라도 있는지 감지하고, 없을 경우, shouldComponentUpdate 이하 단계를 건너 뛴다.
+
+![Pure](https://user-images.githubusercontent.com/40619551/65153551-eaa86500-da64-11e9-92e9-fd5450988ca0.gif)
+
+### 100. How React Updates the DOM
+
+![image](https://user-images.githubusercontent.com/40619551/65154805-1e848a00-da67-11e9-98b0-754b5c70d16e.png)
+
+
+- render 메소드가 호출 되었다고 해서 real DOM 에 바로 렌더링을 하는 것은 아니다.
+- render 메소드가 실행 되고 난 후에는 **virtual DOM**을 비교한다. 비교 대상은 `Old Virtual DOM` 과 render 메소드가 호출되어 생성된 `Re-rendered Virtual DOM` 이다.
+	- 왜 Real DOM으로 비교는 안하는가? 어어엄청 느리기 때문이다.
+- 변화가 감지되면, real DOM에 반영하는데, 이 때도전부 다 갈아 치우는 것이 아니라, **바뀐 부분만 갈아 끼운다.**
+- 변화가 감지되지 않으면, Real DOM을 건드리지 않는다.
+- 즉, Real DOM은 Real DOM에 직접 적용될 변화가 있을 때에만 바뀌는 것이다.
+- DOM 에 접근하는 건 매우 느리다. 때문에 최소화 하는 것이 중요하다. 그래서 위와같은 귀찮은 과정을 거치는 것이다.
+  
+
+### 101. Rendering Adjacent JSX Elements
+
+rendering 할 때 루트 div는 하나만 있어야 한다. 단 하나.
+
+근데 array는 된다. 그래서 실험 해 보았다.
+
+```javascript
+//before Person.js
+return (
+      <div className={styles.Person}>
+        <p onClick={this.props.click}>
+          I'm {this.props.name} and I am {this.props.age} years old!
+        </p>
+        <p>{this.props.children}</p>
+        <input
+          type='text'
+          onChange={this.props.changed}
+          value={this.props.name}
+        />
+      </div>
+    );
+```
+
+```javascript
+//after Person.js
+return [
+
+        <p key="aaa" onClick={this.props.click}>
+          I'm {this.props.name} and I am {this.props.age} years old!
+        </p>,
+        <p key="bbb">{this.props.children}</p>,
+        <input
+		 key="ccc"
+          type='text'
+          onChange={this.props.changed}
+          value={this.props.name}
+        />
+
+    ];
+```
+
+되긴 되는데, array 각 요소에 key를 달라고 경고가 뜬다. 위 코드는 걍 아무 key나 때려 박은거다.
+
+근데 촌스럽다. 그래서 hoc라는걸 써볼거다. higher order component라는 뜻이고, 맨 위에서 아무 의미 없이 감싸주는 역할을 할 예정이다.
+
+```bash
+.
+│  index.css
+│  index.js
+│  registerServiceWorker.js
+│
+├─components
+│  ├─Cockpit
+│  │      Cockpit.js
+│  │      Cockpit.module.css
+│  │
+│  └─Persons
+│      │  Persons.js
+│      │
+│      └─Person
+│              Person.js
+│              Person.module.css
+│
+├─containers
+│      App.js
+│      App.module.css
+│      App.test.js
+│
+└─hoc
+        Auxiliary.js
+```
+
+```javascript
+// Aux.js - 윈도우 에서는 Auxiliary 라고 해야 됨
+...
+import Aux from '../../../hoc/Auxiliary';
+class Person extends Component {
+  render() {
+    ...
+    return (
+      <Aux>
+        <p onClick={this.props.click}>
+          I'm {this.props.name} and I am {this.props.age} years old!
+        </p>
+        <p>{this.props.children}</p>
+        <input
+          type='text'
+          onChange={this.props.changed}
+          value={this.props.name}
+        />
+      </Aux>
+    );
+  }
+}
+```
+
+Aux는 바닐라 js 문법으로 구현한 친구이다. 근데 안만들어도 이미 있다.
+
+### 103. Using React.Fragment
+
+```javascript
+//Person.js
+
+return (
+      <React.Fragment>
+        <p onClick={this.props.click}>
+          I'm {this.props.name} and I am {this.props.age} years old!
+        </p>
+        <p>{this.props.children}</p>
+        <input
+          type='text'
+          onChange={this.props.changed}
+          value={this.props.name}
+        />
+      </React.Fragment>
+    );
+```
+
