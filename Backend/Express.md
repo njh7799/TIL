@@ -187,3 +187,25 @@ app.use(express.static(path.join(__dirname, {target directory})));
 __dirname은 현재의 루트 경로 {target directory} 는 등록할 디렉토리.
 
 위와 같이 설정을 해 놓으면, import할 때 수월하다.
+
+## when request does not carry anything
+
+포스트 맨으로 아래의 코드를 POST 전송하는데 계속 undefined가 나온다
+
+```javascript
+app.post('/', (req, res) => {
+  console.log(req.body);
+  res.send(req.body);
+});
+```
+
+구글링 하니까 해결법이 바로 나왔다. 아래의 코드를 추가해주어야 했다.
+
+```javascript
+var bodyParser = require('body-parser');
+app.use(bodyParser.urlencoded({
+    extended: true
+}));
+app.use(bodyParser.json());
+```
+
