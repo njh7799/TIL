@@ -527,3 +527,121 @@ return (
     );
 ```
 
+### 104. Higher Order Components - Introduction
+
+진짜 아무 것도 안하고 감싸기만 하는 친구
+
+```bash
+│
+└─hoc
+        Auxiliary.js
+        WithClass.js
+```
+
+```js
+// WithClass.js
+
+import React from 'react';
+
+const withClass = props => (
+  <div class Name={props.classes}>
+    {props.children}
+  </div>
+);
+
+export default withClass;
+
+```
+
+```js
+// App.js
+return (
+      <WithClass classes={styles.App}>
+        ...
+      </WithClass>
+```
+
+### 105. Another Form of HOCs
+
+functional component를 반환하는 일반 함수를 제작
+
+```js
+// withClass.js # 함수형 컴포넌트가 아니기 때문에 이름 변경
+import React from 'react';
+
+const withClass = (WrappedComponent, className) => {
+  return props => (
+    <div className={className}>
+      <WrappedComponent />
+    </div>
+  );
+};
+
+export default withClass;
+
+```
+
+```js
+// App.js
+...
+return (
+      <Aux>
+        ...
+      </Aux>
+    );
+  }
+}
+
+export default withClass(App, styles.App);
+```
+
+### **106. Passing Unknown Props
+
+```js
+import React from 'react';
+
+const withClass = (WrappedComponent, className) => {
+  return props => (
+    <div className={className}>
+      // <WrappedComponent props = {...props}/>
+      // 이처럼 작성하면 props에 들어가는 것이 아니고 props라는 이름의 prop가 하나 생기는 것이다. 따라서 스프레드 연산자를 통해 뿌려줘야 한다.
+      ..
+      <WrappedComponent {...props}/>
+    </div>
+  );
+};
+
+export default withClass;
+
+```
+
+**Q1)** 왜 withClass를 지나면 데이터가 소실되는가?
+**A1)**
+```js
+return (
+        <Person
+          click={() => this.props.clicked(index)}
+          name={person.name}
+          age={person.age}
+          key={person.id}
+          changed={event => this.props.changed(event, person.id)}
+        />
+      );
+```
+위 코드가 실행될 때 Person 안에 위 props들이 들어간다. 그런데 여기서 사용한 <Person/> 은 실제론, withClass(Person, styles.Person) 을 의미한다. 즉 props들은 withClass 로 전달이 되어
+
+```js=
+const withClass = (WrappedComponent, className) => {
+  return props => (
+    <div className={className}>
+      <WrappedComponent/>
+    </div>
+  );
+};
+```
+위의 2번째 줄의 props에서 props가 전달이 안되고 멈춘다.
+
+**Q2)** withClass 는 어떻게 props에 데이터를 가지고 있을 수 있는가?
+
+### 107. Setting State Correctly
+
