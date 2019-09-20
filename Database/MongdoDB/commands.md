@@ -74,7 +74,7 @@ db.movies.insert({"title": "ironman"})
 ### 테이블 리스트 확인
 
 ```bash
-show collection
+show collections
 ```
 
 ### 테이블 DROP

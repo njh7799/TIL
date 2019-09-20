@@ -188,6 +188,8 @@ __dirname은 현재의 루트 경로 {target directory} 는 등록할 디렉토�
 
 위와 같이 설정을 해 놓으면, import할 때 수월하다.
 
+---
+
 ## when request does not carry anything
 
 포스트 맨으로 아래의 코드를 POST 전송하는데 계속 undefined가 나온다
