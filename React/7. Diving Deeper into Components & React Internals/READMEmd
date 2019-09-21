@@ -481,8 +481,18 @@ return [
         Auxiliary.js
 ```
 
-```javascript
+```js
 // Aux.js - 윈도우 에서는 Auxiliary 라고 해야 됨
+import React from 'react';
+
+const aux = props => props.children;
+
+export default aux;
+
+```
+
+```javascript
+// Person.js
 ...
 import Aux from '../../../hoc/Auxiliary';
 class Person extends Component {
@@ -543,13 +553,13 @@ return (
 
 import React from 'react';
 
-const withClass = props => (
+const WithClass = props => (
   <div class Name={props.classes}>
     {props.children}
   </div>
 );
 
-export default withClass;
+export default WithClass;
 
 ```
 
@@ -564,6 +574,8 @@ return (
 ### 105. Another Form of HOCs
 
 functional component를 반환하는 일반 함수를 제작
+
+
 
 ```js
 // withClass.js # 함수형 컴포넌트가 아니기 때문에 이름 변경
@@ -617,7 +629,10 @@ export default withClass;
 
 **Q1)** 왜 withClass를 지나면 데이터가 소실되는가?
 **A1)**
+
 ```js
+//Persons.js
+
 return (
         <Person
           click={() => this.props.clicked(index)}
@@ -643,5 +658,36 @@ const withClass = (WrappedComponent, className) => {
 
 **Q2)** withClass 는 어떻게 props에 데이터를 가지고 있을 수 있는가?
 
+```js
+const withClass = (WrappedComponent, className) => {
+  return props => (
+    <div className={className}>
+      <WrappedComponent />
+    </div>
+  );
+};
+```
+
+여기서 WrappedComponent가 props를 가지고 있다. 이 props가 2번째 줄의 props가 되는 것.
+
 ### 107. Setting State Correctly
+
+```js
+// App.js
+this.state = {
+      ...
+      changeCounter: 0
+    };
+nameChangedHandler = (event, id) => {
+    ...
+    this.setState({
+      changeCounter:this.state.changeCounter + 1
+    });
+  };
+```
+
+- 이름을 변경하면, changeCounter가 1씩 올라간다.
+- setState는 컴포넌트의 state를 즉시 변경하고 리 렌더링 하지 않는다.
+- 실제로는 React가 스케줄링한다. 리액트가 state를 변경한다.
+- this.setState는 동기적으로 실행이 되지만, 내부 업데이트 동작은 그렇지 않다. 따라서 지금 this.state.changeCounter를 참조하는 것이 바로 직전 값임을 보장하지 않난다. 즉, race condition이 발생할 수 있다.
 
