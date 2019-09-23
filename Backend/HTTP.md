@@ -348,3 +348,4 @@ HTTP 통신의 경우는 TCP와 다르게 계속 맺고 끊기기 때문에, 매
 - http://www.slideshare.net/deview/d2-campus-http
 - https://developer.mozilla.org/ko/docs/Web/HTTP/Cookies
 - http://www.kyobobook.co.kr/product/detailViewKor.laf?mallGb=KOR&ejkGb=KOR&barcode=9788931447897
+
