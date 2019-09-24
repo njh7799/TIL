@@ -352,7 +352,7 @@ shouldComponentUpdate(nextProps, nextState) {
   - 화면상 변경을 보여줌
   - 이름에 타이핑을 해 보면, Cockpit이 계속 업데이트 되지만, 실제로 바뀌는 값이 없기 때문에 DOM이 갱신이 되지는 않지만, 이를 좀더 최적화 할 여지는 있음
 
-### Optimizing Functional Components with React.memo()
+### 97. Optimizing Functional Components with React.memo()
 
 component를 React.memo로 감싸면, 마운팅이 될 때의 값이 저장된다. 그리고 앱에 변화가 생겼을 때, 그 변화가 현재 component에 영향을 끼치지 않는다면, 저장된 값을 바로 불러오는 방식을 통해 최적화가 가능해진다.
 
