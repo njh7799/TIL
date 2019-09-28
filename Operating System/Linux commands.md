@@ -23,6 +23,7 @@ ps -ef
 sudo python3 manage.py runserver XXXXXX.XXXXXXX.XXXXXXX.com:80 & 
 (XX~~XX is public DNS)
 
-**Kill process**
-sudo kill -9 n
+[**Kill process**](https://www.lesstif.com/pages/viewpage.action?pageId=12943674)
+sudo kill -15 n
 (n is PID)  
+
