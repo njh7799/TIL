@@ -46,7 +46,9 @@
 
 ## [PUT](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/PUT)
 
-**HTTP PUT 요청 방식**은 새로운 자료를 만들거나 목표로 하는 기존의 자료를 요청 페이로드를 통해 교체합니다.
+**HTTP PUT 요청 방식**은 새로운 자료를 만들거나 목표로 하는 기존의 자료를 요청 페이로드를 통해 교체합니다. 자료를 업데이트 할 때에는, 타겟의 업데이트를 진행할 부분만 수정하는 것이 아니라, 전체를 다 교체하는 방식을 사용한다.
+
+**멱등성**을 가진다
 
 `PUT`과 [`POST`](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/POST)의 차이점은 `PUT`은 멱등: 한번 혹은 연속적으로 여러번 하더라도 동일하지만 영향(부작용이 아님)을 미치지만, `POST`는 연속적인 요청이 그대로 전달되어 요청이 연속적으로 들어가는 것으로 되어 추가적인 영향이 있을 수 있습니다.
 
@@ -78,7 +80,9 @@ Content-Location: /existing.html
 
 ## [PATCH](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/PATCH)
 
-**HTTP PATCH** 메소드는 리소스의 부분적인 수정을 할 때에 사용됩니다.
+**HTTP PATCH** 메소드는 리소스의 부분적인 수정을 할 때에 사용됩니다. PUT 방식과 달리 일부분만 교체가 가능한다.
+
+**명등성**을 가지지 않는다.
 
 HTTP [`PUT`](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/PUT) 메소드는 문서 전체의 완전한 교체만을 허용합니다. 반면 `PATCH` 메소드는 `PUT` 메스드와 달리 명등성을 가지지 않는데, 이는 동일한 patch 요청이 다른 결과를 야기할 수도 있음을 뜻합니다. 하지만 PATCH를 PUT과 같은 방식으로 사용함으로써 명등성을 가지게 할 수도 있습니다.
 
