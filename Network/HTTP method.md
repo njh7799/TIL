@@ -98,6 +98,8 @@ HTTP [`PUT`](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/PUT) 메소�
 
 [PUT PATCH 차이](https://papababo.tistory.com/269)
 
+[PPP 차이]https://javaplant.tistory.com/18
+
 
 
 ## [DELETE](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/DELETE)
