@@ -14,22 +14,6 @@
 
 
 
-## [POST](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/POST)
-
-**HTTP POST method**는 데이터(data)를 서버로 보내는 방법 중 하나입니다. request의 body 타입은 [`Content-Type`](https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Content-Type) 헤더(header)에 따라 결정됩니다.
-
-| Request has body                                             | Yes                       |
-| :----------------------------------------------------------- | ------------------------- |
-| Successful response has body                                 | Yes                       |
-| [Safe](https://developer.mozilla.org/ko/docs/Glossary/Safe)  | No                        |
-| [Idempotent](https://developer.mozilla.org/ko/docs/Glossary/Idempotent) | No                        |
-| [Cacheable](https://developer.mozilla.org/ko/docs/Glossary/Cacheable) | 새 정보가 포함되었을 때만 |
-| Allowed in [HTML forms](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms) | Yes                       |
-
-[출처: Mozilla](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods)
-
-
-
 ## [HEAD](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/HEAD)
 
 **HTTP HEAD 메소드**는 특정 리소스를 HTTP [`GET`](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/GET) 메소드로 요청하는 경우에 어떤 헤더들이 반환되는지를 요청합니다. 예를 들어, 큰 용량의 리소스를 다운로드 받을지 말지 결정하기 위해서 사전 요청하는 용도로 사용할 수 있습니다.
@@ -43,6 +27,20 @@
 | [Idempotent](https://developer.mozilla.org/ko/docs/Glossary/Idempotent) | Yes  |
 | [Cacheable](https://developer.mozilla.org/ko/docs/Glossary/Cacheable) | Yes  |
 | Allowed in [HTML forms](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms) | No   |
+
+
+
+## [POST](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/POST)
+
+**HTTP POST method**는 데이터(data)를 서버로 보내는 방법 중 하나입니다. request의 body 타입은 [`Content-Type`](https://developer.mozilla.org/ko/docs/Web/HTTP/Headers/Content-Type) 헤더(header)에 따라 결정됩니다.
+
+| Request has body                                             | Yes                       |
+| :----------------------------------------------------------- | ------------------------- |
+| Successful response has body                                 | Yes                       |
+| [Safe](https://developer.mozilla.org/ko/docs/Glossary/Safe)  | No                        |
+| [Idempotent](https://developer.mozilla.org/ko/docs/Glossary/Idempotent) | No                        |
+| [Cacheable](https://developer.mozilla.org/ko/docs/Glossary/Cacheable) | 새 정보가 포함되었을 때만 |
+| Allowed in [HTML forms](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms) | Yes                       |
 
 
 
@@ -91,6 +89,10 @@ HTTP [`PUT`](https://developer.mozilla.org/ko/docs/Web/HTTP/Methods/PUT) 메소�
 | [Idempotent](https://developer.mozilla.org/ko/docs/Glossary/Idempotent) | No   |
 | [Cacheable](https://developer.mozilla.org/ko/docs/Glossary/Cacheable) | No   |
 | Allowed in [HTML forms](https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/Forms) | No   |
+
+[POST PATCH 차이](https://multifrontgarden.tistory.com/245)
+
+[PUT PATCH 차이](https://papababo.tistory.com/269)
 
 
 
