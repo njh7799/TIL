@@ -1,8 +1,8 @@
-# passport 사용 방법
+# passport
 
 
 
-### 디렉토리
+## 디렉토리
 
 ```
 C:.
@@ -15,13 +15,13 @@ C:.
 routes
 ```
 
-### package 설치
+## install
 
 ```bash
 npm install express-session passport passport-local connect-flash
 ```
 
-### passport 설정
+## setting
 ```js
 // passport/index.js
 

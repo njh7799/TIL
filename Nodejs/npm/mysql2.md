@@ -1,9 +1,9 @@
-# Connect to Node.js
+# [mysql2](https://www.npmjs.com/package/mysql2)
 
-## 0. install mysql2
+## install 
 
 ```bash
-npm install mysql2
+npm install mysql2 --save
 ```
 
 ## 1. Make connection

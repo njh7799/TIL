@@ -1,4 +1,4 @@
-# Express와 미들웨어[ref](https://lucas.codesquad.kr/) +필기
+# express
 
 ------
 
@@ -22,17 +22,7 @@
 
 ## 학습 지식
 
-### Express Quick Start
 
-```bash
-npm install -g express
-express hello-express --view=pug
-cd hello-express
-npm install
-npm start
-```
-
-------
 
 ### Express 내부 살펴보기
 
@@ -67,6 +57,20 @@ https://developer.okta.com/blog/2018/09/13/build-and-understand-express-middlewa
 - morgan (https://www.npmjs.com/package/morgan)
 
 ------
+## install
+
+```bash
+npm install express
+```
+
+## usage
+
+```bash
+express hello-express --view=pug
+cd hello-express
+npm install
+npm start
+```
 
 ## [미들웨어  사용](https://expressjs.com/en/starter/basic-routing.html)
 
