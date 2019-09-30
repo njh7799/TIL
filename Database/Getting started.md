@@ -3,8 +3,6 @@
 - 백엔드 개발에서 가장 중요한 구성요소중 하나
 - RDBMS vs NoSQL
 
-----
-
 
 
 ## 학습지식
@@ -109,4 +107,16 @@
 - Transaction?
 - 확장성?
 
+---
+
+## [용어](https://m.blog.naver.com/PostView.nhn?blogId=classe82&logNo=20153660200&proxyReferer=https%3A%2F%2Fwww.google.com%2F)
+
+| 파일 시스템    | 데이터베이스 모델링   | 관계형 데이터베이스         |
+| -------------- | --------------------- | --------------------------- |
+| 파일(file)     | 엔터티(Entity)        | 테이블(table)               |
+| 레코드(record) | 튜플(Tuple)           | 행(row)                     |
+| 필드(field)    | 어트리뷰트(attribute) | 컬럼(column)                |
+| 키(key)        | 유일값(identifier)    | 기본키(Primary key), unique |
+
 http://db-engines.com/en/ranking
+
