@@ -240,3 +240,35 @@ constructor를 써도 되지만, 번거롭기 때문에 바로 state에 값을 �
 
 ### 159. Adding the Build Control Component
 
+하나의 컴포넌트가 하위 컴포넌트로 표현될 수 있는 경우 디렉토리 설계를 통해 이를 표현한다.
+
+```js
+C:.
+│  
+...
+├─components
+│  ├─Burger
+│  │  │  Burger.js
+│  │  │  Burger.module.css
+│  │  │
+│  │  ├─BuildControls
+│  │  │  │  BuildControls.css
+│  │  │  │  BuildControls.js
+│  │  │  │
+│  │  │  └─BuildControl
+│  │  │          BuildControl.js
+│  │  │          BuildControl.module.css
+│  │  │
+│  │  └─BurgerIngredient
+│  │          BurgerIngredient.js
+│  │          BurgerIngredient.module.css
+│  │
+...
+```
+
+### 160. Outputting Multiple Build Controls
+
+합체
+
+
+
