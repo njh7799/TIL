@@ -207,7 +207,4 @@ Secondary Index
 - 검색 및 조인시 성능 향상
 - `explain`을 이용해서 외래 키가 있는 경우와 없는 경우를 비교해 봅시다.
 
-학습 완료
-
-
-  
+출처: [쿼드 스쿼드 루카스](https://lucas.codesquad.kr/course/boost-4-membership/todo-backend/ERD)
