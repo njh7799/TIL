@@ -642,3 +642,75 @@ export default backdrop
 
 시나리오를 살펴 보았을 때, 모달과 백드롭이 가장 관계가 깊기 때문에, 모달 내부에 백드롭을 위치 시킨다.
 
+
+
+### 168. Adding a Custom Button Component
+
+버튼은 특정 컴포넌트에만 있는 것이 아니라, 지속적으로 쓰인다. 따라서 버튼을 UI component로 관리하면 편하다.
+
+```bash
+...
+│  │
+│  └─UI
+│      ├─Backdrop
+│      │      Backdrop.js
+│      │      Backdrop.module.css
+│      │
+│      ├─Button
+│      │      Button.js
+│      │      Button.module.css
+│      │
+│      └─Modal
+│              Modal.js
+│              Modal.module.css
+...
+```
+
+```js
+// Button.js
+
+import React from 'react'
+
+import styles from './Button.module.css'
+const button = (props) => {
+    <button
+        className={[styles.Button, styles[props.btnType]].join(' ')}
+        onClick={props.clicked}>{props.children}</button>
+}
+
+export default button;
+```
+
+
+
+### 169. Implementing the Button Component
+
+```js
+// OrderSummary.js
+
+...
+import Button from '../../UI/Button/Button'
+
+const orderSummary = (props) => {
+    ...
+
+    return (
+        <Aux>
+            ...
+            <Button btnType="Danger" clicked={props.purchaseCanceled}>CANCEL</Button>
+            <Button btnType="Success" clicked={props.purchaseContinued}>CONTINUE</Button>
+        </Aux>
+    )
+}
+
+export default orderSummary
+```
+
+purchaseCanceled 와  purchaseContinued는 BurgerBuilder 단계에서 정의하여 넘겨준다.
+
+
+
+### 170. Adding the Price to the Order Summary
+
+가격 아직 안넣음
+
