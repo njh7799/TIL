@@ -60,7 +60,7 @@ https://developer.okta.com/blog/2018/09/13/build-and-understand-express-middlewa
 ## install
 
 ```bash
-npm install express
+npm install -g express-generator
 ```
 
 ## usage
