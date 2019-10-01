@@ -270,5 +270,375 @@ C:.
 
 합체
 
+### 161. Connecting State to Build Controls
 
+AddIngredientHandler를 만들건데, 동작은 BuildControls에서 하지만, BurgerBuilder에서 state를 관리하기 때문에, BurgerBuilder에서 정의해서 넘겨주어야 한다.
+
+```js
+// BurgerBuilder.js
+
+...
+state = {
+        ingredients: {
+            salad: 0,
+            bacon: 0,
+            cheese: 0,
+            meat: 0
+        },
+        totalPrice: 4
+    }
+
+    addIngredientHandler = (type) => {
+        const oldCount = this.state.ingredients[type];
+        const updatedCount = oldCount + 1;
+        const updatedIngredient = {
+            ...this.state.ingredients
+        }
+        updatedIngredient[type] = updatedCount;
+        const priceAddition = INGREDIENT_PRICES[type]
+        const oldPrice = this.state.totalPrice;
+        const newPrice = oldPrice + priceAddition
+        this.setState({ ingredients: updatedIngredient, totalPrice: newPrice })
+    }
+    ...
+```
+
+코드의 명확성을 위해 매직 넘버를 최소화 하고 모든 값에 변수를 할당해서 사용하였다.
+
+```js
+// BuildControls.js
+...
+const buildControls = (props) => (
+    <div className={styles.BuildControls}>
+        {controls.map(ctrl => (
+            <BuildControl
+                key={ctrl.label}
+                label={ctrl.label}
+                added={() => props.ingredientAdded(ctrl.type)} />
+        ))}
+    </div>
+)
+```
+
+### 162. Removing Ingredients Safely
+
+1. ingredient 의 수가 음수가 되지 않도록 설정
+2. 재료가 없을 때에는 버튼 비활성화 기능 추가
+
+```js
+// BurgerBuilder.js
+...
+render() {
+        const disabledInfo = {
+            ...this.state.ingredients
+        }
+        for (let key in disabledInfo) {
+            disabledInfo[key] = !disabledInfo[key]
+        }
+        return (
+            <Aux>
+                <Burger ingredients={this.state.ingredients} />
+                <BuildControls
+                    ingredientAdded={this.addIngredientHandler}
+                    ingredientRemoved={this.removeIngredientHandler}
+                    disabled={disabledInfo} />
+            </Aux>
+        );
+    }
+```
+
+
+
+### 163. Displaying and Updating the Burger Price
+
+그냥 하면 됨
+
+### 164. Adding the Order Button
+
+```js
+class BurgerBuilder extends Component {
+    state = {
+		...
+        purchasable: false
+    }
+
+    updatePurchaseState() {
+        const ingredients = {
+            ...this.state.ingredients
+        }
+        const sum = Object.values(ingredients).reduce((pre, val) => pre + val, 0);
+        this.setState({ purchasable: !!sum })
+    }
+
+    addIngredientHandler = (type) => {
+		...
+        this.setState({ ingredients: updatedIngredient, totalPrice: newPrice })
+        this.updatePurchaseState()
+    }
+    removeIngredientHandler = (type) => {
+		...
+        this.setState({ ingredients: updatedIngredient, totalPrice: newPrice })
+        this.updatePurchaseState()
+    }
+
+    render() {
+        const disabledInfo = {
+            ...this.state.ingredients
+        }
+        for (let key in disabledInfo) {
+            disabledInfo[key] = !disabledInfo[key]
+        }
+        return (
+            <Aux>
+                <Burger ingredients={this.state.ingredients} />
+                <BuildControls
+                    ...
+                    purchasable={this.state.purchasable}
+                />
+            </Aux>
+        );
+    }
+}
+```
+
+위와 같이 코드를 작성하면 IngredientHandler 내부의  setState가 동작하기 전에 updatePurchaseState가 동작하기 때문에, 업데이트 되지 않은 값을 참조하는 문제가 발생한다. 아래와 같은 방법으로 이 문제를 해결할 수 있다.
+
+```js
+class BurgerBuilder extends Component {
+    state = {
+		...
+        purchasable: false
+    }
+
+    updatePurchaseState(ingredients) {
+        const sum = Object.values(ingredients).reduce((pre, val) => pre + val, 0);
+        this.setState({ purchasable: !!sum })
+    }
+
+    addIngredientHandler = (type) => {
+		...
+        this.setState({ ingredients: updatedIngredient, totalPrice: newPrice })
+        this.updatePurchaseState(updatedIngredient)
+    }
+    removeIngredientHandler = (type) => {
+		...
+        this.setState({ ingredients: updatedIngredient, totalPrice: newPrice })
+        this.updatePurchaseState(updatedIngredient)
+    }
+
+    render() {
+        const disabledInfo = {
+            ...this.state.ingredients
+        }
+        for (let key in disabledInfo) {
+            disabledInfo[key] = !disabledInfo[key]
+        }
+        return (
+            <Aux>
+                <Burger ingredients={this.state.ingredients} />
+                <BuildControls
+                    ...
+                    purchasable={this.state.purchasable}
+                />
+            </Aux>
+        );
+    }
+}
+```
+
+
+
+### 165. Creating the Order Summary Modal
+
+주문에 대한 정보를 보여줄 모달을 제작할 것이다.
+
+UI를 관리하기 위해 component 내부에 UI 디렉토리를 생성한다.
+
+```bash
+...
+│  │
+│  └─UI
+│      └─Modal
+│              Modal.js
+...
+```
+
+
+
+```js
+// Modal.js
+import React from 'react';
+import styles from './Modal.module.css'
+const modal = (props) => (
+    <div className={styles.Modal}>
+        {props.children}
+    </div>
+)
+
+export default modal;
+```
+
+모달을 어디에서 사용할 것인가?
+
+ 모달이 논리적으로 포함 되며, 스테이트를 가져서 모달의 display를 관리할 수 있는 곳
+즉, BurgerBuilder가 된다.
+
+BurgerBuilder.js 파일은 이제 `주문정보`를 관리해야 한다. 하지만 직접 관리를 하기에는 덩치가 꽤 크다. 따라서 component를 제작하여 이를 관리한다.
+
+BurgerBuilder는 주문에 대한 정보의 처리를 도와줄 component로 OrderSummary를 만들었다. 또한 이를 Burger 디렉토리의 바로 내부에 위치시킨다.
+
+```js
+// Ordersummary.js
+import React from 'react'
+
+import Aux from '../../../hoc/Auxiliary'
+
+const orderSummary = (props) => {
+    const ingredientSummary = Object.keys(props.ingredients)
+        .map(igKey => {
+            return <li key={igKey}>
+                <span style={{ textTransform: 'capitalize' }}>
+                    {igKey}
+                </span>:
+                {props.ingredients[igKey]}
+            </li>
+        })
+
+    return (
+        <Aux>
+            <h3>Your Order</h3>
+            <p>A delicous burger with the following ingredients:</p>
+            <ul>
+                {ingredientSummary}
+            </ul>
+        </Aux>
+    )
+}
+
+export default orderSummary
+```
+
+```js
+import React, { Component } from 'react';
+
+import Aux from '../../hoc/Auxiliary'
+import Burger from '../../components/Burger/Burger'
+import BuildControls from '../../components/Burger/BuildControls/BuildControls'
+import Modal from '../../components/UI/Modal/Modal'
+import OrderSummary from '../../components/Burger/OrderSummary/OrderSummary'
+
+const INGREDIENT_PRICES = {
+    salad: 0.5,
+    cheese: 0.4,
+    meat: 1.3,
+    bacon: 0.7
+}
+
+class BurgerBuilder extends Component {
+    state = {
+        ingredients: {
+            salad: 0,
+            bacon: 0,
+            cheese: 0,
+            meat: 0
+        },
+        totalPrice: 4,
+        purchasable: false
+    }
+
+    ...
+
+    render() {
+		...
+        return (
+            <Aux>
+                <Modal><OrderSummary ingredients={this.state.ingredients}/></Modal>
+				...
+                />
+            </Aux>
+        );
+    }
+}
+
+export default BurgerBuilder
+```
+
+
+
+### 166. Showing & Hiding the Modal (with Animation!)
+
+애니메이션 효과를 넣기 위해서는 Modal을 렌더링 하거나 하지 않는 방식으로 해서는 안된다. Modal의 style에 직접적인 변화를 줘야 한다.
+
+```js
+// BurgerBuilder.js
+
+class BurgerBuilder extends Component {
+    state = {
+        ...
+        purchasing: false
+    }
+
+    ...
+
+    purchaseHandler = () => {
+        this.setState({ purchasing: true })
+    }
+
+    render() {
+        ...
+        return (
+            <Aux>
+                <Modal show={this.state.purchasing}><OrderSummary ingredients={this.state.ingredients} /></Modal>
+                <Burger ingredients={this.state.ingredients} />
+                <BuildControls
+                    ...
+                    ordered={this.purchaseHandler}
+                />
+            </Aux>
+        );
+    }
+}
+
+export default BurgerBuilder
+```
+
+> 시나리오
+>
+> 1. BuildControls 의 Order button을 클릭하면 purchaseHandler가 동작한다.
+> 2. purchaseHandler 가 purchasing의 값을 true로 바꾸어 준다.
+> 3. Modal 에 purchsing 값이 전달된다.
+> 4. Model 내에서inline style을 통해, purchasing 값이 true이면 모달이 보이도록 한다.
+
+### 167. Implementing the Backdrop Component
+
+모달이 떴을 때, 모달 밖 화면 아무데나 클릭하면 모달이 꺼지게 만들기
+
+```bash
+...
+│  │
+│  └─UI
+│      ├─Backdrop
+│      │      Backdrop.js
+│      │
+│      └─Modal
+│              Modal.js
+│              Modal.module.css
+...
+```
+
+```js
+// Backdrop.js
+
+import React from 'react'
+import styles from './Backdrop.module.css'
+const backdrop = (props) => (
+    props.show ? <div className={styles.Backdrop}></div> : null
+);
+
+export default backdrop
+```
+
+배경 전체를 덮는 것이기 때문에 사실 위치는 크게 중요하지 않다.
+
+시나리오를 살펴 보았을 때, 모달과 백드롭이 가장 관계가 깊기 때문에, 모달 내부에 백드롭을 위치 시킨다.
 
