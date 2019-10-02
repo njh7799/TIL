@@ -52,6 +52,75 @@ connection.query를 하면, 알아서 연결하고 쿼리를 수행하고 연결
 
 
 
+## Using Promise Wrapper
+
+1. Promise Wrapper를 사용하지 않고 query method를 이용하는 방법:
+
+```js
+const mysql = require('mysql2');
+
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  database: 'test',
+  waitForConnections: true,
+  connectionLimit: 10,
+  queueLimit: 0
+});
+
+pool.query("SELECT field FROM atable", function(err, rows, fields) {
+
+})
+```
+
+이 경우 query 메소드는 첫 번째 인자로 **쿼리**를, 두 번째 인자로 결과값을 처리할 **콜백 함수**를 가진다.(prepared statement는 일단 빼고 생각하자.) 이 구문을 Promise를 이용하여 바꿔보자.
+
+```js
+getQuery = new Promise((resolve, reject)=>{
+    pool.query("SELECT field FROM atable", function(err, rows, fields) {
+   		if(err) reject(err);
+        resolve([rows, fields]);
+	})
+})
+
+```
+
+이제 getQuery를 사용하면 then 구문을 이용할 수도 있고, async await 연산 또한 수행할 수 있다.
+
+딱 봐도 겁나 편한 기능인데 역시나, mysql2에서도 지원하는 기능이다. 사용법은 아래와 같다.
+
+2. Promise Wrapper를 사용하여  query method를 이용하는 방법 
+
+Case 1. `mysql2`을 이용
+
+```js
+async function main() {
+  // get the client
+  const mysql = require('mysql2');
+  // create the pool
+  const pool = mysql.createPool({host:'localhost', user: 'root', database: 'test'});
+  // now get a Promise wrapped instance of that pool
+  const promisePool = pool.promise();
+  // query database using promises
+  const [rows,fields] = await promisePool.query("SELECT 1");
+}
+```
+
+Case 2. `mysql/promise`를 이용
+
+```js
+async function main() {
+  // get the client
+  const mysql = require('mysql2/promise');
+  // create the pool which is wrapped by Promise
+  const pool = mysql.createPool({host:'localhost', user: 'root', database: 'test'});
+  // query database using promises
+  const [rows,fields] = await pool.query("SELECT 1");
+}
+```
+
+mysql2/promise를 이용하여 pool을 만들거나, mysql2 를 이용하여 만든 pool을 promise화 시킨 후 실행시킨 query 메소드는 위에서 작성한 getQuery와 동작 방식이 같다.
+
 ## Deeper
 
 ORM처럼 동작하게 만들어 보자.
@@ -137,9 +206,9 @@ module.exports = router;
 
 ## BUG
 
-> Prepared Statements와 Promise Wrapper 를 동시에 사용하면 동작이 안된다.
+> 잘못 공부하다가 우연히 재밌는 버그를 찾았다.
 
- Case 1. Prepared Statements 만 사용한 경우
+ Case 1. pool.query에 Prepared Statements 를 사용한 경우 **정상동작**
  ```js
  var router = require('express').Router();
  
@@ -165,7 +234,7 @@ module.exports = router;
  ```
 
 
- Case 2. Promise Wrapper 만 사용한 경우
+ Case 2. Promise Wrapper 를 사용한 경우 **버그 발생** - **정상동작** ???
  ```js
  var router = require('express').Router();
  
@@ -181,6 +250,8 @@ module.exports = router;
      const promisePool = pool.promise();
      new Promise((resolve, reject) => {
          // Prepared Statements 사용 안 함
+         
+         //문제의 지점
          promisePool.query("SELECT * from users where id=2", (err, results) => {
              resolve(results)
          })
@@ -189,8 +260,10 @@ module.exports = router;
  
  module.exports = router;
  ```
+ promisePool.query는 Promise를 return해주는 메소드이기 때문에 콜백 함수가 동작해서는 안되고 당연히 존재 해서도 안된다. 하지만 정상적으로 동작한다.
 
- Case3. Prepared Statements와 Promise Wrapper 둘 다 사용한 경우
+
+ Case3. Prepared Statements와 Promise Wrapper 를 같이 사용한 경우
  ```js
  var router = require('express').Router();
  
@@ -206,6 +279,8 @@ module.exports = router;
      const promisePool = pool.promise();
      new Promise((resolve, reject) => {
          // Prepared Statements 사용
+         
+         // 문제의 지점
          promisePool.query("SELECT * from users where id=?",['2'], (err, results) => {
              resolve(results)
          })
@@ -214,6 +289,9 @@ module.exports = router;
  
  module.exports = router;
  ```
+ 기본적으로 promise query의 메소드는 최대 두개의 인자만 받는다. 따라서 위와 같이 작성할 경우, 세번째 인자인 콜백 함수가 제거되기 때문에, 결과값을 받지 않는 것이다.
+
+ Case 2는 동작해서는 안되는 코드이다. 하지만 콜백함수가 돌아가는 버그가 있다. prepared statement를 고려하여 패러미터의 갯수를 2개로 제한하는 부분은 구현했지만, 콜백 함수가 들어올 경우에 대한 코드는 작성하지 않은듯하다.
 
 Case 4 new Promise 제거
 ```js
@@ -236,7 +314,7 @@ router.get("/users", async function (req, res, next) {
 module.exports = router;
 ```
 
-Case 4 new Promise 제거 후 콜백 제거
+Case 5 new Promise 제거 후 콜백 제거
 
 ```js
 var router = require("express").Router();
@@ -259,11 +337,3 @@ router.get("/users", async function (req, res, next) {
 
 module.exports = router;
 ```
-
-
-
-
-
- Case 1과 2는 잘 동작하지만, 3은 동작하지 않는다. 몹시 화가난다.
-Case 4 실패 5 성공
-
