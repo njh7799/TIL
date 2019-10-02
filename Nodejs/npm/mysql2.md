@@ -54,60 +54,81 @@ connection.query를 하면, 알아서 연결하고 쿼리를 수행하고 연결
 
 ## Deeper
 
-ORM을 만들어보자.
+ORM처럼 동작하게 만들어 보자.
+
+```bash
+...
+├─models
+│      index.js
+│      users.js
+...
+```
 
 ```js
-// get the client
+// models/index.js
+
 const mysql = require('mysql2');
 
-// create the connection to database
 const pool = mysql.createPool({
-  host: 'localhost',
-  user: 'root',
-  database: 'test',
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+    database: process.env.DB_DATABASE,
 });
 
-pool.connect((err) => {
-  if (err) {
-    console.log(err);
-    return;
-  }
-  console.log('DB Connected!');
-});
-
-const user = {};
-const item = {};
-const category = {};
-
-user.findAll = () => {
-  const sql = 'SELECT userid, rank, name FROM User';
-  return new Promise((resolve, reject) => {
-    pool.query(sql, (err, results, fields) => {
-      if (err) {
-        reject(err);
-      }
-      resolve(results);
-    });
-  });
-}
-
-user.add = ({ userid, password, name }) => {
-  const sql = 'INSERT INTO User (userid, password, name) VALUES (?, ?, ?)';
-  const params = [userid, password, name];
-  return new Promise((resolve, reject) => {
-    conn.query(sql, params, (err, results, fields) => {
-      if (err) {
-        console.log(err);
-        reject(err);
-      }
-      console.log(results);
-      resolve(results);
+const createQuery = (query, params = []) => {
+    return new Promise((resolve, reject) => {
+        pool.query(query, params, (err, results, fields) => {
+            if (err) reject(err);
+            resolve(results)
+        })
     })
-  });
 }
+
+console.log('Database Connected!');
+
+const users = require('./users')(createQuery)
+// const [accesses, cards, colums, dashboards, logs];
+
+module.exports = { users }
+
+
+```
+
+```js
+// models/users.js
+
+module.exports = (createQuery) => {
+    return {
+        findAll: () => createQuery(`SELECT username, is_admin FROM users`),
+        findById: (id) => createQuery(`SELECT username, is_admin FROM users WHERE id=?`, [id]),
+    }
+}
+```
+
+```js
+// routes/api.js
+
+var router = require('express').Router();
+
+const { users } = require('../models')
+
+/* GET home page. */
+router.get('/users', function (req, res, next) {
+    users.findAll()
+        .then(results => res.send(results))
+        .catch(err => next(err))
+});
+
+router.get('/users/:id', function (req, res, next) {
+    users.findById(req.params.id)
+        .then(results => res.send(results))
+        .catch(err => res.send(err))
+});
+
+module.exports = router;
+
 ```
 
 
@@ -192,8 +213,57 @@ user.add = ({ userid, password, name }) => {
  });
  
  module.exports = router;
- 
  ```
 
+Case 4 new Promise 제거
+```js
+var router = require("express").Router();
+
+router.get("/users", async function (req, res, next) {
+    const mysql = require("mysql2");
+    const pool = mysql.createPool({
+        host: "localhost",
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: "todo"
+    });
+    // Promise Wrapper 사용
+    const promisePool = pool.promise();
+    // Prepared Statements 사용
+    promisePool.query("SELECT * from users where id=?",['2'], (err, results, f) => res.send(results))
+});
+
+module.exports = router;
+```
+
+Case 4 new Promise 제거 후 콜백 제거
+
+```js
+var router = require("express").Router();
+
+router.get("/users", async function (req, res, next) {
+    const mysql = require("mysql2");
+    const pool = mysql.createPool({
+        host: "localhost",
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: "todo"
+    });
+    // Promise Wrapper 사용
+    const promisePool = pool.promise();
+    // Prepared Statements 사용
+    promisePool
+        .query("SELECT * from users where id=?", ["2"])
+        .then(([results, f]) => res.send(results));
+});
+
+module.exports = router;
+```
+
+
+
+
+
  Case 1과 2는 잘 동작하지만, 3은 동작하지 않는다. 몹시 화가난다.
+Case 4 실패 5 성공
 
