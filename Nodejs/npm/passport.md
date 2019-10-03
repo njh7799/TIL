@@ -49,31 +49,25 @@ module.exports = passport;
 // passport/localStrategy.js
 
 const localStrategy = require('passport-local').Strategy;
-const Query = require('../models/query');
+const { users } = require('../models')
 
 // passport의 LocalStrategy를 등록해주는 함수 작성
 // 이를 passport/index.js 에서 불러와서 사용
 module.exports = passport => {
-  passport.use(
-    new localStrategy(
-      {
-        usernameField: 'username',
-        passwordField: 'password'
-      },
-      async (username, password, done) => {
-        const [rows, fields] = await Query(
-          `Select * from Users where username="${username}"`
-        );
-        const user = rows[0];
-        if (!user) done(null, false);
-        if (user.password != password) done(null, false);
-        else {
-          done(null, user);
-        }
-      }
-    )
-  );
+    passport.use(
+        new localStrategy(
+            { usernameField: 'username', passwordField: 'password' },
+            async (username, password, done) => {
+                const [rows, fields] = await users.findByUsername(username)
+                const userojb = rows[0];
+                if (!userojb) done(null, false);
+                if (userojb.password != password) done(null, false);
+                else done(null, userojb);
+            }
+        )
+    );
 };
+
 
 ```
 
@@ -119,6 +113,8 @@ router.get('/', (req, res) => {
   res.render('login');
 });
 
+
+// POST 1번 방식
 router.post(
   '/',
   passport.authenticate('local', {
@@ -126,6 +122,13 @@ router.post(
     failureRedirect: '/login'
   })
 );
+
+// POST 2번 방식
+router.post('/', passport.authenticate('local', { failureRedirect: '/login' }), (req, res) => {
+    res.redirect('/' + req.user.username);
+});
+
+
 module.exports = router;
 
 ```
