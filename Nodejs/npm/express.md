@@ -112,16 +112,11 @@ app.use(function (req, res, next) {
   next();
 });
 
-//next('error')를 만났을 때 
-// 즉시 에러 핸들러를 호출한다.
+//next(obj)를 만났을 때 
+// 즉시 에러 핸들러를 호출 하고 obj를 넘겨준다. 이 때, Error 객체를 넘겨주어야 에러 핸들러에서 에러를 원할히 실행할 수 있다.
+// 에러 핸들러는 패러미터 err 로 이 obj를 받게 된다.
 app.use(function (req, res, next) {
   next('error');
-});
-
-// next(createError(404));
-// 즉시 에러 핸들러를 호출하고 404 에러를 넘겨준다.
-app.use(function (req, res, next) {
-  next('createError(404)');
 });
 
 // next('route')
