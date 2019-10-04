@@ -141,3 +141,13 @@ git cherry-pick c2 c4
 
 ![체리픽](https://user-images.githubusercontent.com/40619551/64791936-77f64000-d5b3-11e9-8f66-f5a17d160c9c.gif)
 
+
+
+## git reflog
+
+로컬에서의 작업 로그를 가져온다. 지운 로그도 나온다.
+
+## git commit --amend
+
+이전 커밋에 덧붙인다. 이전 커밋에 포함 되어야 하는 아주 작은 수정 사항을 추가할 때 사용.
+
