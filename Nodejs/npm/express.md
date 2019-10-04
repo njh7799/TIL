@@ -107,13 +107,13 @@ app.use('/route', middlwareFunc1, middlewareFunc2);
 
 ```js
 // next()를 만났을 때
-// 바로 다음 미들 웨어가 실행된다.
+// 현재 미들 웨어 실행이 끝난 후 다음 미들 웨어가 실행된다.
 app.use(function (req, res, next) {
   next();
 });
 
 //next(obj)를 만났을 때 
-// 즉시 에러 핸들러를 호출 하고 obj를 넘겨준다. 이 때, Error 객체를 넘겨주어야 에러 핸들러에서 에러를 원할히 실행할 수 있다.
+// 현재 미들 웨어 실행이 끝난 후 에러 핸들러로 건너 뛴다. 이 때, obj를 넘겨주는데, obj로 Error 객체를 넘겨주어야 에러 핸들러에서 에러를 원할히 실행할 수 있다.
 // 에러 핸들러는 패러미터 err 로 이 obj를 받게 된다.
 app.use(function (req, res, next) {
   next('error');
