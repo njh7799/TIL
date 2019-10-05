@@ -96,6 +96,12 @@ git branch {branch}
 
 # Chage HEAD to branch
 git checkout {branch}
+
+# Check local branches
+git branch -a
+
+# Check remote branches
+git branch -r
 ```
 
 ## merge: 두개의 브랜치를 합치기
