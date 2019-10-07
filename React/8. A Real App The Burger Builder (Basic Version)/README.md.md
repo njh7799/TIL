@@ -712,5 +712,86 @@ purchaseCanceled 와  purchaseContinued는 BurgerBuilder 단계에서 정의하�
 
 ### 170. Adding the Price to the Order Summary
 
-가격 아직 안넣음
+가격을 넣자
+
+### 171. Adding a Toolbar
+
+```bash
+├─components
+...
+│  │
+│  ├─Navigation
+│  │  └─Toolbar
+│  │          Toolbar.js
+```
+
+```js
+// Layout.js
+
+const layout = props => (
+  <Aux>
+    <Toolbar />
+    <main className={styles.Content}>
+      {props.children}
+    </main>
+  </Aux>
+);
+```
+
+### 172. Using a Logo in our Application
+
+로고도 하나의 컴포넌트로 관리하는 것이 편하다
+
+```bash
+├─components
+...
+│  │
+│  ├─Logo
+│  │     Logo.js
+```
+
+- img 태그의 경로 지정 문제
+```js
+import React from 'react'
+
+const logo = (props) => (
+    <div>
+        <img scr={}/>
+    </div>
+
+)
+
+export default logo;
+```
+
+src를 단순히 상대 경로로 때려 넣으면 안된다. 리액트를 실행시키면, 웹팩이 번들링 단계를 거치기 때문. 번들링을 거치고 난 디렉토리는 현재 작업하고 있는 디렉토리와 그 구조가 상이하다.
+
+따라서 웹팩에게 어떠한 경로에 있는 이미지 파일을 사용할 것이라는 것을 알려 주어야 한다.
+
+그 방법은 아래와 같다.
+
+```js
+import React from 'react'
+
+import burgerLogo from '../../assets/images/burgerLogo.png'
+
+const logo = (props) => (
+    <div>
+        <img src={burgerLogo} alt="MyBurger" />
+    </div>
+
+)
+
+export default logo;
+```
+
+### 173. Adding Reusable Navigation Items
+
+component 디렉토리에 Navigation 디렉토리를 생성해서 작성한다.
+
+### 174. Creating a Responsive Sidedrawer
+
+### 175. Working on Responsive Adjustments
+
+### 176. More about Responsive Adjustments
 
