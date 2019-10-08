@@ -25,16 +25,16 @@ class Observable {
     }
 
     // Returns the number of observers in the internal list of observers.
-    countObservers()
+    countObservers(){}
 
     // Sets the internal flag that indicates this observable has changed state.
-    setChanged()
+    setChanged(){}
 
     // Clears the internal flag that indicates this observable has changed state.
-    clearChanged()
+    clearChanged(){}
 
     // Returns the boolean value true if this observable has changed state.
-    hasChanged()
+    hasChanged(){}
 
     // Checks the internal flag to see if the observable has changed state and notifies all observers.
     notifyObservers() {
@@ -55,7 +55,7 @@ module.exports = Observable
 
 class Oberser {
     // Called when a change has occurred in the state of the observable.
-    update(observable, obj)
+    update(observable, obj){}
 }
 
 module.exports = Oberser
