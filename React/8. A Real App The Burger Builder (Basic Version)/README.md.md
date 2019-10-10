@@ -796,3 +796,46 @@ component 디렉토리에 Navigation 디렉토리를 생성해서 작성한다.
 ### 176. More about Responsive Adjustments
 
 ### 177. Reusing the Backdrop
+
+### 178. Adding a Sidedrawer Toggle Button
+
+setState안에 state 넣지 마라
+
+```js
+sideDrawerToggleHandler = () => {
+    this.setState({ showSideDrawer: !this.state.showSideDrawer })
+  }
+```
+
+이렇게 해
+
+```js
+  sideDrawerToggleHandler = () => {
+    this.setState((prevState) => {
+      return { showSideDrawer: !prevState.showSideDrawer }
+    })
+  }
+```
+
+### 179. Adding a Hamburger Icon
+
+### 180. Improving the App - Introduction
+
+### 181. Prop Type Validation
+
+데이터 타입을 propTypes을 이용하여 다 지정해주는 것이 좋다.(클래스형 컴포넌트의 경우) 실수도 방지할 수 있으며, 제 3자가 봤을 때, 바로 이해할 수 있기 때문.
+
+### 182. Improving Performance
+
+최적화를 해보자!
+
+BurgerBuilder.js를 보면 Modal이 있다. 얘는 주문에 변화가 생길 때 마다 re-render가 되는데, Modal이 꺼진 상태에서는 굳이 re-render을 할 필요가 없다.
+
+### 183. Using Component Lifecycle Methods
+
+HTTP 사용할 때 나머지 메소드 사용할 것임
+
+### 184. Changing the Folder Structure
+
+### 185. Wrap Up
+
