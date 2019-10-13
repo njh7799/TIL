@@ -21,34 +21,16 @@ mv ~/Linux/Old/!(Tux.png) ~/Linux/New/
 #!/bin/bash
 shopt -s extglob
 BEGIN=1
-END=3
-mybranch=ss22
+END=16
+mybranch=
 username=
 password=
 
-
-echo "> 초기 레포 환경 설정"
-git clone https://${username}:${password}@github.com/${username}/boostcamp-challenge
-cd boostcamp-challenge
-
-echo "> Create First Commit"
-touch README.md
-git add .
-git commit -m "initiate"
-
-echo "> Create branches"
-for i in $(seq ${BEGIN} ${END});
-do
-	git branch day${i}
-done
-
-git push origin --all
-cd ..
-
+echo "> 프로그램 실행"
 for i in $(seq ${BEGIN} ${END});
 do
 	cd day${i}-challenge
-	echo "> 내 브랜치로 체크 아웃"
+	echo "> ${mybranch}로 체크 아웃"
 	git checkout ${mybranch}
 	echo "> 브랜치 초기화 및 최신화"
 	git reset --hard
@@ -57,7 +39,7 @@ do
 	echo "> 레포에 들어갈 디렉토리 생성"
 	mkdir day${i}-challenge
 	echo "> 파일 이동"
-	mv -v "$PWD"/!(.git) "$PWD"/day${i}-challenge
+	mv !(.git|.|..|day${i}-challenge) "$PWD"/day${i}-challenge
 	echo "> 다이렉토리 수정 커밋"
 	git add .
 	git commit -m "Create new directory and move all files"
@@ -65,21 +47,9 @@ do
 	git remote remove origin
 	echo "> 새로운 원격 저장소에 연결"
 	git remote add origin https://${username}:${password}@github.com/${username}/boostcamp-challenge
-	echo "> 새로운 저장소에 push"
+	echo "> 새로운 저장소에 푸시"
 	git push origin ${mybranch}:day${i}
 	cd ..
 done
-
-
-echo "> Merge branches"
-cd boostcamp-challenge
-git pull --all
-for i in $(seq ${BEGIN} ${END});
-do
-	echo "> day${i} 브랜치 머지"
-	git merge day${i}
-done
-
-git push origin master
 ```
 
