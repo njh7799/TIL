@@ -46,13 +46,7 @@ ReactDOM.render(<App title='Title'/>, document.getElementById('root'));
 
 ## Component Lifecycle - Creation
 
-|                                        | Do                                | Don't                                  |
-| -------------------------------------- | --------------------------------- | -------------------------------------- |
-| constructor(props)                     | Set up State                      | Cause Side-Effects                     |
-| getDerivedStateFromProps(props, state) | Sync state                        | Cause Side-Effects                     |
-| render()                               | Prepare & Structure your JSX Code |                                        |
-| Render Child Components                |                                   |                                        |
-| componentDidMount()                    | Cause Side-Effects                | Update State(it'll triggers re-render) |
+![image](https://user-images.githubusercontent.com/40619551/66712497-71d4c880-edd8-11e9-9bed-76f7032abada.png)
 
 ```js
 //App.js
@@ -112,14 +106,8 @@ const person = props =>{
 
 ## Component Lifecycle - Update
 
-|                                                              | Do                                | Don't                                       |
-| ------------------------------------------------------------ | --------------------------------- | ------------------------------------------- |
-| getDerivedStateFromPops(props, state)                        | Sync state to Props               | Cause Side-Effects(don't send http request) |
-| shouldComponentUpdate(nextProps, nextState); May cancel updating process | Decide whether to Continue or Not | Cause Side-Effects                          |
-| render()                                                     | Prepare & Structure your JSX Code |                                             |
-| Update Child Components Props                                |                                   |                                             |
-| getSnapshotBeforeUpdate(prevProps, prevState)                | Last-minute DOM ops               | Cause Side-Effects                          |
-| componentDidUpdate()                                         | Cause Side-Effects                | Update State(triggers re-render)            |
+![image](https://user-images.githubusercontent.com/40619551/66712513-b9f3eb00-edd8-11e9-853b-9116f9211129.png)
+
 
 ### props change
 
