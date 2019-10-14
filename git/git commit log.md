@@ -12,3 +12,7 @@
 
 ## [좋은 git 커밋 메시지를 작성하기 위한 7가지 약속](https://meetup.toast.com/posts/106)
 
+[Convention Commits]( https://www.conventionalcommits.org/ko/v1.0.0-beta.4/#specification )
+
+[Closing Issue]( https://www.hahwul.com/2018/07/closing-git-issue-with-commit.html )
+
