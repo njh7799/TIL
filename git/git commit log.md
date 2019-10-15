@@ -12,6 +12,8 @@
 
 ## [좋은 git 커밋 메시지를 작성하기 위한 7가지 약속](https://meetup.toast.com/posts/106)
 
+[conventional commits]( https://www.conventionalcommits.org/ko/v1.0.0-beta.4/#specification )
+
 ```
 fix:
 feat:
