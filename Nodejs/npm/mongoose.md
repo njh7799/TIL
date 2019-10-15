@@ -46,7 +46,7 @@ var blogpost = new BlogPost({
     name: "NodeJS Tutorial",
     author: "velopert"
 });
-blogpost.save(function(err, book){
+blogpost.save(function(err, book){ // blogpost.save() 메소드는 저장된 객체를 반환한다.
     if(err) return console.error(err);
     console.dir(blogpost);
 });
