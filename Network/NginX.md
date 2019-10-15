@@ -50,7 +50,7 @@ NginX로 리버스 프록시 서버를 만들 수 있다. (자세한 내용은 P
 
 아래와 같이 로드 밸런서 (reverse proxy로 대체 가능) 를 사이에 두고 통신을 하는 방식으로 관리한다.
 
-![1571072036522](C:\Users\Jack\AppData\Roaming\Typora\typora-user-images\1571072036522.png)
+![image](https://user-images.githubusercontent.com/40619551/66835951-67aef780-ef9b-11e9-9392-2102f12f8769.png)
 
 ### 덤) Load Balancer가 죽으면 망하는거 아닌가?
 
