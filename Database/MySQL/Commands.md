@@ -48,6 +48,12 @@ INSERT INTO Users (firstname, lastname, email)
 VALUES ('Jack', 'Nam', 'rainy_waltz');
 ```
 
+# Delete ALL from table
+
+```mysql
+TRUNCATE TABLE tablename
+```
+
 
 
 ## Import and Export Database
