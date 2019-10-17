@@ -1,2 +1,2 @@
-# [REST Resource Naming Guide](https://restfulapi.net/resource-naming/)
+# [REST Resource Naming Guide](<https://restfulapi.net/resource-naming/>)
 
