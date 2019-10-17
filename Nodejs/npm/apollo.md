@@ -1,18 +1,20 @@
-# apollo  <small>[link]( https://www.apollographql.com/docs/react/v2.5/essentials/get-started/#connect-your-client-to-react )</small>
+# apollo  <small>[link]( https://www.apollographql.com/docs/react/  )</small>
 
 리액트와 graphQL을 연결시켜주는 도구이다.
 
 # Get started
+
+알고보니 구버전으로 정리하고 있었다. 다시 하겠다.
 
 ---
 
 ## Installing
 
 ```bash
-npm install apollo-boost react-apollo graphql --save
+npm install apollo-boost @apollo/react-hooks graphql
 ```
 - `apollo-boost`: Package containing everything you need to set up Apollo Client
-- `react-apollo`: View layer integration for React
+- `@apollo/react-hooks`: React hooks based view layer integration
 - `graphql`: Also parses your GraphQL queries
 
 ## Create a client
@@ -20,40 +22,22 @@ npm install apollo-boost react-apollo graphql --save
 클라이언트 만들기
 
 ```js
-import ApolloClient from "apollo-boost";
+import ApolloClient from 'apollo-boost';
 
 const client = new ApolloClient({
-  uri: "https://48p1r2roz4.sse.codesandbox.io"
+  uri: 'https://48p1r2roz4.sse.codesandbox.io',
 });
 ```
 
-간단한 쿼리 요청
-```js
-import { gql } from "apollo-boost";
-// or you can use `import gql from 'graphql-tag';` instead
 
-...
-
-client
-  .query({
-    query: gql`
-      {
-        rates(currency: "USD") {
-          currency
-        }
-      }
-    `
-  })
-  .then(result => console.log(result));
-```
 
 ## Connect your client to React
 
 ```js
-import React from "react";
-import { render } from "react-dom";
+import React from 'react';
+import { render } from 'react-dom';
 
-import { ApolloProvider } from "react-apollo";
+import { ApolloProvider } from '@apollo/react-hooks';
 
 const App = () => (
   <ApolloProvider client={client}>
@@ -63,7 +47,7 @@ const App = () => (
   </ApolloProvider>
 );
 
-render(<App />, document.getElementById("root"));
+render(<App />, document.getElementById('root'));
 ```
 
 짜잔 연결이 되었습니다.
