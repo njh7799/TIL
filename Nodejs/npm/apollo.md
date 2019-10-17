@@ -4,6 +4,7 @@
 
 # Get started
 
+
 알고보니 구버전으로 정리하고 있었다. 다시 하겠다.
 
 ---
@@ -14,7 +15,9 @@
 npm install apollo-boost @apollo/react-hooks graphql
 ```
 - `apollo-boost`: Package containing everything you need to set up Apollo Client
+
 - `@apollo/react-hooks`: React hooks based view layer integration
+
 - `graphql`: Also parses your GraphQL queries
 
 ## Create a client
