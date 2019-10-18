@@ -58,3 +58,32 @@ Client는 authorization code, redirect_URL, Client ID,  Client secret 을 Resour
 인증이 끝난 후에는 authorization code 를 지운다. 그리고 **access Token**을 발급하여 Client에게 발급한다. 이 access Token은 *user id 1번에 대해 B, C 에 대한 권한이 열려 있다.* 라는 정보를 가지고 있다.
 
 이하 강의에 대한 정리는 생략하겠으며, 직접 들어보자.
+
+
+
+
+
+# oAuth 적용
+
+따라해보기 [link](https://medium.com/shriram-navaratnalingam/authentication-using-github-oauth-2-0-with-nodejs-be1091ce10a7/)
+
+공식 문서 https://developer.github.com/apps/building-oauth-apps/ 
+
+### flow
+
+1. 클라이언트에서 아래 client_id 를 포함시켜 아래 주소로 이동하면 로그인 화면이 나옴
+   `https://github.com/login/oauth/authorize?client_id={CLIENT_ID}`
+
+2. 로그인을 하면 redirection url 에 code 패러미터로 붙은 상태로 이동
+   `http://localhost:4000/home?code={code}`
+
+3. 토큰을 발급 받기 위해 client id, cient secret, code 를 post 방식으로 요청
+   `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${requestToken}`
+
+4. 받은 데이터에는 토큰 값이 저장되어 있음.
+   이 값을 처리해주고 난 후 본 페이지로 redirect
+   `http://localhost:3000`
+
+
+
+
