@@ -1,5 +1,8 @@
 # commands
 
+# 기본 명령어
+---
+
 ## clone
 
 ```bash
@@ -50,7 +53,7 @@ git branch -d <branch_name>
 
 ```bash
 # Unstage changes
-git reset HEAD
+git reset
 
 # go back to HEAD~n
 git reset HEAD~n
@@ -60,17 +63,6 @@ git reset --hard
 
 # undo last commit
 ```
-
-## revert 
-
-- 선택된 커밋 하나가 삭제된 상태로 commit 된다.
-
-```bash
-git revert HEAD~n
-```
-위 코드를 실행할 시, HEAD~n 에서의 commit 만  삭제된 상태가 된다.
-
-
 
 ## git log
 
@@ -88,23 +80,45 @@ git log --graph
 git log --all
 ```
 
-## branch
+
+
+# 브랜치 명령어
+
+---
+
+## 브랜치 생성
 
 ```bash
-# Create new branch on HEAD
-git branch {branch}
+git nb
+```
 
-# Chage HEAD to branch
-git checkout {branch}
 
-# Check local branches
+
+## 브랜치 목록
+
+```bash
+# 1. local 브랜치
 git branch -a
 
-# Check remote branches
+# 2. remote 브랜치
 git branch -r
 ```
 
-## merge: 두개의 브랜치를 합치기
+
+
+## 브랜치 이름 변경
+
+```bash
+// 1. 해당 브랜치로 체크 아웃
+git checkout nb
+
+// 2. 이름 바꾸기
+git branch -m nnb
+```
+
+
+
+## merge
 
 ```bash
 # HEAD location : master
@@ -121,6 +135,67 @@ git checkout bugFix; git merge master
 # master 로 bugFix 가 넘어온다.
 ```
 ![머지2](https://user-images.githubusercontent.com/40619551/64791636-f6061700-d5b2-11e9-91a9-38239766e7e8.gif)
+
+
+
+
+
+# 로컬 저장소 원격 저장소에 붙이기
+
+---
+
+1. 로컬 저장소 생성
+
+```bash
+git init
+```
+
+2. 원격 저장소에 연결
+
+```bash
+git remote add {저장소 이름} {URL}
+git remote add origin https://github.com/njh7799/forTest
+```
+
+3. git push 디폴트 값 설정
+
+```bash
+git push --set-upstream origin master
+```
+
+
+
+# 유용한 명령어들
+---
+
+1. 로컬에서의 작업 로그를 가져온다. 지운 로그도 나온다.
+
+```bash
+git reflog
+```
+
+2. 이전 커밋에 덧붙인다. 이전 커밋에 포함 되어야 하는 아주 작은 수정 사항을 추가할 때 사용.
+
+```bash
+git commit --amend
+```
+
+
+
+
+
+# 잘 안쓰는 명령어들
+---
+
+## revert 
+
+- 선택된 커밋 하나가 삭제된 상태로 commit 된다.
+
+```bash
+git revert HEAD~n
+```
+위 코드를 실행할 시, HEAD~n 에서의 commit 만  삭제된 상태가 된다.
+
 
 
 ## rebase - 두 브랜치를 한줄로
@@ -146,14 +221,3 @@ git cherry-pick c2 c4
 ```
 
 ![체리픽](https://user-images.githubusercontent.com/40619551/64791936-77f64000-d5b3-11e9-8f66-f5a17d160c9c.gif)
-
-
-
-## git reflog
-
-로컬에서의 작업 로그를 가져온다. 지운 로그도 나온다.
-
-## git commit --amend
-
-이전 커밋에 덧붙인다. 이전 커밋에 포함 되어야 하는 아주 작은 수정 사항을 추가할 때 사용.
-
