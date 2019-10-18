@@ -1,4 +1,4 @@
-# apollo  <small>[link]( https://www.apollographql.com/docs/react/  )</small>
+# apollo  <small>[link](https://www.apollographql.com/docs/react/ )</small>
 
 리액트와 graphQL을 연결시켜주는 도구이다.
 
