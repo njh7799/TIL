@@ -109,11 +109,21 @@ git branch -r
 ## 브랜치 이름 변경
 
 ```bash
-// 1. 해당 브랜치로 체크 아웃
+# 1. 해당 브랜치로 체크 아웃
 git checkout nb
 
-// 2. 이름 바꾸기
+# 2. 이름 바꾸기
 git branch -m nnb
+```
+
+
+
+## 브랜치 위치 변경
+
+```bash
+# branch-name 을 new-tip-commit 으로 이동한다.
+# new-tip-commit 자리에 HEAD도 가능
+git branch -f branch-name new-tip-commit
 ```
 
 
