@@ -1,8 +1,8 @@
-# oauth
+# OAuth
 
-생활 코딩의 강의를 통하여 ARABOZA  https://opentutorials.org/course/3405 
-
-필자는 정리에 약하므로 양해 바란다. Resource server는 편의상 github라고 하겠다.
+- 강의:  https://opentutorials.org/course/3405 
+- 공식 문서 https://developer.github.com/apps/building-oauth-apps/ 
+- 따라해보기 [link](https://medium.com/shriram-navaratnalingam/authentication-using-github-oauth-2-0-with-nodejs-be1091ce10a7/)
 
 ## 역할
 
@@ -13,77 +13,111 @@
 `Resource server`   API를 통해 리소스를 제공 (구글의 리소스 저장 서버)
 `Authorization server`   인증 담당으로 access token을 client 에게 보내줌 (구글의 인증 담당 서버) 
 
-## 등록	`Client ---register--> Resource server`
 
-oauth는 쓰고 싶다고 냅다 가져다 쓸 수 있는 것이 아니다. 사용하기 전에 우선 해당 서비스(github)의 oauth에 내 사이트를 등록 해야 한다.
+![image](https://user-images.githubusercontent.com/40619551/67158865-b0d6c100-f378-11e9-83ec-62a7e347fce3.png)
 
+## Flow
 
+1. **등록**
+   해당 리소스 서버에 등록을 하고 나면, 리소스 서버와 클라이언트는 각각 `Client ID`, `Client Secret`, `redirect URL`을 가지게 된다.
+2. **Resource Owner의 승인**
+   - 리소스 아우너가 클라이언트에 접근을 하고 로그인을 하고자 한다.
+   - 클라리언트는 사용자를 `https://github.com/login/oauth/authorize?client_id={CLIENT_ID}` 로 이동시킨다. oauth 로그인을 하게끔 한다.
+   - 로그인이 있다면, `client ID`와 `redirect URL`를 확인한 후, `redirect URL`로 보낸다.
+   - 로그인이 되어 있지 않다면  로그인 창을 전송하는데, 로그인을 완료하면, 바로 위 단계를 진행한다. 여기서 리소스 서버는 해당 유저가 설정한 scope에 대한 작업에 허용 하였다는 정보를 가지게 된다.
+3. **Resource Server의 승인**
+   - 리소스 서버가 리소스 오너의 웹 브라우저를 `http://localhost:4000/home?code={code}`로 이동시킨다. 
+   - {code}가 authorization code이다.
+   - `code={code}` 라는 쿼리에 의해서 클라이언트는 authorization 코드를 알 게 된다.
+   - 클라이언트가 리소스 서버에게 토큰을 받기 위해`https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${authorizationCode}` 로 POST 요청을 보낸다.
+     - `clientID`, `clientSecret`, `authorizationCode` 을 확인하여 유요하다면, 
+4. **액세스 토큰 발급**
+   - authorizationCode 를 리소스 서버와 클라이언트에서 삭제한다.
+   - Access Token을 리소서 서버가 클라이언트에게 넘겨준다.
 
-등록을 하면 아래 세가지를 받게 된다.
+5. **API 호출**
 
-`Client ID`  우리가 만들고있는 앱을 식별하는 식별자
-`Client Secret` 그 비번 **노출되면 개클남**
-`Authorized redirect URL` 리소스 서버가 권한을 부여하는 과정에서 Authorized Code를 보내줄 것인데 그걸 여기로 준다.
+- header 에 Authorization 에 accessToken을 넣어서 정해진 url에 요청을 보낸다.	
+    ```js
+    ...
+    method: 'get',
+        headers: {
+         Authorization: `token ${accessToken}`,
+        },
+        url: 'https://api.github.com/user',
+    ...
+    ```
 
-
-
-## Resource Owner의 승인
-
-자 현재, Client와 Resource Server는  `Client ID`, `Client Secret`, `Authorized redirect URL` 세가지를 가지고 있다.
-
-Resource Server는 A,B,C,D 네가지 기능을 지원하는데, 이 중에서 B 와 C 기능만을 필요로 하는 상황이다. (이 기능들을 scope이라 칭하겠다.)
-
-사용자가 내 페이지에서 B 기능을 사용하고자 한다면, **인증** 동의를 위한 버튼을 살포시 띄워 주자.
-
-이 버튼을 누르면 위 `Client ID`, `Authorized redirect URL`, `scope` 를 깃 허브 페이지에 날린다.
-
-Resource Server는 로그인 여부를 확인하고 되어 있지 않을 경우, 로그인 페이지를 우선 띄운다. 로그인이 성공하면, `Client ID`, `Authorized redirect URL`를 검사한다. 통과가 된다면 scope에 대한 권한을 Client에게 허용할 것인지에 대한 모달을 Owner에게 띄운다. Owener가 허용 하면 user id 와 해당 scope 에 대한 동의 정보를 저장한다.
-
-
-
-## Resource Server의 인증
-
-자 이제 Resource Server에게 인증을 받아보자.
-
-바로 토큰을 주면 좋겠지만, 어림도 없다.
-Resource Server는 authorization code를 만들어 Owner에게 전송한다.
-이걸 전송할 때에 Location: ~~ 헤더에 authorization code를 포함하여 전송한다. 이 요청을 받으면  Owner은 Client 에게 authorization code 를 전달하게 된다.
-
-Client는 authorization code, redirect_URL, Client ID,  Client secret 을 Resource Server에게 전송한다.
-
-
-
-## Access token 발급
-
-인증이 끝난 후에는 authorization code 를 지운다. 그리고 **access Token**을 발급하여 Client에게 발급한다. 이 access Token은 *user id 1번에 대해 B, C 에 대한 권한이 열려 있다.* 라는 정보를 가지고 있다.
-
-이하 강의에 대한 정리는 생략하겠으며, 직접 들어보자.
+6. (추가) access token이 만료되었을 경우
+   - 서버에 `Client ID`, `Client Secret`, `Refresh Token `을 전송하면 access token을 새로 발급받을 수 있다.
+   - github의 경우에는 access token에 수명이 없기 때문에 위와 같은 과정이 필요 없다.
 
 
 
+## 따라 해보기
 
+가독성을 위해 단계별로 함수를 만들어 정리하였다.
 
-# oAuth 적용
+```js
+// app.js
 
-따라해보기 [link](https://medium.com/shriram-navaratnalingam/authentication-using-github-oauth-2-0-with-nodejs-be1091ce10a7/)
+const express = require('express');
+const cors = require('cors');
+require('dotenv').config();
 
-공식 문서 https://developer.github.com/apps/building-oauth-apps/ 
+const { getAccessToken, getUserData } = require('./oauth');
 
-### flow
+const app = express();
 
-1. 클라이언트에서 아래 client_id 를 포함시켜 아래 주소로 이동하면 로그인 화면이 나옴
-   `https://github.com/login/oauth/authorize?client_id={CLIENT_ID}`
+app.use(cors());
 
-2. 로그인을 하면 redirection url 에 code 패러미터로 붙은 상태로 이동
-   `http://localhost:4000/home?code={code}`
+app.get('/home', async (req, res) => {
+  const authorizationCode = req.query.code;
+  const accessToken = await getAccessToken(authorizationCode);
+  const protectedResource = await getUserData(accessToken);
+  console.log(protectedResource);
+  res.redirect('http://localhost:3000');
+});
 
-3. 토큰을 발급 받기 위해 client id, cient secret, code 를 post 방식으로 요청
-   `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${requestToken}`
+app.listen(process.env.PORT, () => {
+  console.log('now listening for requests on port 4000');
+});
 
-4. 받은 데이터에는 토큰 값이 저장되어 있음.
-   이 값을 처리해주고 난 후 본 페이지로 redirect
-   `http://localhost:3000`
+```
 
+```js
+// oauth/index.js
 
+const axios = require('axios');
 
+const clientID = process.env.CLIENT_ID;
+const clientSecret = process.env.CLIENT_SECRET;
+
+async function getAccessToken(authorizationCode) {
+  const response = await axios({
+    method: 'post',
+    url: `https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${authorizationCode}`,
+    // Set the content type header, so that we get the response in JSON
+    headers: {
+      accept: 'application/json',
+    },
+  }).catch((error) => console.log(error.message));
+  const accessToken = response.data.access_token;
+  return accessToken;
+}
+
+async function getUserData(accessToken) {
+  const response = await axios({
+    method: 'get',
+    headers: {
+      Authorization: `token ${accessToken}`,
+    },
+    url: 'https://api.github.com/user',
+  }).catch((error) => console.log(error.message));
+  const protectedResource = response.data;
+  return protectedResource;
+}
+module.exports = { getAccessToken, getUserData };
+
+```
 
