@@ -164,11 +164,7 @@ class App extends Component {
   };
   ```
 
-
-
-## Class-based vs Functional Components
-
-## Functional Components
+## 31. Creating a Functional Component 
 
 ```javascript
 import Reacdt, {useState} from 'react';
