@@ -27,9 +27,12 @@
 import React from 'react'
 import styles from './StarRate.module.css'
 const starRate = (props) => {
-    const style = { background: 'linear-gradient(90deg, #fc0 30%, #fff 30%)' }
+    const rate = props.children / 5 * 100;
+    const style = {
+        backgroundImage: `linear-gradient(90deg, #fc0 ${rate}%, #fff ${rate}%)`,
+    }
     return (
-        <div className={styles.StarRate}>★★★★★</div>
+        <div style={style} className={styles.StarRate} >★★★★★</div>
     )
 }
 
@@ -40,8 +43,8 @@ export default starRate
 .StarRate {
   background-size: cover;
   background-position: center;
-  background: linear-gradient(90deg, #fc0 30%, #fff 30%);
   text-align: center;
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
