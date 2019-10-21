@@ -121,3 +121,24 @@ module.exports = { getAccessToken, getUserData };
 
 ```
 
+## Oauth로 받은 데이터의 전달
+
+이제 Oauth를 이용하여 유저의 정보를 받아 내는 것 까지 성공했다. 문제는 이 데이터를 어떻게 client에게 넘겨 주냐는 것이다. 우선, git 에서 받은 access token을 클라이언트에게 넘기는 것은 보안상 매우 위험하다. 이에 필자는, protectedResource 에서 필요한 정보만을 골라, jwt 를 생성하였다. 아래 코드에서는 createToken 함수가 해당 기능을 수행한다.
+
+```js
+app.get('/home', async (req, res) => {
+  const authorizationCode = req.query.code;
+  const accessToken = await getAccessToken(authorizationCode);
+  const protectedResource = await getProtectedResource(accessToken);
+  const token = await createToken(protectedResource)
+  res.redirect('http://localhost:3000');
+});
+```
+
+이 데이터를 바로 client에게 전달하는 것 또한 안전하지 않다. 따라서 다음과 같은 방법을 제안한다.
+
+1. 테이블을 생성하여 key : value 의 value에 위에서 만든 토큰을 넣는다.
+2. 쿠키에 key 값을 넣는다.
+3. redirect 시켜준다.
+4. client에서는 cookie 값을 통해 토큰의 키 값을 알 수 있다.
+
