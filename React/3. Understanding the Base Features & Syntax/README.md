@@ -167,7 +167,7 @@ class App extends Component {
 ## 31. Creating a Functional Component 
 
 ```javascript
-import Reacdt, {useState} from 'react';
+import React, {useState} from 'react';
 //useState를 이용하여 functional components에서 state에 접근할 수 있다.
 const app = props =>{
     const [personState, setPersonsState] = uesState({
