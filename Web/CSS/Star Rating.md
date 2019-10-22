@@ -24,6 +24,7 @@
 ## in React
 
 ```js
+// Component
 import React from 'react'
 import styles from './StarRate.module.css'
 const starRate = (props) => {
@@ -40,6 +41,7 @@ export default starRate
 ```
 
 ```css
+// CSS
 .StarRate {
   background-size: cover;
   background-position: center;
@@ -49,5 +51,10 @@ export default starRate
   -webkit-text-fill-color: transparent;
 }
 
+```
+
+```jsx
+// Usage
+<StarRate>{props.room.star_rate}</StarRate>
 ```
 
