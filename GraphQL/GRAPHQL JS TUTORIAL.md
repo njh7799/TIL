@@ -238,11 +238,13 @@ var schema = buildSchema(`
 `);
 ```
 
+
 	1. Query 라는 타입을 정의
 	2. passing arguments 설정. roll 의 경우에만 Int! 타입의 numRolls 인자가 존재.
 	3. Query 구성 요소의 타입 설정.
-	
-	2. `root` 는 각 API 엔드 포인트의  resolver function을 제공한다.
+
+2. `root` 는 각 API 엔드 포인트의  resolver function을 제공한다.
+
 
 ```js
 var root = {
