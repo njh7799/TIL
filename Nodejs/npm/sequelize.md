@@ -338,3 +338,4 @@ $ npx sequelize-cli db:seed:undo:all
 
 솔직히 뭔 소린지 모르겠다. 설명에 성의가 없어보인다. 실험 결과 hasOne 과 belongsTo  는 반대 의임은 확인이 가능했다.
 
+find method 링크[find](https://sequelize.org/master/manual/querying.html)
