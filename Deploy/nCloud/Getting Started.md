@@ -2,7 +2,6 @@
 
 ## nCloud 서버 열기
 
-
 ![새 파일 2019-10-04 10 50 58_2](https://user-images.githubusercontent.com/40619551/66266201-a4bd1080-e85c-11e9-947b-1e1a94a4cecc.jpg)
 ![새 파일 2019-10-04 10 50 58_3](https://user-images.githubusercontent.com/40619551/66266202-a555a700-e85c-11e9-9ff5-ae398b0c288d.jpg)
 ![새 파일 2019-10-04 10 50 58_4](https://user-images.githubusercontent.com/40619551/66266203-a555a700-e85c-11e9-9ec5-9de28d22533c.jpg)
@@ -42,4 +41,13 @@ passwd
 
 
 
+## sudo: unable to resolve host 에러 [link](https://linuxhandbook.com/sudo-unable-resolve-host/)
+
+기본 세팅대로 사용하면 `unable to resolve host(서버 이름)` 에러가 반겨준다.
+
+`vim /etc/hosts ` 명령어로 파일에 들어가서  `127.0.0.1 {hostname} ` 을 추가해주자.
+
+
+
 출처: nCloud 공식 홈페이지 및 nCloud Platform Hands-on 교육
+
