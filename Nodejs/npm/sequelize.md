@@ -4,6 +4,30 @@
 
 를 읽어보는 것이 가장 좋다. 정리가 잘 되어 있다.
 
+
+
+- 데이터 초기화
+
+  `bulkCreate` 메소드를 사용하면 된다.
+
+  ```js
+  User.bulkCreate([
+    { username: 'barfooz', isAdmin: true },
+    { username: 'foo', isAdmin: true },
+    { username: 'bar', isAdmin: false }
+  ]).then(() => { // Notice: There are no arguments here, as of right now you'll have to...
+    return User.findAll();
+  }).then(users => {
+    console.log(users) // ... in order to get the array of user objects
+  })
+  ```
+
+  
+
+
+
+이하 공식 문서 요약.
+
 # Getting sarted
 
 ---
@@ -173,7 +197,7 @@ User.update({ lastName: "Doe" }, {
 
 
 
-# Migrations
+# Migrations <small>[link](https://sequelize.org/master/manual/migrations.html)</small>
 
 ---
 
