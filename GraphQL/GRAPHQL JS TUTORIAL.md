@@ -74,12 +74,12 @@ data returned: Object { hello: "Hello world!" }
 - 리스트를 표현하고 슾을 경우엔 `[Int]` 와 같이 표현하면 된다.
 
 ```js
-var express = require('express');
-var graphqlHTTP = require('express-graphql');
-var { buildSchema } = require('graphql');
+const express = require('express');
+const graphqlHTTP = require('express-graphql');
+const { buildSchema } = require('graphql');
 
 // Construct a schema, using GraphQL schema language
-var schema = buildSchema(`
+const schema = buildSchema(`
   type Query {
     quoteOfTheDay: String
     random: Float!
