@@ -1,6 +1,22 @@
 # Ubuntu
 
-## NginX Setting [link](https://medium.com/@soban1193/upgrading-nginx-to-the-latest-version-on-ubuntu-c0ad9116cf87)
+## Set host name [link](https://linuxhandbook.com/sudo-unable-resolve-host/)
+
+```bash
+vim /etc/hosts
+```
+
+`127.0.0.1 {hostname} ` 을 추가.
+
+
+
+## Update apt
+
+0. Update apt
+
+```bash
+sudo apt-get update
+```
 
 1.  Install the dependencies 
 
@@ -20,7 +36,31 @@ sudo add-apt-repository ppa:nginx/stable
 sudo apt-get update
 ```
 
-4. Run install
+
+
+## Language setting
+
+```bash
+sudo apt-get install language-pack-ko
+```
+
+## Locale setting
+
+```bash
+sudo locale-gen ko_KR.UTF-8
+locale
+sudo -i
+cat << 'EOF' > /etc/default/locale
+LANG="ko_KR.UTF-8"
+LANGUAGE="ko_KR:ko:en_US:en"
+EOF
+```
+
+
+
+## NginX Setting [link](https://medium.com/@soban1193/upgrading-nginx-to-the-latest-version-on-ubuntu-c0ad9116cf87)
+
+Run install
 
 ```bash
 sudo apt-get install nginx
@@ -28,7 +68,7 @@ sudo apt-get install nginx
 
 
 
-## Node Setting
+## Node Setting [link](https://websiteforstudents.com/install-the-latest-node-js-and-nmp-packages-on-ubuntu-16-04-18-04-lts/)
 
 그냥 `apt install npm` 을 해버리면 구버전이 받아지기 때문에 다른 방법을 써야 한다.
 
@@ -50,6 +90,4 @@ sudo apt install nodejs
 node -v
 npm -v
 ```
-
-출처: https://websiteforstudents.com/install-the-latest-node-js-and-nmp-packages-on-ubuntu-16-04-18-04-lts/
 
