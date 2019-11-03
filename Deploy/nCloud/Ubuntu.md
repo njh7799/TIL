@@ -91,3 +91,12 @@ node -v
 npm -v
 ```
 
+
+
+## Handling connection timeout <small>[link](https://m.blog.naver.com/PostView.nhn?blogId=asdf2017&logNo=221170355124&proxyReferer=https%3A%2F%2Fwww.google.com%2F)</small>
+
+가끔 apt 명령어를 수행할 때,  kr.archive.ubuntu.com 에서 데이터를 받아오지 못하는 경우가 있다. 본인의 경우에는 `connecting to kr.archive.ubuntu.com` 의 상태만 지속되다가 time out 이 되어 연결이 해지 되는 문제가 발생하였다. 여러 방법을 시도해보았지만, 전부 실패하였고, 결국 발견한 방법이 아래의 방법이다.
+
+그냥 데이터를 받는 서버를 한국 서버에서 미국 서버로 바꾸는 것이다.
+
+`vim /etc/apt/sources.list ` 명렁어를 통해 해당 파일을 수정한다. 이 때, kr.~~ 으로 되어있는 부분들 전부 us.~~ 로 바꿔주면 된다. 저장 후 apt 명령어를 사용하면 정상적으로 동작하는 것을 확인할 수 있다.
