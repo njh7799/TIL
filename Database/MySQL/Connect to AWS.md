@@ -117,15 +117,15 @@ mysql> status
 ### 일반사용자 외부 접속 허용
 
 ```bash
-$ sudo -i
-$ cd /etc/mysql
-$ grep -r 'bind'
+sudo -i
+cd /etc/mysql
+grep -r 'bind'
 # bind-adress=127.0.0.1 내용 주석처리 (앞에 #을 붙임)
-$ cd /etc/mysql/mysql.conf.d
-$ sed -i 's/bind/# bind/' mysqld.cnf
-$ cat mysqld.cnf | grep bind
-$ sudo systemctl restart mysql
-$ exit
+cd /etc/mysql/mysql.conf.d
+sed -i 's/bind/# bind/' mysqld.cnf
+cat mysqld.cnf | grep bind
+sudo systemctl restart mysql
+exit
 ```
 
 - 주의: root 사용자의 외부 접속은 허용하면 안 됩니다.
@@ -151,7 +151,7 @@ $ mysql -u root -p
 ```sql
 CREATE DATABASE mydb;
 --- 아이디 및 패스워드 설정
-CREATE USER 'myuserid'@'%' IDENTIFIED BY 'mypassword';
+CREATE USER 'myuserid'@'%' IDENTIFIED WITH mysql_native_password BY '1q2w3e!Q';
 GRANT ALL ON mydb.* TO 'myuserid'@'%';
 FLUSH PRIVILEGES;
 ```
