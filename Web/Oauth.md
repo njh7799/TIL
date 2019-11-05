@@ -31,8 +31,14 @@
 
 (B) **Authorization Grant**
    - 클라이언트가 authorization grant를 받는다. (여기서는 authorization code 이다.)
+
+        - authorization grant 의 방법으로는 authorization code, implicit, resource owner password credentials, 그리고 client credentials 가 있다.
+
+
    - 리소스 서버가 리소스 오너의 웹 브라우저를 `http://localhost:4000/home?code={code}`로 이동시킨다. 
+
    - {code}가 authorization code이다.
+
    - `code={code}` 라는 쿼리에 의해서 클라이언트는 authorization 코드를 알 게 된다.
 
 (C) **Authorization Grant**
