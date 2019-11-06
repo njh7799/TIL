@@ -6,3 +6,5 @@
 
 ## 강의 [link](https://www.youtube.com/watch?v=Cx2dkpBxst8&list=PLXDU_eVOJTx7QHLShNqIXL1Cgbxj7HlN4&index=1)
 
+애니메이션 효과 [link](https://www.youtube.com/watch?v=PrSwK0Cpvfw&t=20s)
+
