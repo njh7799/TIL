@@ -649,4 +649,6 @@ console.log('Running a GraphQL API server at localhost:4000/graphql');
 express 에서는 인증을 처리하기 위해  [passport](http://passportjs.org/), [express-jwt](https://github.com/auth0/express-jwt) 혹은 [express-session](https://github.com/expressjs/session) 과 같은 라이브러리를 사용한다. 위 모듈들을 모두  `express-graphql`와 충돌 없이 이용이 가능하니까 편하게 써라.
 
 
-막스형 유튜브 강의 [링크](https://www.youtube.com/watch?v=7giZGFDGnkc&list=PL55RiY5tL51rG1x02Yyj93iypUuHYXcB_)
+
+[The Fullstack Tutorial for GraphQL](https://www.howtographql.com/?fbclid=IwAR0jB7T6FPLalqk_EUWrle1rBrdJxuRtc5JgPdZtAFusnw5oc4astG68gHg)
+
