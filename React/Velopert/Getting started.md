@@ -1,6 +1,19 @@
 # Modern React with Velopert [link](https://react.vlpt.us/)
 
-# UseEffect
+
+
+# useRef
+
+쉬운 것 부터 보자. react component내에서 변수를 만들 때 사용하는 친구이다.
+
+정의
+
+```javascript
+const nextId = useRef(4); // 정의
+console.log(nextId.current); // 접근
+```
+
+# useEffect
 
 ## deps가 빈 배열일 경우
 
@@ -123,5 +136,206 @@ const CreateUser = ({ username, email, onChange, onCreate }) => {
 };
 
 export default React.memo(CreateUser);
+```
+
+
+
+
+
+# useReducer
+
+##  reducer
+
+reducer 는 현재 상태와 액션 객체를 파라미터로 받아와서 새로운 상태를 반환해주는 함수이다.
+
+```js
+function reducer(state, action) {
+  // 새로운 상태를 만드는 로직
+  // const nextState = ...
+  return nextState;
+}
+```
+
+state에는 현재 상태, action에는 업데이트를 위한 정보가 담겨있다.
+
+일반적인 action의 형태는 아래와 같다.
+
+```js
+// 카운터에 1을 더하는 액션
+{
+  type: 'INCREMENT'
+}
+// 카운터에 1을 빼는 액션
+{
+  type: 'DECREMENT'
+}
+// input 값을 바꾸는 액션
+{
+  type: 'CHANGE_INPUT',
+  key: 'email',
+  value: 'tester@react.com'
+}
+// 새 할 일을 등록하는 액션
+{
+  type: 'ADD_TODO',
+  todo: {
+    id: 1,
+    text: 'useReducer 배우기',
+    done: false,
+  }
+}
+```
+
+* convention  `type` 값은 대문자와 _ 로 구성한다.
+
+## useReducer
+
+```js
+const [state, dispatch] = useReducer(reducer, initialState);
+```
+
+- state: 상태
+- dispatch: 액션을 발생시키는 함수이다. 이 함수의 input 파라미터가 reducer의 action이 된다.
+- reducer: 위에서 설명한 함수
+- initialState: 초기 상태
+
+예시 코드
+
+```js
+import React, { useReducer } from 'react';
+
+function reducer(state, action) {
+  switch (action.type) {
+    case 'INCREMENT':
+      return state + 1;
+    case 'DECREMENT':
+      return state - 1;
+    default:
+      return state;
+  }
+}
+
+function Counter() {
+  const [number, dispatch] = useReducer(reducer, 0);
+
+  const onIncrease = () => {
+    dispatch({ type: 'INCREMENT' });
+  };
+
+  const onDecrease = () => {
+    dispatch({ type: 'DECREMENT' });
+  };
+
+  return (
+    <div>
+      <h1>{number}</h1>
+      <button onClick={onIncrease}>+1</button>
+      <button onClick={onDecrease}>-1</button>
+    </div>
+  );
+}
+
+export default Counter;
+```
+
+
+
+# Custom Hooks
+
+custom hook이 뭔데요?
+
+그냥 함수다. 함수인데, 내부에서 React Hook을 사용하여 state를 관리하는 함수이다. 아래 예시를 참고하자.
+
+```js
+import { useState, useCallback } from 'react';
+
+function useInputs(initialForm) {
+  const [form, setForm] = useState(initialForm);
+  // change
+  const onChange = useCallback(e => {
+    const { name, value } = e.target;
+    setForm(form => ({ ...form, [name]: value }));
+  }, []);
+  const reset = useCallback(() => setForm(initialForm), [initialForm]);
+  return [form, onChange, reset];
+}
+
+export default useInputs;
+```
+
+이런식으로 코드를 관리해주면 하나의 파일에서 모든 state를 관리하지 않아도 된다는 장점이 있다. 또한 재사용성이 증대되며, 다양한 이점이 존재한다.
+
+
+
+# Context API
+
+상태를 관리할 때에, 저어어어기 아래 컴포넌트에서 사아아앙위 컴포넌트의 상태에 접근하기 위해선, 상태를 props로 넘겨주고, 넘겨주고, 넘겨주고..... 를 반복해야 한다. 몹시 비효율적이므로 등장한 친구가 Context API 이다. 이 친구를 이용하면 상태를 특정 범위 내에서 전역변수처럼 관리할 수 있다.
+
+만약, 전역변수로 설정해야할 상태가 너무 많다면, 구조가 복잡해질 것이다. 이를 해결 하기 위해 dispatch를 함께 사용하면 매우 깔끔한 구조를 만들 수 있다.
+
+자세한 동작 설명은 원문을 참고하자.
+
+1. 조상 컴포넌트에서 아래와같이 선언
+
+```js
+const UserDispatch = React.createContext(null);
+```
+
+2. 조상 컴포넌트에서 Context가 접근할 수 있는 범위를 UserDispatch.Provider 로 감싸주고 value에 전역변수로 만들 값을 넣는다.
+
+```js
+<UserDispatch.Provider value={dispatch}>...</UserDispatch.Provider>
+```
+
+3. 자손 컴포넌트에서 전역 상태를 가져온다.
+
+```js
+import React, { useContext } from 'react';
+import { UserDispatch } from './App';
+
+const User = React.memo(function User({ user }) {
+	const dispatch = useContext(UserDispatch);
+    ...
+```
+
+
+
+### 코드 예시
+
+```js
+import React, { useRef, useReducer, useMemo, useCallback } from 'react';
+import UserList from './UserList';
+import CreateUser from './CreateUser';
+import useInputs from './hooks/useInputs';
+
+function countActiveUsers(users) {
+  ...
+}
+
+const initialState = {
+  users: [
+      ...
+  ]
+};
+
+function reducer(state, action) {
+  ...
+}
+
+// UserDispatch 라는 이름으로 내보내줍니다.
+export const UserDispatch = React.createContext(null);
+
+function App() {
+  ...
+  return (
+    <UserDispatch.Provider value={dispatch}>
+      ...
+      ...
+      ...
+    </UserDispatch.Provider>
+  );
+}
+
+export default App;
 ```
 
