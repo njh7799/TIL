@@ -261,3 +261,90 @@ git cherry-pick c2 c4
 ```
 
 ![체리픽](https://user-images.githubusercontent.com/40619551/64791936-77f64000-d5b3-11e9-8f66-f5a17d160c9c.gif)
+
+
+
+
+
+## git pull
+
+로컬에서 작업을 했는데, 원격에서 다른 사람이 먼저 커밋을 했을 때 pull을 하면?
+
+```bash
+# 초기 상태
+# remote
+c3
+|
+c2
+|
+c1
+```
+
+```bash
+# git pull 을 하고 commit을 함
+# 내 local
+c4
+|
+c3
+|
+c2
+|
+c1
+```
+
+```bash
+# 그런데 다른 사람이 원격에 먼저 푸시 날림
+# remote
+c5
+|
+c3
+|
+c2
+|
+c1
+```
+
+이 경우, 당연히 push가 안된다. 이 때 pull을 하면 충돌이 없다는 가정 하에 아래와 같은 그래프가 생성된다. 
+
+```bash
+# pull 하고 난 후
+# 내 local
+
+c6 (HEAD -> master) Merge branch 'master' of https://github.com/njh7799/forTest
+| \
+c4 c5 (origin/master)
+|  /
+c3
+|
+c2
+|
+c1
+```
+
+짱신기하다.
+
+## 여기서 reset을 하면?
+
+여기서 git reset HEAD~1을 하면 어디를 기준으로 어디까지가 reset이 될까? 해보자
+
+**git pull을 하기 바로 전 상태**로 돌아왔다.
+
+##  git pull --rebase 
+
+이제 pull 설정을 rebase로 해보자. 아무런 설정을 하지 않으면 깃은 자동으로 fetch merge 를 진행한다. 여기서 merge를 rebase로 바꿔주는 것이다.
+
+```bash
+# pull 하고 난 후
+# 내 local
+
+c4 (HEAD -> master)
+|
+c5 (origin/master)
+|
+c3
+|
+c2
+|
+c1
+```
+
