@@ -23,3 +23,8 @@
 
 ![image](https://user-images.githubusercontent.com/40619551/68527668-dbd78380-032c-11ea-9903-4422cc19b0e6.png)
 
+
+
+원문의 원문 [A successful Git branching model](https://nvie.com/posts/a-successful-git-branching-model/)
+
+설치  https://github.com/nvie/gitflow/wiki/Installation 
