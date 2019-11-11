@@ -1,86 +1,164 @@
 
-## init 을 이용하여 기본 설정 하기
+# init 을 이용하여 기본 설정 하기
 ```
 ./node_modules/.bin/eslint --init
 ```
 
-## 직접 설정하기
+# 직접 설정하기
 
-### eslint
-
-1. 설치
+## eslint 설치  [link]( https://www.npmjs.com/package/eslint )
 
 ```bash
-npx install-peerdeps --dev eslint-config-airbnb-base
+npm install eslint --save-dev
 ```
 
-2. .eslintrc.js 파일 추가
+
+
+## prettier 설치
+
+```bash
+npm install prettier --save-dev
+```
+
+
+
+## prettier config 파일설치 [link](https://prettier.io/docs/en/integrating-with-linters.html)
+
+### Disable formatting rules
+
+ [`eslint-config-prettier`](https://github.com/prettier/eslint-config-prettier) 는 eslint가 Prettier과의 충돌 되는 부분을 비활성화해주는 config이다. 
+
+```bash
+npm install --save-dev eslint-config-prettier
+```
+
+```js
+// .eslintrc.json
+{
+  "extends": ["prettier"] // extends 배열의 가장 마지막에 넣는다.
+}
+```
+
+### Use ESLint to run Prettier
+
+ [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier)는 Prettier의 규칙을 적용시킬 수 있게끔 해주는 plugin이다.
+
+```bash
+npm install --save-dev eslint-plugin-prettier
+```
+
+```js
+// .eslintrc.json
+{
+  "plugins": ["prettier"],
+  "rules": {
+    "prettier/prettier": "error"
+  }
+}
+```
+
+  참고로 prettierrc 파일 설정을 끝내고 나면 `"prettier/prettier"` 설정 뒤에 `.prettierrc` 의 설정이 붙어서 적용된다.  예를 들자면, `.prettierec` 파일이  `{"singleQuote": true, "parser": "flow"}` 라면  `"prettier/prettier": "error"` 는 `"prettier/prettier": ["error", {"singleQuote": true, "parser": "flow"}]`가 되는 것이다.
+
+
+
+## Prettier RC 파일 추가 [link](https://github.com/obartra/prettierrc/blob/master/README.md)
+
+`.prettierrc` 파일을 만들어 prettier 설정을 관리할 수 있게 해준다.
+
+```bash
+npm install --save-dev prettier prettierrc
+```
+
+
+
+## 중간 정리
+
+`.eslintrc`
 
 ```js
 module.exports = {
-    "parserOptions": {
-        "ecmaVersion": 9
-    },
-    "extends": ["airbnb-base"], // airbnb-base 설정을 사용한다.
-    "env": {
-        "browser": true, // 브라우저 환경
-        "node": true, // 노드 환경
-    },
-    "plugins": ['import'], // require 대신 import를 사용
+    "extends": ["prettier"],
+    "plugins": ["prettier"],
     "rules": {
-        // 적용 규칙
+        "prettier/prettier": "error"
     }
 };
 ```
 
-이제 여기게 prettier를 얹어 보겠다.
-
-### eslint-config-prettier
-
- [eslint-config-prettier](https://github.com/prettier/eslint-config-prettier)은 prettier 에서 관리 해 줄 수 있는 코드 스타일의 ESLint 규칙을 비활성화시켜 준다. 이것을 사용하게 된다면 ESLint 는 자바스크립트 문법 관련된 것들만 관리하게 되고, 코드스타일 관련 작업은 prettier 가 담당하게 된다. 예를 들어 ` Expected linebreaks to be 'LF' but found 'CRLF'.eslint(linebreak-style) ` 이런 경고나 ` Missing semicolon.eslint(semi) ` 이런 경고가 더 이상 나타나지 않게 된다.
-
-1. 설치
-
-```bash
-npm install eslint-config-prettier
-```
-
-2.  .prettierrc 파일  설정
+`.prettier`
 
 ```js
-{  
-  "singleQuote": true, // " " 대신 ' ' 를 기본으로 사용한다.
-  "semi": true, // 문장의 끝에는 ; 를 붙여준다.
-  "useTabs": false, // 기본 탭 들여쓰기를 비활성화 한다.
-  "tabWidth": 2, // 탭을 스페이스 두 칸으로 한다.
-  "trailingComma": "all", // 객체나 배열의 마지막 요소에 , 를 붙인다.
-  "printWidth": 80 // 한 줄에 80 길이만큼만 둔다.
+{
+    
 }
 ```
 
-3. .eslintrc.js 파일 수정
+
+
+자 이제 airbnb 규칙을 적용해 보자.
+
+## airbnb 규칙 적용
+
+```bash
+npm install eslint-plugin-import --save-dev
+npm install eslint-config-airbnb-base --save-dev
+```
+
+참고로 `eslint-config-airbnb-base` 는 `eslint-plugin-import ` 가 없으면 동작하지 않기 때문에,  `eslint-plugin-import `  를 먼저 설치해주어야 한다.
+
+`.eslintrc.js`
+
+```js
+module.exports = {
+    "extends": ["airbnb-base", "prettier"], // 이 부분이 추가 되었다.
+    "plugins": ["prettier"],
+    "rules": {
+        "prettier/prettier": "error"
+    }
+};
+```
+
+
+
+## 추가 규칙 적용
+
+이제 기본적인 세팅이 끝났다. 나머지는 필자가 현재 참여하고 있는 프로젝트의 설정 파일을 첨부하겠다.
+
+`.eslintrc`
 
 ```js
 module.exports = {
     "parserOptions": {
         "ecmaVersion": 9
     },
-    "extends": ["airbnb-base", "prettier"], // 이거 하나만 바뀐 것이다.
+    "extends": ["airbnb-base", "prettier"],
     "env": {
         "browser": true,
         "node": true,
     },
-    "plugins": ['import'],
+    "plugins": ['import', "prettier"],
     "rules": {
+        "prettier/prettier": "error"
     }
 };
 ```
 
+`.prettier`
+
+```js
+{  
+  "singleQuote": true,
+  "semi": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "printWidth": 80
+}
+```
 
 
 
-
-## Error
+# Error
 
 Cannot find module 'eslint-plugin-import'
 
