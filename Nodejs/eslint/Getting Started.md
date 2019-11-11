@@ -66,7 +66,7 @@ npm install --save-dev eslint-plugin-prettier
 `.prettierrc` 파일을 만들어 prettier 설정을 관리할 수 있게 해준다.
 
 ```bash
-npm install --save-dev prettier prettierrc
+npm install --save-dev prettierrc
 ```
 
 
@@ -100,8 +100,7 @@ module.exports = {
 ## airbnb 규칙 적용
 
 ```bash
-npm install eslint-plugin-import --save-dev
-npm install eslint-config-airbnb-base --save-dev
+npm install eslint-plugin-import eslint-config-airbnb-base --save-dev
 ```
 
 참고로 `eslint-config-airbnb-base` 는 `eslint-plugin-import ` 가 없으면 동작하지 않기 때문에,  `eslint-plugin-import `  를 먼저 설치해주어야 한다.
@@ -157,6 +156,48 @@ module.exports = {
 ```
 
 
+
+## 최종 정리
+
+앞 부분을 공부하기 귀찮을 수 있으니, 위의 과정을 한 번에 모아 보겠다.
+
+1. 설치
+
+```bash
+npm install eslint prettier eslint-config-prettier eslint-plugin-prettier prettierrc eslint-plugin-import eslint-config-airbnb-base --save-dev
+```
+
+`.eslintrc`
+
+```js
+module.exports = {
+    "parserOptions": {
+        "ecmaVersion": 9
+    },
+    "extends": ["airbnb-base", "prettier"],
+    "env": {
+        "browser": true,
+        "node": true,
+    },
+    "plugins": ['import', "prettier"],
+    "rules": {
+        "prettier/prettier": "error"
+    }
+};
+```
+
+`.prettier`
+
+```js
+{  
+  "singleQuote": true,
+  "semi": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "printWidth": 80
+}
+```
 
 # Error
 
