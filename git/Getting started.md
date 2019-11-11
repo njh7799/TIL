@@ -1,5 +1,9 @@
 # Getting started
 
+Pro-Git 책을 꼭 읽어 보자.
+
+
+
 ## Create Local git repository 
 
 ```bash
