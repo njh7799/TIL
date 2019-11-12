@@ -32,8 +32,9 @@ npm install prettier --save-dev
 npm install --save-dev eslint-config-prettier
 ```
 
+
+`.eslintrc.json`
 ```js
-// .eslintrc.json
 {
   "extends": ["prettier"] // extends 배열의 가장 마지막에 넣는다.
 }
@@ -41,7 +42,7 @@ npm install --save-dev eslint-config-prettier
 
 ### Use ESLint to run Prettier
 
- [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier)는 Prettier의 규칙을 적용시킬 수 있게끔 해주는 plugin이다.
+ [`eslint-plugin-prettier`](https://github.com/prettier/eslint-plugin-prettier)는 Prettier의 규칙을 eslint에 적용시킬 수 있게끔 해주는 plugin이다.
 
 ```bash
 npm install --save-dev eslint-plugin-prettier
@@ -57,16 +58,22 @@ npm install --save-dev eslint-plugin-prettier
 }
 ```
 
-  참고로 prettierrc 파일 설정을 끝내고 나면 `"prettier/prettier"` 설정 뒤에 `.prettierrc` 의 설정이 붙어서 적용된다.  예를 들자면, `.prettierec` 파일이  `{"singleQuote": true, "parser": "flow"}` 라면  `"prettier/prettier": "error"` 는 `"prettier/prettier": ["error", {"singleQuote": true, "parser": "flow"}]`가 되는 것이다.
+  참고로 prettierrc 파일 설정을 끝내고 나면 `"prettier/prettier"` 설정 뒤에 `.prettierrc` 의 설정이 붙어서 적용된다.  예를 들자면, `.prettierrc` 파일이  `{"singleQuote": true, "parser": "flow"}` 라면  `"prettier/prettier": "error"` 는 `"prettier/prettier": ["error", {"singleQuote": true, "parser": "flow"}]`가 되는 것이다.
 
 
 
-## Prettier RC 파일 추가 [link](https://github.com/obartra/prettierrc/blob/master/README.md)
+## Prettier 확장팩 설정
 
-`.prettierrc` 파일을 만들어 prettier 설정을 관리할 수 있게 해준다.
+아래와 같이 수정한다.
 
-```bash
-npm install --save-dev prettierrc
+`settings.json`
+
+```json
+{
+    ...
+    "editor.formatOnSave": true,
+    "eslint.autoFixOnSave": true
+}
 ```
 
 
@@ -85,7 +92,7 @@ module.exports = {
 };
 ```
 
-`.prettier`
+`.prettierrc`
 
 ```js
 {
@@ -93,7 +100,15 @@ module.exports = {
 }
 ```
 
+`settings.json`
 
+```js
+{
+    ...
+    "editor.formatOnSave": true,
+    "eslint.autoFixOnSave": true
+}
+```
 
 자 이제 airbnb 규칙을 적용해 보자.
 
@@ -142,7 +157,7 @@ module.exports = {
 };
 ```
 
-`.prettier`
+`.prettierrc`
 
 ```js
 {  
@@ -157,6 +172,8 @@ module.exports = {
 
 
 
+
+
 ## 최종 정리
 
 앞 부분을 공부하기 귀찮을 수 있으니, 위의 과정을 한 번에 모아 보겠다.
@@ -164,7 +181,7 @@ module.exports = {
 1. 설치
 
 ```bash
-npm install eslint prettier eslint-config-prettier eslint-plugin-prettier prettierrc eslint-plugin-import eslint-config-airbnb-base --save-dev
+npm install eslint prettier eslint-config-prettier eslint-plugin-prettier eslint-plugin-import eslint-config-airbnb-base --save-dev
 ```
 
 `.eslintrc`
@@ -198,6 +215,18 @@ module.exports = {
   "printWidth": 80
 }
 ```
+
+`settings.json`
+
+```js
+{
+    ...
+    "editor.formatOnSave": true,
+    "eslint.autoFixOnSave": true
+}    
+```
+
+
 
 # Error
 
