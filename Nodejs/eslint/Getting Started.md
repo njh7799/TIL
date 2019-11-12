@@ -146,12 +146,12 @@ module.exports = {
 
 ```js
 {  
-  "singleQuote": true,
-  "semi": true,
-  "useTabs": false,
-  "tabWidth": 2,
-  "trailingComma": "all",
-  "printWidth": 80
+  "singleQuote": true, // " " 대신 ' ' 를 사용
+  "semi": true, // 문장 끝에는 ; 를 붙여줌
+  "useTabs": false, // 탭을 누르면 tab이 안되고 스페이스 여러 칸이 들어감
+  "tabWidth": 2, // 탭 간격을 스페이스 2칸으로 함
+  "trailingComma": "all", // 객체의 마지막 요소 뒤에 , 를 붙여줌
+  "printWidth": 80 // 한 줄의 길이가 80을 넘지 않도록 함
 }
 ```
 
