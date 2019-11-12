@@ -228,6 +228,32 @@ module.exports = {
 
 
 
+
+
+## React의 경우
+
+**react**
+
+1. npm 패키지 설치
+
+```bash
+npm install --save-dev eslint-config-airbnb eslint eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react eslint-plugin-react-hooks eslint-config-prettier prettier
+```
+
+2. eslintrc.js 설정파일 추가
+
+```js
+module.exports = {
+  extends: ['react-app', 'airbnb', 'airbnb/hooks', 'prettier'],
+  plugins: ['react', 'jsx-a11y', 'import', 'prettier'],
+  rules: {
+    'react/jsx-one-expression-per-line': 0,
+    'react/jsx-filename-extension': 0,
+	'prettier/prettier': 'error',
+  },
+};
+```
+
 # Error
 
 Cannot find module 'eslint-plugin-import'
