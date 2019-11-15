@@ -240,7 +240,7 @@ module.exports = {
 npm install --save-dev eslint-config-airbnb eslint eslint-plugin-jsx-a11y eslint-plugin-import eslint-plugin-react eslint-plugin-react-hooks eslint-config-prettier prettier
 ```
 
-2. eslintrc.js 설정파일 추가
+2. `eslintrc.js` 설정파일 추가
 
 ```js
 module.exports = {
@@ -253,7 +253,18 @@ module.exports = {
   },
 };
 ```
+3. `.prettier`
 
+```js
+{  
+  "singleQuote": true,
+  "semi": true,
+  "useTabs": false,
+  "tabWidth": 2,
+  "trailingComma": "all",
+  "printWidth": 80
+}
+```
 # Error
 
 Cannot find module 'eslint-plugin-import'
