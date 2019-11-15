@@ -128,6 +128,31 @@ git branch -f branch-name new-tip-commit
 
 
 
+## 로컬 브랜치와 원격 브랜치를 연결
+
+```bash
+git branch -u upstream/foo foo
+```
+
+
+
+## 브랜치 삭제
+
+### 로컬
+
+```bash
+git branch -d branch_name # --delete
+git branch -D branch_name # --delete --force
+```
+
+### 원격
+
+```bash
+git push <remote_name> --delete <branch_name>
+```
+
+
+
 ## merge
 
 ```bash
