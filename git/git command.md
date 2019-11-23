@@ -151,7 +151,8 @@ git branch -D branch_name # --delete --force
 git push <remote_name> --delete <branch_name>
 ```
 
-
+# Merge 명령어
+---
 
 ## merge
 
@@ -175,7 +176,123 @@ git checkout bugFix; git merge master
 
 
 
-# 로컬 저장소 원격 저장소에 붙이기
+#  Rebase 명령어
+
+---
+
+Merge와 비슷하다.   
+
+장점: 잘 사용하면 브랜치가 깔끔해진다.
+
+단점: 실수했을 때 되돌리기가 쉽지 않다.
+
+
+
+## 기본 사용 법
+
+예시를 보며 이해해 보자. C3의 변경사항이 C2 에 커밋의 형태로 반영이 된다. 물론 충돌이 발생할 수도 있으며, 충돌이 일어나면, 충돌이 일어난 파일에서 충돌을 해결하고 `git add .` `git rebase --continue` 를 해주면 된다.
+
+자 그렇다면 그래프의 형태가 아래와 같을 때 c4를 c2에 리베이스 하면 어떻게 될까
+
+```bash
+C0
+|  \
+c1  c3
+|    |
+c2  c4
+```
+
+결과는 아래와 같다
+
+```bash
+C0
+|  \
+c1  c3
+|    |
+c2  c4
+|
+c3'
+|
+c4'
+```
+
+마치 c3와 c4를 체리픽 한 것과 같다.
+
+
+
+```bash
+# HEAD location : bugFix
+git rebase master # 현재 브랜치를 master 밑으로 이동시킨다.
+# bugFix 가 master 밑으로 이동한다.
+```
+
+![리베이스1](https://user-images.githubusercontent.com/40619551/64791702-0fa75e80-d5b3-11e9-9baf-38d737c6ef83.gif)
+
+아래 명령어를 통해 브랜치를 정리해준다. (사실 왜 하는지 모르겠다.)
+```bash
+git checkout master; git rebase bugFix
+```
+
+![리베이스2](https://user-images.githubusercontent.com/40619551/64791726-17ff9980-d5b3-11e9-8f44-dbb065a0789b.gif)
+
+
+
+## 원격에 있는 브랜치를 rebase 하기
+
+이게 무슨 소리일까. 이해를 돕기 위해 `git pull` 명령어를 먼저 이해해보자.
+
+`git pull` 을 실행하면, 원격에서 브랜치 정보를 가져 온다.(`fetch`) 그리고 충돌이 없을 경우 자동으로 `merge` 해준다. 여기서 이 `merge`를 `rebase`로 설정을 바꾸어 줄 수 있다!
+
+```bash
+# pull 하고 난 후
+# 내 local
+
+c4 (HEAD -> master)
+|
+c5 (origin/master)
+|
+c3
+|
+c2
+|
+c1
+```
+
+
+
+## feat 브랜치에서 작업을 이어 나가고 싶을 때
+
+이 경우는, 배경 설명이 일부 필요하다.
+
+필자는 팀 프로젝트에서 git-flow 전략을 취하는데, 이 때 유용하게 사용되는 기능이다.
+
+우선 배경 설명을 하겠다. 원격 브랜치 `upstream` 에는 `develop` 이라는 브랜치가 있다. 각 팀원들을 `develop`에서 각자 만들 feature 브랜치( `feat-nav_bar`와 같은) 브랜치를 만든다. 
+
+`git checkout -b feat-nav_bar devleop`
+
+그리고 feature 작업이 끝나면, 이를 원격에 push 하여 develop 브랜치에 `Pull Request`를 보낸다.
+
+`git push upstream feature`
+
+`github에서 PR 작성`
+
+이 때, 내가 다음에 개발할 작업은 내가 PR 을 보낸 코드를 기반으로 작성 해야하는 상황을 생각해보자. 다음 개발을 하기 위해선 항상 최신의 develop 브랜치에서 새로운 브랜치를 생성 하여야 하는데, PR 이 merge 되기 전에는 내 전 작업이 develop에 포함 되어 있지 않다. 그렇다면, PR이 merge 될 때 까지 기다려야 하는 것일까?
+
+물론 아니기 때문에 이 글을 쓰고 있다.
+
+이 경우에는, 그냥 작업 하던 브랜치에서 계속 코드를 작성 하면 된다! rebase를 이용하면 브랜치 트리가 꼬이지 않게 작업을 할 수 있다.
+
+```
+git commit ~~
+git commit ~~
+git rebase develop
+```
+
+
+![실험2](https://user-images.githubusercontent.com/40619551/69470659-54cde500-0ddb-11ea-9f07-61dcf01e1c6a.gif)
+
+
+#  로컬 저장소 원격 저장소에 붙이기
 
 ---
 
@@ -233,49 +350,7 @@ git revert HEAD~n
 
 
 
-## rebase - 두 브랜치를 한줄로
 
-머지랑 동작 자체는 비슷하다. 아래의 예시로 설명을 하겠다. C3의 변경사항이 C2 에 커밋의 형태로 반영이 된다. 물론 충돌이 발생할 수도 있으며, 충돌이 일어나면, 충돌이 일어난 파일에서 충돌을 해결하고 `git rebase --continue` 를 해주면 된다.
-
-그렇다면 그래프의 형태가 아래와 같을 때 c4를 c2에 리베이스 하면 어떻게 될까
-
-```bash
-C0
-|  \
-c1  c3
-|    |
-c2  c4
-```
-
-결과는 아래와 같다
-
-```bash
-C0
-|  \
-c1  c3
-|    |
-c2  c4
-|
-c3'
-|
-c4'
-```
-
-마치 c3와 c4를 체리픽 한 것과 같다.
-
-
-
-```bash
-# HEAD location : bugFix
-git rebase master # 현재 브랜치를 master 밑으로 이동시킨다.
-# bugFix 가 master 밑으로 이동한다.
-```
-![리베이스1](https://user-images.githubusercontent.com/40619551/64791702-0fa75e80-d5b3-11e9-9baf-38d737c6ef83.gif)
-
-```bash
-git checkout master; git rebase bugFix
-```
-![리베이스2](https://user-images.githubusercontent.com/40619551/64791726-17ff9980-d5b3-11e9-8f44-dbb065a0789b.gif)
 
 ## cherry-pick 
 
@@ -353,23 +428,4 @@ c1
 여기서 git reset HEAD~1을 하면 어디를 기준으로 어디까지가 reset이 될까? 해보자
 
 **git pull을 하기 바로 전 상태**로 돌아왔다.
-
-##  git pull --rebase 
-
-이제 pull 설정을 rebase로 해보자. 아무런 설정을 하지 않으면 깃은 자동으로 fetch merge 를 진행한다. 여기서 merge를 rebase로 바꿔주는 것이다.
-
-```bash
-# pull 하고 난 후
-# 내 local
-
-c4 (HEAD -> master)
-|
-c5 (origin/master)
-|
-c3
-|
-c2
-|
-c1
-```
 
