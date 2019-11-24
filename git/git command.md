@@ -291,6 +291,9 @@ git rebase develop
 
 ![실험2](https://user-images.githubusercontent.com/40619551/69470659-54cde500-0ddb-11ea-9f07-61dcf01e1c6a.gif)
 
+이전 feature을 필요로 하긴 하는데, 주 작업 내용이 달라서 branch 새로 파는 경우도 상관 없이 동작한다.
+
+![실험1](https://user-images.githubusercontent.com/40619551/69470947-d888d100-0ddd-11ea-8912-e6685231e47a.gif)
 
 #  로컬 저장소 원격 저장소에 붙이기
 
@@ -350,8 +353,6 @@ git revert HEAD~n
 
 
 
-
-
 ## cherry-pick 
 
 선택된 브랜치 밑에 원하는 커밋들을 붙인다.
@@ -364,7 +365,9 @@ git cherry-pick c2 c4
 
 
 
+# 추가
 
+---
 
 ## git pull
 
