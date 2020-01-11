@@ -31,3 +31,7 @@ console.log(obj)
 => {a:3}
 ```
 
+
+
+## [get index of key in object](https://stackoverflow.com/questions/15218448/get-index-of-a-key-in-json)
+
