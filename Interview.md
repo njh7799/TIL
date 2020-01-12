@@ -1,4 +1,4 @@
-### 기술적 도전
+기술적 도전
 
 - 성능 최적화
   - 무한 스크롤
@@ -38,14 +38,35 @@
 
 ### backend
 
-- [node](https://asfirstalways.tistory.com/43) [하나 더](https://programmingsummaries.tistory.com/328)
-  - [이벤트 루프과 스레딩 관련](https://meetup.toast.com/posts/89)
+- node
+  - [Node js란 무엇인가?](https://asfirstalways.tistory.com/43)
+  -  [Node js 이해하기](https://programmingsummaries.tistory.com/328)
+  - [자바 스크립트와 이벤트 루프](https://meetup.toast.com/posts/89)
+
+  > 자바스크립트가 '단일 스레드' 기반의 언어라는 말은 '자바스크립트 엔진이 단일 호출 스택을 사용한다'는 관점에서만 사실이다. 실제 자바스크립트가 구동되는 환경(브라우저, Node.js등)에서는 주로 여러 개의 스레드가 사용되며, 이러한 구동 환경이 단일 호출 스택을 사용하는 자바 스크립트 엔진과 상호 연동하기 위해 사용하는 장치가 바로 '이벤트 루프'인 것이다.
   - [루프 및 스레드](https://sjh836.tistory.com/149)
+  - [멀티 스레드 -> 비동기](http://www.nextree.co.kr/p7292/)
+  - [싱글 스레드인가?](https://sjh836.tistory.com/79)
+
+  > 싱글스레드 기반의 이벤트루프가 계속 돌면서 요청을 처리한다. io요청이 있는 경우, 쓰레드풀에 던져둔다. 여기에는 워커들이 여러개있다. 사용자가 작성할때가 싱글쓰레드다.
+  >
+  > 즉, 이벤트루프만 싱글스레드라서 req, res이 싱글쓰레드인거지 뒤에서 열심히 일하는 워커(io처리)들은 여러개(멀티쓰레드)이다.
+  >
+  > 이벤트루프만 blocking안되게 만들면, 워커들은 알아서 일나눠가지고 돌아간다.
+  >
+  
   - 멀티코어
+    
+
+
 - mysql2
+
 - sequelize
+  
   - ORM
+  
 - express
+
 - [Graphql](https://tech.kakao.com/2019/08/01/graphql-basic/)
   - Rest
     - https://tv.naver.com/v/2292653
