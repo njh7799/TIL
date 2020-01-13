@@ -6,7 +6,7 @@
 
  상위 요소에 이벤트를 붙였을 때, 하위 요소들에게도 이벤트가 적용되는 것을 의미한다.
 
-```js
+```html
 <div id="one">
 	<div id="two">
 		<div id="three">
@@ -14,6 +14,32 @@
 	</div>
 </div>
 ```
+
+```css
+#one{
+  width:300px;
+  height:300px;
+  background-color:blue;
+}
+
+#two{
+  width:200px;
+  height:200px;
+  background-color:red;
+}
+
+#three{
+  width:100px;
+  height:100px;
+  background-color:yellow;
+}
+```
+
+```js
+document.getElementById("one").addEventListener("click", ()=>{console.log(1)})
+```
+
+
 
 위의 예시에서 `id="one"` 인 요소에만 이벤트를 붙여도 하위 요소 모두 적용 된다.
 
