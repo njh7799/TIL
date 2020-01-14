@@ -1,13 +1,3 @@
-기술적 도전
-
-- 성능 최적화
-  - 무한 스크롤
-  - React-virtualized
-  - 쿼리 최적화
-  - 캐싱
-
-
-
 ## 사용 스택 What and Why
 
 - javascript
@@ -15,26 +5,87 @@
 
 ### FrontEnd
 
-- [React](https://velopert.com/3612)
+- [React](https://velopert.com/3612) (프레임워크 or 모듈 정보 포함)
+  
+  > ​	**장점 요약**
+  >
+  > 1. **Dom 관리와 상태 관리**
+  >
+  >    웹 개발을 하게 될 때,  DOM 관리와 상태값 업데이트 관리를 최소화하고, 오직 기능 개발, 그리고 사용자 인터페이스를 구현하는 것에 집중 할 수 있도록 해준다.
+  >
+  > 2. **Virtual Dom**
+  >
+  >    렌더링을 하기 전에 가상 돔을 먼저 만들어서 비교한다. **다른 부분**만 다시 렌더링 한다.
+  >
+  >    * Hueristic 알고리즘: 뭐가 다른지 판단하는 O(N) 알고리즘
+  >      * Key가 중요한 이유
+  >
+  > 3. **묶어서 한 번에**
+  >
+  >    여러 인터렉션이 발생할 때마다 매번 돔을 다시 그려 reflow, repaint 하는 것은 매우 비효율적이다. React 는 이 작업들을 묶어서 한 번에 처리를 해준다. 즉 연산이 줄어든다. (규모는 커지지만)
+  
+  - [DOM](https://m.blog.naver.com/magnking/220972680805)
+  
   - [ReactJS의 Virtual DOM과 Repaint, Reflow](http://blog.drakejin.me/React-VirtualDOM-And-Repaint-Reflow/)
+  
+  - [재조정](https://ko.reactjs.org/docs/reconciliation.html#recursing-on-children)
+  
+  - [Key](https://ko.reactjs.org/docs/lists-and-keys.html)
+  
   - [왜 Virtual Dom 인가](https://velopert.com/3236)
-  - [React 인가 Vue 인가](https://joshua1988.github.io/web_dev/vue-or-react/)
-  - [React를 Vue.js보다 선호하는 이유](https://ahnheejong.name/articles/why-i-prefer-react-over-vuejs/)
+  
+  - [Reflow 와 Repaint](https://webclub.tistory.com/346)
+  
+    > 1. 변경이 잦은 요소는 Absolute에 배치합니다.
+    >
+    > 2. 스타일 변경은 한번에 묶어서 처리합니다.
+    >
+    > 3. 테이블은 점진적 배치에서 제외되기 때문에 사용을 지양합니다.
+    >
+    > 4. CSS에서의 JS표현식을 피합니다. (ex. 3항 연산자 등)
+    >
+    > 5. 스타일을 최적화 합니다. (ex. css 최소화)
+    >
+    >    
+  
   - [성능 최적화 공식 페이지](https://ko.reactjs.org/docs/optimizing-performance.html)
-  - functional 과 class 차이
+  
+  - [왜 라이브러리인가](https://develoger.com/is-reactjs-library-or-a-framework-a14786f681a0)
+  
+    > - 리액트는 템플리이나 디자인 패턴을 가지고 있지 않다. 어플리케이션의 구조에 전혀 관여하지 않는다.
+    > - 라이프 사이클이 제어의 역전을 나타낸다고 할 수도 있지만, 이정도는 jQuery도 가능 했으며 결과론적으로 봤을 때 구조적은 해결해 주지 않는다.
+    > - 본질적인 프레임 워크는 코드 수준에서 구조적 및 아키텍쳐적 문제를 해결한다. 하지만 리액트는 전혀 아니다.
+  
+  - [라이프 사이클](https://velopert.com/3631)
+  
+    - [will 을 대거 삭제한 이유](https://velog.io/@kyusung/리액트-교과서-컴포넌트와-라이프사이클-이벤트)
+  
+      > - 초기 렌더링을 제어하는 방법이 많아져서 혼란이 됨.
+      > - 오류 처리 인터럽트 동작시에 메모리 누수 발생할 수 있음.
+      > - React 커뮤니티에서도 가장 혼란을 야기하는 라이프 사이클
+  
+  - [함수형과 클래스형](https://overreacted.io/ko/how-are-function-components-different-from-classes/)
+  
+    > - Props는 리액트에서 불변(immutable) 값이다. **하지만, `this`는 \*변경 가능하며(mutable)\*, 조작할 수 있다.**
+    >
+    >   그것이 `this`가 클래스에서 존재하는 목적이다. 리액트가 시간이 지남에 따라 이를 변경하기 때문에 `render`나 라이프사이클 메서드를 호출할 때 업데이트된 값들을 읽어 올 수 있는 것이다.
+  
+  - [React 인가 Vue 인가](https://joshua1988.github.io/web_dev/vue-or-react/)
+  
+    > 리액트는 템플릿을 문자열로 표현하지 않으므로 여러 정보를 잃어버리지 않는다.
+  
+  - [React를 Vue.js보다 선호하는 이유](https://ahnheejong.name/articles/why-i-prefer-react-over-vuejs/)
+  
+    
+  
 - SPA
   - [단점](https://m.mkexdev.net/374)
     - SPA 속도 저하: 코드 스플릿으로 해결~
     - [vs MPA](https://babytiger.netlify.com/posts/SPA/)                                                                                                                                                                                              
 
 
-- Apollo
+- [Apollo](https://d2.naver.com/helloworld/4245995)
 
-- styled Component
-
-- react-virtualized
-
-- Intersection-observer
 
 ### backend
 
@@ -55,18 +106,17 @@
   > 이벤트루프만 blocking안되게 만들면, 워커들은 알아서 일나눠가지고 돌아간다.
   >
   
+  - [Node 와 express](https://ithub.tistory.com/32)
   - 멀티코어
-    
 
-
-- mysql2
 
 - sequelize
   
   - ORM
-  
+    - [장단점](https://gmlwjd9405.github.io/2019/02/01/orm.html)
 - express
 
+  - [Express Koa Hapi](https://avengersrhydon1121.tistory.com/101)
 - [Graphql](https://tech.kakao.com/2019/08/01/graphql-basic/)
   - Rest
     - https://tv.naver.com/v/2292653
@@ -74,7 +124,19 @@
 
 
 
-# CS 기본기
+# 내 기술 스택
+
+[this](https://poiemaweb.com/js-this)
+
+> 자바스크립트의 경우 함수 호출 방식에 의해 [this](https://poiemaweb.com/js-this)에 바인딩할 어떤 객체가 동적으로 결정된다. 다시 말해, 함수를 선언할 때 this에 바인딩할 객체가 정적으로 결정되는 것이 아니고, **함수를 호출할 때 함수가 어떻게 호출되었는지에 따라** this에 바인딩할 객체가 동적으로 결정된다.
+
+> function Person(name) {  // new없이 호출하는 경우, 전역객체에 name 프로퍼티를 추가
+>   this.name = name;
+>  };
+
+[this arrow function](https://poiemaweb.com/es6-arrow-function)
+
+> 화살표 함수는 함수를 선언할 때 this에 바인딩할 객체가 정적으로 결정된다. 동적으로 결정되는 일반 함수와는 달리 **화살표 함수의 this 언제나 상위 스코프의 this를 가리킨다.** 이를 **Lexical this**라 한다. 
 
 [프레임 vs 라이브러리](https://webclub.tistory.com/458) + 제어의 역전
 
@@ -87,6 +149,10 @@
 [Common JS & AMD](https://d2.naver.com/helloworld/12864)
 
 [ECMAScript](https://jayzzz.tistory.com/63)
+
+[ES6](https://blog.asamaru.net/2017/08/14/top-10-es6-features/)
+
+[ES5](https://k39335.tistory.com/81)
 
 Polyfill: 기술 차이를 연결해주는 것. 바벨은 폴리필을 수행하는 라이브러리 중 하나
 
@@ -102,7 +168,7 @@ HTML5
 
 [stack heap data](https://dsnight.tistory.com/50)
 
-[async await vs Promise]
+[async await vs Promise](https://medium.com/better-programming/should-i-use-promises-or-async-await-126ab5c98789)
 
 [컴파일과 인터프리팅](https://seodh007.tistory.com/entry/인터프리터언어-와-컴파일언어의-뜻)
 
@@ -112,11 +178,23 @@ HTML5
 
 [Promise vs async await](https://medium.com/better-programming/should-i-use-promises-or-async-await-126ab5c98789)
 
+[왜 노드에서는 import 를 못쓸까](https://www.daleseo.com/js-babel-node/)
 
+> 노드는 CommonJs 의 모듈 시스템을 사용하기 때문
 
+[노드의 모듈 공식](https://nodejs.org/api/esm.html)
 
+[Stack Heap Data](https://dsnight.tistory.com/50)
 
-# 성능 최적화
+[cors](https://zamezzz.tistory.com/137)
+
+[응집도와 결합도](https://lazineer.tistory.com/93)
+
+[쿠키 세션](https://sdevstudy.tistory.com/27)
+
+[인터넷 구조](https://wiki.developer.mozilla.org/ko/docs/Learn/Common_questions/How_does_the_Internet_work)
+
+#  성능 최적화
 
 - [브라우저 성능 최적화 방법](https://ui.toast.com/fe-guide/ko_PERFORMANCE/)
 - [리액트 성능 최적화 방법](https://ko.reactjs.org/docs/optimizing-performance.html)
@@ -147,7 +225,7 @@ HTML5
 
 - **windowing 기법 적용**
 
-  - 초기 렌더링 속도를 개선할 수 있었다. `display:none` 설정을 추가 하여도 초기 렌더링 속도가 크게 차이가 없다는 점에서, 초기 돔 트리를 구성하는 부분에서 병목 현상이 발생하였음을 알 수 있었다.
+  - 초기 렌더링 속도를 개선할 수 있었다. `display:none` 설정을 추가 하여도 초기 렌더링 속도가 크게 차이가 없다는 점(2.7 -> 2.6)에서, 초기 돔 트리를 구성하는 부분에서 병목 현상이 발생하였음을 알 수 있었다.
 
 ## 안한 것
 
@@ -165,3 +243,20 @@ HTML5
 
 - 캐싱 전략
   - 메인 페이지 접속 이후 상세 페이지 접근시 캐시 참조
+
+
+
+# 이외
+
+## 힘들었던 점
+
+- 공부 시간의 부족
+- 팀원과의 방향성 
+
+
+
+## 1분 자기 소개
+
+​	안녕하십니까 저는 프론트엔드 개발자를 목표로하고 있는 남정호입니다. 저는 웹 개발자가 되기 위해 지난 여름 부스트 캠프 챌리지와 멤버십에 참여하였습니다. 챌린지 과정에서는 js 의 동작 원리와 기본 문법을 익혔으며 멤버십에서는 리액트와 노드를 이용한 프로젝트 관리 전반에 대햐여 배웠습니다. 특히 멤버십에서는 팀을 이루어 두 달간 프로젝트를 진행하며 실력을 키울 수 있었습니다. 
+
+​	제가 속한 팀의 주제는 인스타그램의 클론이었습니다. 저는 팀에서 프론트엔드 성능 개선을 주로 맡았습니다. 인메모리 캐싱을 이용한 요청 최소화, 무한 스크롤, 윈도우잉 기법을 이용한 렌더링 부하 억제를 하였습니다.
