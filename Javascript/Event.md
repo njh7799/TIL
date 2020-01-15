@@ -7,36 +7,38 @@
  상위 요소에 이벤트를 붙였을 때, 하위 요소들에게도 이벤트가 적용되는 것을 의미한다.
 
 ```html
-<div id="one">
-	<div id="two">
-		<div id="three">
+<div id="yellow">
+	<div id="green">
+		<div id="blue">
 		</div>
 	</div>
 </div>
 ```
 
 ```css
-#one{
+#yellow{
   width:300px;
   height:300px;
-  background-color:blue;
+  background-color:yellow;
 }
 
-#two{
+#green{
   width:200px;
   height:200px;
-  background-color:red;
+  background-color:green;
 }
 
-#three{
+#blue{
   width:100px;
   height:100px;
-  background-color:yellow;
+  background-color:blue;
 }
 ```
 
 ```js
-document.getElementById("one").addEventListener("click", ()=>{console.log(1)})
+document.getElementById("yellow").addEventListener("click", ()=>{console.log("yellow")});
+document.getElementById("green").addEventListener("click", ()=>{console.log("green")});
+document.getElementById("blue").addEventListener("click", ()=>{console.log("blue")})
 ```
 
 
