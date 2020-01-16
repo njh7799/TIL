@@ -7,7 +7,21 @@
 
 - [React](https://velopert.com/3612) (프레임워크 or 모듈 정보 포함)
   
-  > ​	**장점 요약**
+  - [동작 방식](https://medium.com/@gethylgeorge/how-virtual-dom-and-diffing-works-in-react-6fc805f9f84e)
+  - [네이버 D2 발 자료](https://d2.naver.com/helloworld/9297403)
+  
+  > **re-rendering 동작 과정**
+  >
+  > 1. setState 를 이용하여 state 를 변경시킨다. 이 때 setState 가 호출되면  해당 컴포넌트를 변경 대상 컴포넌트(dirty component)로 등록한다.
+  > 2. 이제 컴포넌트를 업데이트 시키자. batch 업데이트에서는 dirty한 컴포넌트들이 있는지 확인한다.
+  > 3. 해당 컴포넌트 이하의 컴포넌트들이 가상돔에 빌드 된다. 이 때 shouldComponentUpdate가 false 이면 해당 컴포넌트는 가상돔에 업데이트 되지 않는다.
+  > 4. 직전의 가상돔과 현재의 가상돔을 비교한여 갱신한다. 휴리스틱 알고리즘을 사용하며 이 과정을 재조정이라고 한다. 재 조정은 두 노드의 엘리먼트 타입을 비교한다. 같으면 속성 값만 갱신하며 다를 경우 이전 트리를 버리고 새로운 트리를 구축한다.
+  > 5. 재조정 후 수정 대상이 되는 값들을 한 번에 처리
+  >
+  > * Key 값이 없으면 재조정시, 속성값등을 다 바꾸어 주어야 함.
+  > * Render is where the Virtual DOM gets re-build and the diffing happens
+  
+  > **장점 요약**
   >
   > 1. **Dom 관리와 상태 관리**
   >
@@ -70,6 +84,8 @@
     >
     >   그것이 `this`가 클래스에서 존재하는 목적이다. 리액트가 시간이 지남에 따라 이를 변경하기 때문에 `render`나 라이프사이클 메서드를 호출할 때 업데이트된 값들을 읽어 올 수 있는 것이다.
   
+  - [Hooks의 의존성](https://rinae.dev/posts/a-complete-guide-to-useeffect-ko#리액트에게-의존성으로-거짓말하지-마라)
+  
   - [React 인가 Vue 인가](https://joshua1988.github.io/web_dev/vue-or-react/)
   
     > 리액트는 템플릿을 문자열로 표현하지 않으므로 여러 정보를 잃어버리지 않는다.
@@ -107,18 +123,36 @@
   >
   
   - [Node 와 express](https://ithub.tistory.com/32)
-  - 멀티코어
+  
+  - [왜 노드에서는 import 를 못쓸까](https://www.daleseo.com/js-babel-node/)
+  
+    > 노드는 CommonJs 의 모듈 시스템을 사용하기 때문
 
 
 - sequelize
   
   - ORM
     - [장단점](https://gmlwjd9405.github.io/2019/02/01/orm.html)
+  
 - express
 
   - [Express Koa Hapi](https://avengersrhydon1121.tistory.com/101)
+  
 - [Graphql](https://tech.kakao.com/2019/08/01/graphql-basic/)
-  - Rest
+  
+  > Graph QL(이하 gql)은 Structed Query Language(이하 sql)와 마찬가지로 쿼리 언어입니다
+  >
+  > sql은 **데이터베이스 시스템**에 저장된 데이터를 효율적으로 가져오는 것이 목적이고, gql은 **웹 클라이언트**가 데이터를 서버로 부터 효율적으로 가져오는 것이 목적입니다.
+  >
+  > gql이 제공하는 추가 기능 덕분에 백엔드 프로그래머와 프론트엔드 프로그래머의 협업 방식 에도 영향을 줍니다. 이전 협업 방식(REST API)에서는 프론트앤드 프로그래머는 백앤드 프로그래머가 작성하여 전달하는 API의 request / response의 형식에 의존하게 됩니다. 그러나, gql을 사용한 방식에 서는 이러한 의존도가 많이 사라집니다. 다만 여전히 데이터 schema에 대한 협업 의존성은 존재합니다.
+  >
+  > **Resolver**
+  >
+  > gql에서 데이터를 가져오는 구체적인 과정은 resolver(이하 리졸버)가 담당한다.
+  >
+  > gql 쿼리에서는 각각의 필드마다 함수가 하나씩 존재 한다고 생각하면 됩니다. 이 함수는 다음 타입을 반환합니다. 이러한 각각의 함수를 리졸버(resolver)라고 합니다.
+  
+  - [Rest](https://gmlwjd9405.github.io/2018/09/21/rest-and-restful.html)
     - https://tv.naver.com/v/2292653
     - http://slides.com/eungjun/rest#/
 
@@ -168,8 +202,6 @@ HTML5
 
 [stack heap data](https://dsnight.tistory.com/50)
 
-[async await vs Promise](https://medium.com/better-programming/should-i-use-promises-or-async-await-126ab5c98789)
-
 [컴파일과 인터프리팅](https://seodh007.tistory.com/entry/인터프리터언어-와-컴파일언어의-뜻)
 
 [Ajax](https://coding-factory.tistory.com/143)
@@ -177,10 +209,6 @@ HTML5
 [Run time]
 
 [Promise vs async await](https://medium.com/better-programming/should-i-use-promises-or-async-await-126ab5c98789)
-
-[왜 노드에서는 import 를 못쓸까](https://www.daleseo.com/js-babel-node/)
-
-> 노드는 CommonJs 의 모듈 시스템을 사용하기 때문
 
 [노드의 모듈 공식](https://nodejs.org/api/esm.html)
 
@@ -192,7 +220,17 @@ HTML5
 
 [쿠키 세션](https://sdevstudy.tistory.com/27)
 
+[쿠키 세션 로컬 스토리지](https://github.com/yangshun/front-end-interview-handbook/blob/master/Translations/Korean/questions/html-questions.md#cookie-sessionstorage-localstorage-사이의-차이점을-설명하세요)
+
+[쿠키 세션 로그인](https://tansfil.tistory.com/58)
+
 [인터넷 구조](https://wiki.developer.mozilla.org/ko/docs/Learn/Common_questions/How_does_the_Internet_work)
+
+바벨: 트랜스 파일러
+
+[웹팩](http://jeonghwan-kim.github.io/js/2017/05/15/webpack.html)
+
+
 
 #  성능 최적화
 
@@ -259,4 +297,4 @@ HTML5
 
 ​	안녕하십니까 저는 프론트엔드 개발자를 목표로하고 있는 남정호입니다. 저는 웹 개발자가 되기 위해 지난 여름 부스트 캠프 챌리지와 멤버십에 참여하였습니다. 챌린지 과정에서는 js 의 동작 원리와 기본 문법을 익혔으며 멤버십에서는 리액트와 노드를 이용한 프로젝트 관리 전반에 대햐여 배웠습니다. 특히 멤버십에서는 팀을 이루어 두 달간 프로젝트를 진행하며 실력을 키울 수 있었습니다. 
 
-​	제가 속한 팀의 주제는 인스타그램의 클론이었습니다. 저는 팀에서 프론트엔드 성능 개선을 주로 맡았습니다. 인메모리 캐싱을 이용한 요청 최소화, 무한 스크롤, 윈도우잉 기법을 이용한 렌더링 부하 억제를 하였습니다.
+​	제가 속한 팀의 주제는 인스타그램의 클론이었습니다. 저는 팀에서 프론트엔드 성능 개선을 주로 맡았습니다. 인메모리 캐싱을 이용한 요청 최소화, 무한 스크롤, 윈도우잉 기법을 이용한 렌더링 부하 억제를 시도하였습니다.
