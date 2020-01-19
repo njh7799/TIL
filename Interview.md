@@ -101,6 +101,7 @@
 
 
 - [Apollo](https://d2.naver.com/helloworld/4245995)
+- [][https://velog.io/@rjs1197/SSR%EA%B3%BC-CSR%EC%9D%98-%EC%B0%A8%EC%9D%B4%EB%A5%BC-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90][SSR vs CSR](https://velog.io/@rjs1197/SSR과-CSR의-차이를-알아보자)
 
 
 ### backend
@@ -290,6 +291,8 @@ HTML5
 
 - 공부 시간의 부족
 - 팀원과의 방향성 
+
+## 왜 프론트엔드 개발자가 되고 싶은지
 
 
 
