@@ -66,3 +66,11 @@ TRUNCATE TABLE tablename
  mysqldump -u {user} -p DATABASE_NAME > backup.sql
 ```
 
+
+
+## 원격 접속
+
+```
+
+```
+
