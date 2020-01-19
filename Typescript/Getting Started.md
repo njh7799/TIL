@@ -23,3 +23,7 @@ https://typescript-kr.github.io/
 마지막 경우를 보면, 입력이 `input` 이 `string` 이기 때문에 입력까지는 정상적으로 들어간다. 하지만 `type` 이 `number`인 a 에게 type이 `string` 인 `input`을 대입하려 하였기 때문에 에러가 발생한다.
 
 
+
+## 제너릭
+
+https://hyunseob.github.io/2017/01/14/typescript-generic/
