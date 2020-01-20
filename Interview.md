@@ -101,7 +101,7 @@
 
 
 - [Apollo](https://d2.naver.com/helloworld/4245995)
-- [][https://velog.io/@rjs1197/SSR%EA%B3%BC-CSR%EC%9D%98-%EC%B0%A8%EC%9D%B4%EB%A5%BC-%EC%95%8C%EC%95%84%EB%B3%B4%EC%9E%90][SSR vs CSR](https://velog.io/@rjs1197/SSR과-CSR의-차이를-알아보자)
+- [SSR vs CSR](https://velog.io/@rjs1197/SSR과-CSR의-차이를-알아보자)
 
 
 ### backend
@@ -231,12 +231,21 @@ HTML5
 
 [웹팩](http://jeonghwan-kim.github.io/js/2017/05/15/webpack.html)
 
+- 동작 원리
 
+[바벨](https://moonformeli.tistory.com/28)
+
+- 동작 원리
+
+[개발자 도구 Performance & Network]
+
+[부캠 Lucas 자료 정리](https://lucas.codesquad.kr/course/boost-4-membership/)
 
 #  성능 최적화
 
 - [브라우저 성능 최적화 방법](https://ui.toast.com/fe-guide/ko_PERFORMANCE/)
 - [리액트 성능 최적화 방법](https://ko.reactjs.org/docs/optimizing-performance.html)
+- [리액트 성능 최적화 추가](https://blog.bitsrc.io/10-ways-to-optimize-your-react-apps-performance-e5e437c9abce)
 
 
 
