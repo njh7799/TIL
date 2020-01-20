@@ -35,7 +35,7 @@
         - authorization grant 의 방법으로는 authorization code, implicit, resource owner password credentials, 그리고 client credentials 가 있다.
 
 
-   - 리소스 서버가 리소스 오너의 웹 브라우저를 `http://localhost:4000/home?code={code}`로 이동시킨다. 
+   - 리소스 서버가 리소스 오너의 웹 브라우저를 Client (`http://localhost:4000/home?code={code}`)로 이동시킨다. 
 
    - {code}가 authorization code이다.
 
@@ -43,7 +43,7 @@
 
 (C) **Authorization Grant**
 
-   - 클라이언트가 리소스 서버에게 토큰을 받기 위해`https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${authorizationCode}` 로 POST 요청을 보낸다.
+   - 클라이언트가 리소스 서버에게 토큰을 받기 위해`https://github.com/login/oauth/access_token?client_id=${clientID}&client_secret=${clientSecret}&code=${authorizationCode}` 로 요청을 보낸다.
      
 
 (D) **Access Token**
