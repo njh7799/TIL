@@ -227,17 +227,9 @@ HTML5
 
 [인터넷 구조](https://wiki.developer.mozilla.org/ko/docs/Learn/Common_questions/How_does_the_Internet_work)
 
-바벨: 트랜스 파일러
-
 [웹팩](http://jeonghwan-kim.github.io/js/2017/05/15/webpack.html)
 
-- 동작 원리
-
 [바벨](https://moonformeli.tistory.com/28)
-
-- 동작 원리
-
-[개발자 도구 Performance & Network]
 
 [부캠 Lucas 자료 정리](https://lucas.codesquad.kr/course/boost-4-membership/)
 
