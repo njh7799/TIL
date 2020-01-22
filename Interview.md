@@ -132,8 +132,7 @@
 
 - sequelize
   
-  - ORM
-    - [장단점](https://gmlwjd9405.github.io/2019/02/01/orm.html)
+  - [ORM](https://gmlwjd9405.github.io/2019/02/01/orm.html)
   
 - express
 
@@ -183,9 +182,24 @@
 
 [Common JS & AMD](https://d2.naver.com/helloworld/12864)
 
+> AMD가 목표로 하는 것은 필요한 모듈을 네트워크를 이용해 내려받아야 하는 브라우저 환경에서도 모듈을 사용할 수 있도록 표준을 만드는 일이다. 
+>
+> 필요한 파일이 모두 로컬 디스크에 있어 바로 불러 쓸 수 있는 상황, 즉 서버사이드에서는 CommonJS 명세가 AMD 방식보다 간결하다. 반면 필요한 파일을 네트워크를 통해 내려받아야 하는 브라우저와 같은 환경에서는 AMD가 CommonJS보다 더 유연한 방법을 제공한다.
+
 [ECMAScript](https://jayzzz.tistory.com/63)
 
 [ES6](https://blog.asamaru.net/2017/08/14/top-10-es6-features/)
+
+> 1. 기본 매개 변수 (Default Parameters)
+> 2. 템플릿 리터럴 (Template Literals)
+> 3. 멀티 라인 문자열 (Multi-line Strings)
+> 4. 비구조화 할당 (Destructuring Assignment)
+> 5. 향상된 객체 리터럴 (Enhanced Object Literals)
+> 6. 화살표 함수 (Arrow Functions)
+> 7. Promises
+> 8. 블록 범위 생성자 Let 및 Const (Block-Scoped Constructs Let and Const)
+> 9. 클래스 (Classes)
+> 10. 모듈 (Modules)
 
 [ES5](https://k39335.tistory.com/81)
 
@@ -206,6 +220,10 @@ HTML5
 [컴파일과 인터프리팅](https://seodh007.tistory.com/entry/인터프리터언어-와-컴파일언어의-뜻)
 
 [Ajax](https://coding-factory.tistory.com/143)
+
+>  Ajax를 한마디로 정의하자면 JavaScript를 사용한 비동기 통신, 클라이언트와 서버간에 XML 데이터를 주고받는 기술이라고 할 수 있겠습니다.
+>
+>  ajax는 html 페이지 전체가아닌 일부분만 갱신할수 있도록 XML HttpRequest객체를 통해 서버에 request를 합니다.
 
 [Run time]
 
@@ -229,7 +247,21 @@ HTML5
 
 [웹팩](http://jeonghwan-kim.github.io/js/2017/05/15/webpack.html)
 
+> **엔트리**: 의존성 그래프의 시작점. 웹팩은 엔트리를 통해서 필요한 모듈을 로딩한고 하나의 파일로 묶는다.
+>
+> **아웃풋**: 번들된 결과물을 처리할 위치
+>
+> **로더**:비 자바스크립트 파일을 웹팩이 이해하게끔 변경. 파일단위로 처리
+>
+> **플러그인**: 번들된 결과물을 처리(예시. Uglify)
+
 [바벨](https://moonformeli.tistory.com/28)
+
+> **파싱**: 소스 코드로 부터 추상 구문 트리를 만듦. **babel-parser** 라는 이름의 플러그인이 수행
+>
+> **변환**: AST를 브라우저의 환경에 맞게 AST를 변환.  **preset/plugin** 이 **babel-traverse**를 이용하여 수행
+>
+> **코드 생성**: 실제 브라우저의 환경에 맞는 코드를 생성. **babel-generator** 가 수행
 
 [부캠 Lucas 자료 정리](https://lucas.codesquad.kr/course/boost-4-membership/)
 
