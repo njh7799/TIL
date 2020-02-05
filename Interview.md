@@ -1,5 +1,7 @@
 ## 기본 개념 정리
 
+⭐️ [브라우저 렌더링 과정 구체적](https://blog.logrocket.com/how-browser-rendering-works-behind-the-scenes-6782b0e8fb10/)
+
 [프레임 vs 라이브러리](https://webclub.tistory.com/458) + 제어의 역전
 
 [의존성 주입](https://dayzen1258.tistory.com/entry/의존성-주입이란-DI)
