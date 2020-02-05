@@ -4,6 +4,7 @@
 
 - [NextJS, A JavaScript Framework for building next generation SPA](https://www.slideshare.net/dotPKG/nextjs-a-javascript-framework-for-building-next-generation-spa)
 - [The Benefits of Server Side Rendering Over Client Side Rendering](https://medium.com/walmartlabs/the-benefits-of-server-side-rendering-over-client-side-rendering-5d07ff2cefe8)
+- [React SSR](https://alligator.io/react/server-side-rendering/)
 
 <br/>
 
@@ -25,6 +26,4 @@
 <br/>
 
 ### NextJS
-
-- [Next.js: The React Framework](https://www.youtube.com/watch?v=KC7j3DtOnYE)
 
