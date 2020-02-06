@@ -1,6 +1,6 @@
 ## 기본 개념 정리
 
-⭐️ [브라우저 렌더링 과정 구체적](https://blog.logrocket.com/how-browser-rendering-works-behind-the-scenes-6782b0e8fb10/)
+⭐️ [브라우저 렌더링 과정](https://blog.logrocket.com/how-browser-rendering-works-behind-the-scenes-6782b0e8fb10/)
 
 [프레임 vs 라이브러리](https://webclub.tistory.com/458) + 제어의 역전
 
@@ -37,6 +37,8 @@ HTML5
 [쿠키 세션 로그인](https://tansfil.tistory.com/58)
 
 [인터넷 구조](https://wiki.developer.mozilla.org/ko/docs/Learn/Common_questions/How_does_the_Internet_work)
+
+![image](https://user-images.githubusercontent.com/40619551/73901169-5b95cf80-48d5-11ea-8dcf-558d23464dfa.png)
 
 
 
