@@ -54,6 +54,10 @@ HTML5
 
 [this](https://poiemaweb.com/js-this)
 
+[this arrow function](https://poiemaweb.com/es6-arrow-function)
+
+> 화살표 함수는 함수를 선언할 때 this에 바인딩할 객체가 정적으로 결정된다. 동적으로 결정되는 일반 함수와는 달리 **화살표 함수의 this 언제나 상위 스코프의 this를 가리킨다.** 이를 **Lexical this**라 한다. 
+
 [Common JS & AMD](https://d2.naver.com/helloworld/12864)
 
 > AMD가 목표로 하는 것은 필요한 모듈을 네트워크를 이용해 내려받아야 하는 브라우저 환경에서도 모듈을 사용할 수 있도록 표준을 만드는 일이다. 
@@ -84,10 +88,6 @@ Polyfill: 기술 차이를 연결해주는 것. 바벨은 폴리필을 수행하
 > function Person(name) {  // new없이 호출하는 경우, 전역객체에 name 프로퍼티를 추가
 > this.name = name;
 > };
-
-[this arrow function](https://poiemaweb.com/es6-arrow-function)
-
-> 화살표 함수는 함수를 선언할 때 this에 바인딩할 객체가 정적으로 결정된다. 동적으로 결정되는 일반 함수와는 달리 **화살표 함수의 this 언제나 상위 스코프의 this를 가리킨다.** 이를 **Lexical this**라 한다. 
 
 [Ajax](https://coding-factory.tistory.com/143)
 
