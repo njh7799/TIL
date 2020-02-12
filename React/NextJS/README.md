@@ -21,12 +21,14 @@
 
 - [React SSR](https://alligator.io/react/server-side-rendering/)
   => css 먹이기가 힘듦
-- [React Router SSR](https://alligator.io/react/react-router-ssr/)
-- [styled components](https://styled-components.com/docs/advanced)
+- [styled components](https://styled-components.com/docs/advanced#server-side-rendering)
 - [The simple guide to server-side rendering React with styled-components](https://medium.com/styled-components/the-simple-guide-to-server-side-rendering-react-with-styled-components-d31c6b2b8fbf)
   => 심플한건 좋은데 js가 안먹음 & build된 파일을 사용하지 않음
-- [초기 상태 관리](https://redux.js.org/recipes/server-rendering/)
-- [라우터 연결](https://tylermcginnis.com/react-router-server-rendering/)
+- [Redux로 초기 상태 관리](https://redux.js.org/recipes/server-rendering/)
+- 라우터 설정
+  - [React Router SSR](https://alligator.io/react/react-router-ssr/)
+  - [초기 상태 관리 & 라우터 연결](https://tylermcginnis.com/react-router-server-rendering/)
+- [타입 스크립트 설정](https://github.com/kkweon/SSR-React-TSX)
 
 <br/>
 
