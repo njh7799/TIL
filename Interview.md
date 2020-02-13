@@ -108,13 +108,12 @@ Polyfill: 기술 차이를 연결해주는 것. 바벨은 폴리필을 수행하
 
 > **re-rendering 동작 과정**
 >
-> 1. setState 를 이용하여 state 를 변경시킨다. 이 때 setState 가 호출되면  해당 컴포넌트를 변경 대상 컴포넌트(dirty component)로 등록한다.
-> 2. 이제 컴포넌트를 업데이트 시키자. batch 업데이트에서는 dirty한 컴포넌트들이 있는지 확인한다.
-> 3. 해당 컴포넌트 이하의 컴포넌트들이 가상돔에 빌드 된다. 이 때 shouldComponentUpdate가 false 이면 해당 컴포넌트는 가상돔에 업데이트 되지 않는다.
+> 1. setState 를 이용하여 state 를 변경시킨다. 이 때 setState 가 호출되면  해당 컴포넌트를 변경 대상 컴포넌트(dirty component)로 마킹한다.
+> 2. **가상 돔 갱신** React의 batch update가 수행한다. dirty한 컴포넌트들과 하위 노드들을 업데이트한다. 이 때 shouldComponentUpdate가 false 이면 해당 컴포넌트는 가상돔에 업데이트 되지 않는다.
 > 4. 직전의 가상돔과 현재의 가상돔을 비교한여 갱신한다. 휴리스틱 알고리즘을 사용하며 이 과정을 재조정이라고 한다. 재 조정은 두 노드의 엘리먼트 타입을 비교한다. 같으면 속성 값만 갱신하며 다를 경우 이전 트리를 버리고 새로운 트리를 구축한다.
 > 5. 재조정 후 수정 대상이 되는 값들을 한 번에 처리
->
-> * Key 값이 없으면 재조정시, 속성값등을 다 바꾸어 주어야 함.
+> 
+>* Key 값이 없으면 재조정시, 속성값등을 다 바꾸어 주어야 함.
 > * Render is where the Virtual DOM gets re-build and the diffing happens
 
 > **장점 요약**
