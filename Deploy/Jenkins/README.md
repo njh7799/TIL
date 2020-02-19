@@ -48,9 +48,9 @@ jenkins/jenkins is the official repository on Docker Hub for the Jenkins Project
 
    
 
-6. http://127.0.0.1:8080/ 를 연다
+6. http://127.0.0.1:8080/ 를 연다.
 
-7. 컨테
+7. 위의 비밀번호를 입력하고 주욱 수행한다.
 
 ### Ref
 
