@@ -54,7 +54,7 @@ jenkins/jenkins is the official repository on Docker Hub for the Jenkins Project
 
 ### Ref
 
-- [젠킨스 버전 올리기](https://batmat.net/2018/09/07/how-to-run-and-upgrade-jenkins-using-the-official-docker-image/)
+- [도커 이미지로 젠킨스 설치](https://batmat.net/2018/09/07/how-to-run-and-upgrade-jenkins-using-the-official-docker-image/)
 - [플러그인 설치](https://shy-blg.tistory.com/entry/Jenkins젠킨스-플러그인-직접-설치-방법)
 - [docker를 이용한 CI 구축 연습하기 (젠킨스, 슬랙)](https://jojoldu.tistory.com/139)
 - [젠킨스 파이프라인 정리 - 1. 파이프라인 샘플 만들기](https://jojoldu.tistory.com/355)
