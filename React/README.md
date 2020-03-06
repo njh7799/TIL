@@ -1,5 +1,9 @@
 # React
 
+## 강의
+
+- [벨로퍼트](https://react.vlpt.us/)
+
 ## Webpack 설정부터 직접 해보기
 
 ### Ref
