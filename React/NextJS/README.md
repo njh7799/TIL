@@ -1,5 +1,19 @@
 
 
+## 환경변수
+
+```js
+module.exports = {
+  env: {
+    customKey: 'my-value',
+  },
+}
+```
+
+https://nextjs.org/docs/api-reference/next.config.js/environment-variables
+
+
+
 ## Documents
 
 ### SSR
