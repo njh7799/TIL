@@ -1,4 +1,4 @@
-# [cors]( https://www.npmjs.com/package/cors )
+# [cors](https://www.npmjs.com/package/cors)
 
 보안 설정하는 패키지
 
@@ -73,7 +73,7 @@ app.listen(80, function () {
 
 ### Configuring CORS w/ Dynamic Origin
 
-옵션 객체의 내부 구조가 이해가 안되지만, 대충 화이트 리스트에 포함된 아이들에게는 열려 있다는 뜻인듯하다.
+화이트 리스트에 포함된 url만 허용한다.
 
 ```js
 var express = require('express')
@@ -83,7 +83,7 @@ var app = express()
 var whitelist = ['http://example1.com', 'http://example2.com']
 var corsOptions = {
   origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
+    if (whitelist.indexOf(origin) !== -1) { // 요청을 보낸 주소가 whitelist 에 있다면
       callback(null, true)
     } else {
       callback(new Error('Not allowed by CORS'))
