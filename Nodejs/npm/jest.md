@@ -1,14 +1,24 @@
 
 
-## [타입스크립트에서의 jest](https://www.npmjs.com/package/ts-jest)
+# [타입스크립트에서의 jest](https://www.npmjs.com/package/ts-jest)
 
-### 설치
+## 설치
 
 ```shell
 yarn add -D jest ts-jest @types/jest
+yarn add -D @babel/preset-env @babel/preset-typescript babel-plugin-transform-class-properties
 ```
 
-### 예시
+## 바벨 설정
+```shell
+{
+  "presets": ["@babel/preset-typescript", "@babel/preset-env"],
+  "plugins": ["transform-class-properties"]
+}
+```
+
+
+## 예시
 
 ```js
 import convertToTwoDigits from './convertToTwoDigits';
