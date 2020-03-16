@@ -2,6 +2,8 @@
 
 ⭐️ [브라우저 렌더링 과정](https://blog.logrocket.com/how-browser-rendering-works-behind-the-scenes-6782b0e8fb10/)
 
+- [자바스크립트 async defer](https://blog.asamaru.net/2017/05/04/script-async-defer/)
+
 [프레임 vs 라이브러리](https://webclub.tistory.com/458) + 제어의 역전
 
 [의존성 주입](https://dayzen1258.tistory.com/entry/의존성-주입이란-DI)
