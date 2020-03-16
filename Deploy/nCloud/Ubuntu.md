@@ -12,12 +12,6 @@ vim /etc/hosts
 
 ## Update apt
 
-0. Update apt
-
-```bash
-sudo apt-get update
-```
-
 1.  Install the dependencies 
 
 ```bash
@@ -54,6 +48,16 @@ cat << 'EOF' > /etc/default/locale
 LANG="ko_KR.UTF-8"
 LANGUAGE="ko_KR:ko:en_US:en"
 EOF
+```
+
+
+
+## Docker setting
+
+install
+
+```shell
+curl -fsSL https://get.docker.com/ | sudo sh 
 ```
 
 
