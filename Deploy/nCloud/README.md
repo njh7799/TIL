@@ -29,7 +29,7 @@
 
 위 사진에서 관리자 비밀번호 확인을 누르면 확인할 수 있다.
 
-3. ssh 접속한다.
+3. ssh 접속한다. (공인 IP로 접속)
 ![image](https://user-images.githubusercontent.com/40619551/66266280-96bbbf80-e85d-11e9-92d5-f67e158a1891.png)
 비밀번호는 위에서 확인 했을 것이다.
 
