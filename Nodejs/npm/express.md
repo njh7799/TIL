@@ -72,6 +72,28 @@ npm install
 npm start
 ```
 
+## 기본
+
+```js
+const express = require('express');
+
+const PORT = 3000;
+const app = express();
+
+app.get('/', (req, res) => {
+  return res.send('Hi');
+});
+
+app.listen(PORT, () => {
+  console.log(`😎 Server is listening on port ${PORT}`);
+});
+
+```
+
+
+
+
+
 ## [미들웨어  사용](https://expressjs.com/en/starter/basic-routing.html)
 
 - use 메소드와 METHOD 메소드
