@@ -13,13 +13,13 @@
 3. 컨테이너를 만들고 바로 실행시킨다.
 
    ```shell
-   docker run --name jenkins-test --detach -p 50000:50000 -p 8080:8080 jenkins/jenkins
+   docker run --name jenkins --detach -p 50000:50000 -p 8080:8080 jenkins/jenkins
    ```
 
 4. 컨테이너에 들어간다.
 
    ```shell
-   docker exec -it jenkins-test /bin/bash
+   docker exec -it jenkins /bin/bash
    ```
 
 5. 컨테이너를 열고 젠킨스의 비밀번호를 찾는다.
@@ -50,6 +50,14 @@ build 스크립트가 실행되는 환경은 타겟 깃의 루트 디렉토리�
 ## CD
 
 [link](https://setyourmindpark.github.io/2017/04/22/jenkins/jenkins-2/)를 참고하여 완성하였다.
+
+## Node 추가
+
+build 테스트에서 npm test 를 실행하기 위해선 노드 환경이 구축되어 있어야 한다. [link](https://plugins.jenkins.io/nodejs/)를 따라 하자.
+
+1. Nodejs 플러그인 설치
+2. Jenkins 관리 > Global Tool configuration > NodeJs 설정
+3. 프로젝트 아이템 > 빌드 구성 > `Provide Node & npm bin/ folder to PATH` 설정
 
 # 번외
 
