@@ -7,6 +7,13 @@
 ## 리눅스에서 설치
 
 ```shell
-curl -fsSL https://get.docker.com/ | sudo sh 
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh get-docker.sh
+```
+
+## 도커 실행
+
+```shell
+sudo systemctl start docker
 ```
 
