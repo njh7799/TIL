@@ -64,4 +64,4 @@ pub key 는 `ssh-rsa ASDFQWEDSFQWED` 와 같이 `ssh-rsa` 를 포함해야한다
 ## Ref
 - [difference-between-authorized-keys-and-known-hosts](https://security.stackexchange.com/questions/20706/what-is-the-difference-between-authorized-keys-and-known-hosts-file-for-ssh)
 - [한 대의 맥에서 여러 개의 깃허브(github) 계정 사용하는 방법](https://devlog.jwgo.kr/2018/08/17/how-to-use-multi-github-accounts-with-a-machine/)
-
+- [github 저장소에 ssh 연결하기](https://yujuwon.tistory.com/entry/github-저장소에-ssh-연결하기)
