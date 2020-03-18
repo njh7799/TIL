@@ -62,3 +62,9 @@ ls "`pwd`/file.txt"
 mv ~/Linux/Old/!(Tux.png) ~/Linux/New/
 ```
 
+### 폴더채로 삭제
+
+```shell
+rm -rf Directory
+```
+
