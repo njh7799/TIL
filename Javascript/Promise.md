@@ -125,3 +125,6 @@ Promise.resolve()
   .then(() => alert("promise"));
 alert("code");
 ```
+
+## [이벤트 루프 시각화](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
+
