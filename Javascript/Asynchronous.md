@@ -7,8 +7,5 @@ asyn 함수와 then 의 return 값은 promise!!
 ```js
 const doAsync = fn => async (...params) =>
   await fn(...params).catch(err => console.log(err));
-export default doAsync;
+export default doAsyn;
 ```
-
-
-

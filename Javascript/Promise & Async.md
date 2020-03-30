@@ -1,3 +1,5 @@
+# Promise
+
 ## Promise 내부는 언제 실행될까?
 
 ### 대조군
@@ -128,3 +130,129 @@ alert("code");
 
 ## [이벤트 루프 시각화](https://jakearchibald.com/2015/tasks-microtasks-queues-and-schedules/)
 
+
+
+# Asynchronous
+
+## async 함수의 결과 값
+
+### 1. 그냥 return 때렸을 경우
+
+```js
+async function run(){
+	return 'run'
+}
+console.log(run()) // Promise {<resolved>: "run"}
+```
+
+프로미스 객체에 감싸져서 반환된다.
+
+### 2. 프로미스를 반환할 경우
+
+```JS
+async function run(){
+	return new Promise((resolve, reject)=>{
+		resolve("run")
+	})
+}
+console.log(run()) // Promise {<pending>}
+// 콜스택을 비운 후 실행
+console.log(run()) // Promise {<resolved>: "run"}
+```
+
+그렇다. 그냥 그대로 반환 된다.
+
+
+
+## Async Await의 내부 동작 원리
+
+await 를 만나기 전에는 동기적으로 실행이 된다. await 를 만나면 await 구문을 마치 `Promise` 내부 로직처럼 실행한 후 await 의 다음 줄을 마치 `.then` 처럼 실행한다.
+
+### await가 없는 경우
+
+```js
+async function run(){
+	console.log('a'); // (a)
+    console.log('b'); // (b)
+}
+run(); // (run)
+console.log('end'); // (end)
+```
+
+```js
+a
+b
+end
+```
+
+### 실행 순서
+
+`(run) -> (a) -> (b) -> (end)`
+
+그냥 동기적으로 주욱 실행 된다.
+
+### await가 처음에 있는 경우
+
+```js
+async function run(){
+	await console.log('a'); // (a)
+    console.log('b'); // (b)
+}
+run(); // (run)
+console.log('end'); // (end)
+```
+
+```js
+a
+end
+b
+```
+
+### 실행 순서
+
+`(run) -> (a) -> (end) -> (b)`
+
+(a) 까지 실행된 후 다음줄부터를 이벤트 루프에 넣어버린다. 따라서 a, end 가 출력된 후 콜스택이 비고 b를 출력하는 함수가 콜스택에 들어가서 위와 같은 결과가 나온다.
+
+
+
+### await가 중간에 있는 경우
+
+```js
+async function run(){
+	console.log('a'); // (a)
+    console.log('b'); // (b)
+    await console.log('c'); // (c)
+    console.log('d'); // (d)
+    console.log('e'); // (e)
+}
+run(); // (run)
+console.log('end'); // (end)
+```
+
+```js
+a
+b
+c
+end
+d
+e
+```
+
+### 실행 순서
+
+`(run) -> (a) -> (b) -> (c) -> (end) -> (d) -> (e)`
+
+a, b 실행 후 c 에서 프로미스 블록을 만들고 이하 구문들은 이벤트 루프에 들어간다.
+
+
+
+## async wrapper
+
+에러를 핸들링해주는 래퍼
+
+```js
+const doAsync = fn => async (...params) =>
+  await fn(...params).catch(err => console.log(err));
+export default doAsync;
+```
