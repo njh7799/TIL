@@ -110,7 +110,7 @@ http.get(url, (res) => {
 
 
 
-### HTTP Response example
+### HTTP Response example 
 
 ```http
 HTTP/1.0 200 OK
