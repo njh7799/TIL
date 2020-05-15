@@ -53,11 +53,35 @@ module.exports = Observable
 ```js
 // Observer.js
 
-class Oberser {
+class Observer {
     // Called when a change has occurred in the state of the observable.
     update(observable, obj){}
 }
 
-module.exports = Oberser
+module.exports = Observer
 ```
+
+
+
+## 예시
+
+```js
+// main.js
+
+const Observer = require('./Observer');
+const Observable = require('./Observable');
+
+class Employer extends Observable{
+    
+}
+
+class Employee extends Observer{
+    
+}
+
+const Jack = new Employer();
+const Sam = new Employee();
+```
+
+
 
