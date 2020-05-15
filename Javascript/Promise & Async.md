@@ -256,3 +256,7 @@ const doAsync = fn => async (...params) =>
   await fn(...params).catch(err => console.log(err));
 export default doAsync;
 ```
+
+## Ref
+- [Are javascript's async functions actually synchronous?](https://stackoverflow.com/questions/57906002/are-javascripts-async-functions-actually-synchronous)
+
