@@ -6,9 +6,12 @@ js 문법은 아래 두 링크만 다 봐도 거의 커버 가능하다. 더 어
 
 - [front-end-interview-handbook](https://github.com/yangshun/front-end-interview-handbook/blob/master/contents/kr/javascript-questions.md)
 - https://poiemaweb.com/
-- [Lucas](https://lucas.codesquad.kr/course/boost-4-membership/그룹프로젝트수업/week-7-2-JS개발자의-흔한-질문)
 
 [js 실행과 컨텍스트](https://poiemaweb.com/js-execution-context)
+
+[클로저](https://poiemaweb.com/js-closure)
+
+>  클로저는 반환된 내부함수가 자신이 선언됐을 때의 환경(Lexical environment)인 스코프를 기억하여 자신이 선언됐을 때의 환경(스코프) 밖에서 호출되어도 그 환경(스코프)에 접근할 수 있는 함수이다.
 
 [this](https://poiemaweb.com/js-this)
 
@@ -74,4 +77,17 @@ Polyfill: 웹 개발에서 폴리필은 기능을 지원하지 않는 웹 브라
 
 [var, let, const 특징 및 호이스팅](https://medium.com/sjk5766/var-let-const-%ED%8A%B9%EC%A7%95-%EB%B0%8F-scope-335a078cec04)
 
-래퍼 객체에 대해 추가 공부
+[원시 값의 메서드](https://ko.javascript.info/primitives-methods)
+
+[Object vs object vs {}](https://stackoverflow.com/questions/49464634/difference-between-object-and-in-typescript)
+
+> While `object` (lowercased) represents all **non-primitive types**, `Object` (uppercased) describes functionality that is **common to all JavaScript objects**.
+
+[1급 객체](https://jcsoohwancho.github.io/2019-10-18-1급-객체(first-class-object)이란/)
+
+> 1. 함수의 실질적인 매개변수가 될 수 있다.
+> 2. 함수의 반환값이 될 수 있다.
+> 3. 할당의 대상이 될 수 있다.
+> 4. 비교 연산(==, equal)을 적용할 수 있다.
+>
+> JS의 함수는 1급 객체이다.
