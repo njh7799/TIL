@@ -6,7 +6,7 @@
 - promise와 async await를 어느정도 다를 줄 안다.
 - 마이크로 태스크 큐와 매크로 태스크 큐가 뭔지 안다.
 
-이 글은 나의 궁금증과 이를 해결하는 과정으로 진행될 것이다. 따라서 다소 쉬운 내용이 섞여 있을 수도 있음을 미리 알린다.
+이 글은 나의 궁금증과 이를 해결하는 과정으로 진행될 것이다. 따라서 내용이 뒤죽박죽일 수 있음을 미리 알린다.
 
 🚨 **잘못된 정보가 있을 수도 있다. 방금도 하나 발견했다.**
 
@@ -289,6 +289,65 @@ Promise { 'run' }
 ```
 
 promise 자체는 문제가 없음을 확인할 수 있었다. 그렇다면 결론은 async 함수가 promise를 반환하는 과정에서 태스트 큐에 함수가 들어가는 현상이 생겼다는 것인데, 왜 이런 일이 발생하는 것일까? 이 추론이 맞기는 한 것일까?
+
+### 콜스택을 비워보자
+
+setTimeout을 이용하여 콜스택을 비훈 후 다시 출력해보자.
+
+```js
+async function run() {
+  const promise = new Promise((resolve, reject) => {
+    resolve("run");
+  });
+  return promise;
+}
+
+const r = run();
+console.log(r); // 원래 코드
+setTimeout(() => {
+  // 기존의 콜스택을 비운 후 실행된다.
+  console.log(r);
+});
+```
+
+```
+Promise { <pending> }
+Promise { 'run' }
+```
+
+왜일까...
+
+자문을 구해본 결과 답은 Promise 안에 Promise가 들어가서 그렇다고 한다. async 함수가 promise를 반환하는 경우 이 promise가 그대로 반환 되는 것이 아니라 promise를 Promise로 한 번 더 감싸서 반환하는 것이다! 여전히 의문 점은 남지만 왜 그런지에 대한 답은 일단 되었다.
+
+### promise 안에 promise
+
+그래서 promise 안에 promise가 들어간 경우를 만들어 보았다. 위에 만든 함수 run() 의 반환 값과 promise는 완전히 동일하다.
+
+```js
+const innerPromise = new Promise((resolve, reject) => {
+  resolve(true);
+});
+
+const outerPromise = new Promise((resolve, reject) => {
+  resolve(innerPromise);
+});
+
+console.log(outerPromise);// ...(1)
+setTimeout(() => {
+  console.log(outerPromise);// ...(2)
+});
+```
+
+```
+Promise { <pending> }
+Promise { 'run' }
+```
+
+#### 결론
+
+promise안에 promise가 들어갈 경우 outerPromise 가 innerPromise의 resolved 값을 그대로 가져오는데, 이 과정이 비동기적으로 실행된다.  위의 (1) 단계에서는 아직 innerPromise의 resolved 값이 outerPromise 에게 전달이 되지 않은 상태라는 것이다. 따라서 pending 으로 표기된다. (1)이 끝나면 콜스택이 비워지기 때문에 이 과정이 태스크큐에서 콜스택으로 들어가 수행되게 되고 그 이후에 실행한 (2) 에서는 정상적인 값이 나오게 된 것이다.
+
+🚨 **이 결론은 나의 추리이다!! 실제로는 아닐 가능성이 높다**
 
 
 
