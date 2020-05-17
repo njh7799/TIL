@@ -34,8 +34,6 @@ HTML5
 
 [primitive type과 reference type](https://hggggggk.wordpress.com/2013/07/04/첫번째과제2-primitive-type과-reference-type의-차이/)
 
-[Object vs object vs {}](https://mariusschulz.com/blog/the-object-type-in-typescript#object-vs-object-vs)
-
 [컴파일과 인터프리팅](https://seodh007.tistory.com/entry/인터프리터언어-와-컴파일언어의-뜻)
 
 [Stack Heap Data](https://dsnight.tistory.com/50)
