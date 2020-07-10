@@ -23,6 +23,8 @@ View는 클라이언트 측 기술인 html/css/javascript들을 모아둔 컨테
 
 ## Flux
 
+- [공식](https://haruair.github.io/flux/docs/overview.html#content)
+
 ### Actions
 Objects with property and data.
 
