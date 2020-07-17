@@ -207,7 +207,7 @@
 >
 > **코드 생성**: 실제 브라우저의 환경에 맞는 코드를 생성. **babel-generator** 가 수행
 
-
+- [core js](https://github.com/zloirock/core-js/blob/master/docs/2019-03-19-core-js-3-babel-and-a-look-into-the-future.md)
 
 ## **폴리필**
 
