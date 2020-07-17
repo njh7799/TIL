@@ -30,6 +30,8 @@ js 문법은 아래 두 링크만 다 봐도 거의 커버 가능하다. 더 어
 
 > 화살표 함수는 함수를 선언할 때 this에 바인딩할 객체가 정적으로 결정된다. 동적으로 결정되는 일반 함수와는 달리 **화살표 함수의 this 언제나 상위 스코프의 this를 가리킨다.** 이를 **Lexical this**라 한다. 
 
+[CJS AMD UMD ESM](https://dev.to/iggredible/what-the-heck-are-cjs-amd-umd-and-esm-ikm)
+  
 [Common JS & AMD](https://d2.naver.com/helloworld/12864)
 
 > AMD가 목표로 하는 것은 필요한 모듈을 네트워크를 이용해 내려받아야 하는 브라우저 환경에서도 모듈을 사용할 수 있도록 표준을 만드는 일이다. 
