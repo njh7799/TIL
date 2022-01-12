@@ -2,6 +2,7 @@
 
 # 성능 최적화
 
+- [웹과 브라우저를 위한 프로파일링과 성능 개선](https://tv.naver.com/v/23652467)
 - [자바스크립트 웹 사이트 최적화](https://12bme.tistory.com/127)
 - [Optimize Website Speed With Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/speed/get-started)
 - [성능 최적화](https://ui.toast.com/fe-guide/ko_PERFORMANCE/)
