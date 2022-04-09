@@ -123,7 +123,7 @@
   }
   
   var m = new Messenger('hi');
-  m.delayedMessage();
+  m.showMessage();
   // hi
   
   m.delayedMessage();
