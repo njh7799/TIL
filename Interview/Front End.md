@@ -142,7 +142,7 @@
   }
   
   var m = new Messenger('hi');
-  m.delayedMessage();
+  m.showMessage();
   // hi
   
   // m 의 message를 바꿀 방법이 없음
