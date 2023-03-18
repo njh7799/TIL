@@ -1,4 +1,5 @@
-[DOM](https://m.blog.naver.com/magnking/220972680805)
+- [DOM](https://m.blog.naver.com/magnking/220972680805)
+- https://blog.logrocket.com/how-browser-rendering-works-behind-scenes/
 
 # 성능 최적화
 
