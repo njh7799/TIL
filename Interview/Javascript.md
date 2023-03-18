@@ -77,7 +77,8 @@ Polyfill: 웹 개발에서 폴리필은 기능을 지원하지 않는 웹 브라
 > Object.freeze()
 > 
 
-[var, let, const 특징 및 호이스팅](https://medium.com/sjk5766/var-let-const-%ED%8A%B9%EC%A7%95-%EB%B0%8F-scope-335a078cec04)
+- [var, let, const 특징 및 호이스팅](https://medium.com/sjk5766/var-let-const-%ED%8A%B9%EC%A7%95-%EB%B0%8F-scope-335a078cec04)
+- https://hanamon.kr/javascript-호이스팅이란-hoisting/
 
 [원시 값의 메서드](https://ko.javascript.info/primitives-methods)
 
