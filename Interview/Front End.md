@@ -101,14 +101,6 @@
 
 - [Hooks의 의존성](https://rinae.dev/posts/a-complete-guide-to-useeffect-ko#리액트에게-의존성으로-거짓말하지-마라)
 
-- [왜 라이브러리인가](https://develoger.com/is-reactjs-library-or-a-framework-a14786f681a0)
-
-  > - 리액트는 템플리이나 디자인 패턴을 가지고 있지 않다. 어플리케이션의 구조에 전혀 관여하지 않는다.
-  > - 라이프 사이클이 **제어의 역전**을 나타낸다고 할 수도 있지만, 이정도는 jQuery도 가능 했으며 결과론적으로 봤을 때 구조적은 해결해 주지 않는다.
-  > - 본질적인 프레임 워크는 코드 레벨에서 구조적 문제를 해결하거나 및 아키텍쳐적를 정의한다. 하지만 리액트는 app level에서 구조적, 아키텍쳐적 문제를 해결하지 못한다.
-
-
-
 - SPA
 
   - [단점](https://m.mkexdev.net/374)
