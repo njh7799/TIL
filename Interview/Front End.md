@@ -23,15 +23,6 @@
 
 - [라이프 사이클](https://velopert.com/3631)
 
-  - [will 을 대거 삭제한 이유](https://velog.io/@kyusung/리액트-교과서-컴포넌트와-라이프사이클-이벤트)
-
-    > - 초기 렌더링을 제어하는 방법이 많아져서 혼란이 됨.
-    > - 오류 처리 인터럽트 동작시에 메모리 누수 발생할 수 있음.
-    > - React 커뮤니티에서도 가장 혼란을 야기하는 라이프 사이클
-
-
->   **주의할 점**
->   최적화 작업을 (제대로) 손수했을때와 리액트를 사용 했을때를 비교한다면 대부분의 경우 전자가 더 빠릅니다.
 
 ## Reflow 와 Repaint
 
@@ -44,11 +35,6 @@
   > 5. 스타일을 최적화 합니다. (ex. css 최소화)
 
 
-## 주요 특징들
-
-
-- [Hooks의 의존성](https://rinae.dev/posts/a-complete-guide-to-useeffect-ko#리액트에게-의존성으로-거짓말하지-마라)
-
 - SPA
 
   - [단점](https://m.mkexdev.net/374)
@@ -57,17 +43,9 @@
     - [vs MPA](https://babytiger.netlify.com/posts/SPA/)                                                                                                                                                                                              
 
 
-- [Apollo](https://d2.naver.com/helloworld/4245995)
-
 - [SSR vs CSR](https://velog.io/@rjs1197/SSR과-CSR의-차이를-알아보자)
 
 - [A React job interview — recruiter perspective.](https://medium.com/@baphemot/a-react-job-interview-recruiter-perspective-f1096f54dd16)
-
-
-## 비교
-- [ReactJS vs Angular5 vs Vue.js ](https://brunch.co.kr/@hee072794/112)
-- [React를 Vue.js보다 선호하는 이유](https://ahnheejong.name/articles/why-i-prefer-react-over-vuejs/)
-- [[번역글] React vs Angular : 둘 중 어떤 것이 당신의 프로젝트에 알맞을까요?](https://www.popit.kr/번역글-react-vs-angular-둘-중-어떤-것이-당신의-프로젝트에-알맞/)
 
 
 # 웹팩
