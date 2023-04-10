@@ -35,8 +35,6 @@
 
 ## Reflow 와 Repaint
 
-- [ReactJS의 Virtual DOM과 Repaint, Reflow](http://blog.drakejin.me/React-VirtualDOM-And-Repaint-Reflow/)
-
 - [Reflow 와 Repaint](https://webclub.tistory.com/346)
 
   > 1. 변경이 잦은 요소는 Absolute에 배치합니다.
