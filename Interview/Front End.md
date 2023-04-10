@@ -21,22 +21,6 @@
 
 `리액트`는 `컴포넌트` 기반의 `라이브러리`이다.
 
-## 특징
-
-- [자바스크립트 프레임워크 소개 4 - React](https://meetup.toast.com/posts/100)
-
-> - UI 컴포넌트를 만들기 위한 라이브러리이며 React의 컴포넌트는 트리형태로 구성된다.
-> - Virtual DOM을 사용하여 변경된 부분에 대한 최소한의 DOM 처리로 UI를 업데이트하여 애플리케이션의 성능을 향상한다.
-> - 부모 컴포넌트에서 하위 컴포넌트로 전달하는 단방향의 단순한 데이터 흐름을 갖고 있어 데이터 추적과 디버깅을 쉽게 해준다.
-## 동작 원리
-
-- [누구든지 하는 리액트 1편: 리액트는 무엇인가](https://velopert.com/3612)
-- [왜 Virtual Dom 인가](https://velopert.com/3236)
-- [React Virtual DOM Explained in Simple English](https://programmingwithmosh.com/react/react-virtual-dom-explained/)
-- [How Virtual-DOM and diffing works in React](https://medium.com/@gethylgeorge/how-virtual-dom-and-diffing-works-in-react-6fc805f9f84e)
-- [React 적용 가이드 - React 작동 방법](https://d2.naver.com/helloworld/9297403)
-- [재조정](https://ko.reactjs.org/docs/reconciliation.html#recursing-on-children)
-- [Key](https://ko.reactjs.org/docs/lists-and-keys.html)
 - [라이프 사이클](https://velopert.com/3631)
 
   - [will 을 대거 삭제한 이유](https://velog.io/@kyusung/리액트-교과서-컴포넌트와-라이프사이클-이벤트)
@@ -45,43 +29,6 @@
     > - 오류 처리 인터럽트 동작시에 메모리 누수 발생할 수 있음.
     > - React 커뮤니티에서도 가장 혼란을 야기하는 라이프 사이클
 
-> **re-rendering 동작 과정**
->
-> 1. **Marking the component dirty**
->
-> 	DOM 이벤트가 발생하면 이를 감싸고 있는 React event listeners가 this.setState를 실행시킨다. setState 를 이용하여 state 를 변경시킨다. setState 는 해당 컴포넌트(this)를 변경 대상 컴포넌트(dirty component)로 마킹한다.
-> 	
-> 2. **새 virtual DOM element 생성**(dirty한 component 업데이트)
->
->      React의 `flushBatchedUpdates` 함수가 수행한다. dirty로 마킹된 컴포넌트들과 하위 노드들을 업데이트한다. 그리고 shouldComponentUpdate를 확인하여 해당 컴포넌트가 re-rendering 될지 말지를 체크한다.
->
-> 3. **use the diffing algorithm to do the reconciliation**
->
->      직전의 가상돔 element와 현재의 가상돔을 비교(**diffing**)하여 어떤 가상 돔을 실제 돔에 업데이트할지 판단한다. 이 과정은 `render` 단계에서 진행된다.
->
->      - Key 값이 없으면 재조정시, 속성값등을 다 바꾸어 주어야 함.
->
-> 4. **update the actual DOM**
->
->    재조정 후 수정 대상이 되는 값들을 한 번에 처리
->
-
-> **장점 요약**
->
-> 1. **Dom 관리와 상태 관리**
->
->    웹 개발을 하게 될 때,  DOM 관리와 상태값 업데이트 관리를 최소화하고, 오직 기능 개발, 그리고 사용자 인터페이스를 구현하는 것에 집중 할 수 있도록 해준다.
->
-> 2. **Virtual Dom**
->
->    렌더링을 하기 전에 가상 돔을 먼저 만들어서 비교한다. **다른 부분**만 다시 렌더링 한다.
->
->    * Hueristic 알고리즘: 뭐가 다른지 판단하는 O(N) 알고리즘
->      * Key가 중요한 이유
->
-> 3. **묶어서 한 번에**
->
->    여러 인터렉션이 발생할 때마다 매번 돔을 다시 그려 reflow, repaint 하는 것은 매우 비효율적이다. React 는 이 작업들을 묶어서 한 번에 처리를 해준다. 즉 연산이 줄어든다. (규모는 커지지만)
 
 >   **주의할 점**
 >   최적화 작업을 (제대로) 손수했을때와 리액트를 사용 했을때를 비교한다면 대부분의 경우 전자가 더 빠릅니다.
