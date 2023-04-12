@@ -63,34 +63,15 @@ ECMA script
 
 Polyfill: 웹 개발에서 폴리필은 기능을 지원하지 않는 웹 브라우저에서 기능을 구현하는 코드다.
 
-[Ajax](https://coding-factory.tistory.com/143)
 
->  Ajax는 JavaScript의 라이브러리중 하나이며 Asynchronous Javascript And Xml(비동기식 자바스크립트와 xml)의 약자입니다. 브라우저가 가지고있는 XMLHttpRequest 객체를 이용해서 전체 페이지를 새로 고치지 않고도 페이지의 일부만을 위한 데이터를 로드하는 기법 이다. Ajax를 한마디로 정의하자면 JavaScript를 사용한 비동기 통신, 클라이언트와 서버간에 XML 데이터를 주고받는 기술이라고 할 수 있겠습니다.
->
->  ajax는 html 페이지 전체가아닌 일부분만 갱신할수 있도록 XML HttpRequest객체를 통해 서버에 request를 합니다.
 
 [Promise vs async await](https://medium.com/better-programming/should-i-use-promises-or-async-await-126ab5c98789)
 
 > 특정 비동기 작업에 대한 결과를 기다리지 않고 코드를 진행하며 응답이 왔을 때 응답을 처리하는 방법을 취할 때는 Promise. 비동기 작업에 대한 응답이 있어야 다음 코드를 실행할 수 있는 경우에는 async await가 더 좋다. 물론 둘 다 서로가 유리한 경우에 사용 가능하다.
 
-[Constant variables in javascript or when const isnt constant](https://mariusschulz.com/blog/constant-variables-in-javascript-or-when-const-isnt-constant)
-> Object.freeze()
-> 
 
-- [var, let, const 특징 및 호이스팅](https://medium.com/sjk5766/var-let-const-%ED%8A%B9%EC%A7%95-%EB%B0%8F-scope-335a078cec04)
-- https://hanamon.kr/javascript-호이스팅이란-hoisting/
-
-[원시 값의 메서드](https://ko.javascript.info/primitives-methods)
 
 [Object vs object vs {}](https://stackoverflow.com/questions/49464634/difference-between-object-and-in-typescript)
 
 > While `object` (lowercased) represents all **non-primitive types**, `Object` (uppercased) describes functionality that is **common to all JavaScript objects**.
 
-[1급 객체](https://jcsoohwancho.github.io/2019-10-18-1급-객체(first-class-object)이란/)
-
-> 1. 함수의 실질적인 매개변수가 될 수 있다.
-> 2. 함수의 반환값이 될 수 있다.
-> 3. 할당의 대상이 될 수 있다.
-> 4. 비교 연산(==, equal)을 적용할 수 있다.
->
-> JS의 함수는 1급 객체이다.
